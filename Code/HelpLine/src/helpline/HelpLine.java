@@ -14,8 +14,8 @@ import javax.swing.JOptionPane;
 
 public class HelpLine 
 {
-    ArrayList<String> User = new ArrayList<String>();
-    ArrayList<String> Password = new ArrayList<String>();
+    static ArrayList<String> User = new ArrayList<String>();
+    static ArrayList<String> Password = new ArrayList<String>();
     
     public static void main(String[] args) 
     {
@@ -43,7 +43,7 @@ public class HelpLine
 
             while (rst.next()) 
             {
-                
+                User.add(rst.getString("StaffID"));
             }
             
             /*sql = "Select * From Login Where ";

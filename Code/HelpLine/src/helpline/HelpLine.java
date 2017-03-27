@@ -1,27 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package helpline;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Vanilla
- */
-public class HelpLine {
-
-    /**
-     * @param args the command line arguments
-     */
+public class HelpLine 
+{
+    ArrayList<String> User = new ArrayList<String>();
+    
     public static void main(String[] args) 
     {
         if (DatabaseConnection() == false) 
@@ -42,12 +33,13 @@ public class HelpLine {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/helpline","user","user");
             Statement stmt = (Statement)con.createStatement();
             
-            String sql = "Select * From 'customer reporting form'";
+            String sql = "Select * From Login";
             ResultSet rst;
             rst = stmt.executeQuery(sql);
 
             while (rst.next()) 
             {
+                
             }
         } 
         catch (Exception ex) 

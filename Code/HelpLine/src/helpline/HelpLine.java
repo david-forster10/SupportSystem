@@ -15,7 +15,8 @@ public class HelpLine {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        Login_Form LogForm= new Login_Form();
+        LogForm.setVisible(true);
     }
     
 }

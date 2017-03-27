@@ -39,10 +39,10 @@ public class HelpLine {
         try 
         {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/","user","user");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/helpline","user","user");
             Statement stmt = (Statement)con.createStatement();
             
-            String sql = "Select * From ";
+            String sql = "Select * From 'customer reporting form'";
             ResultSet rst;
             rst = stmt.executeQuery(sql);
 

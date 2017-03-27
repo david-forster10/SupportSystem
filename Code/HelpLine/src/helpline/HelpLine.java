@@ -30,7 +30,7 @@ public class HelpLine {
         System.exit(0);
         }
         
-        Login_Form form = new Login_Form();
+        Navigation form = new Navigation();
         form.setVisible(true);   
     }
     

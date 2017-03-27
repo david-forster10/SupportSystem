@@ -37,10 +37,20 @@ public class Navigation extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         btn_NavProd.setText("Products");
+        btn_NavProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_NavProdActionPerformed(evt);
+            }
+        });
 
         btn_NavCust.setText("Customer Report");
 
         btn_QuitNav.setText("Quit");
+        btn_QuitNav.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_QuitNavActionPerformed(evt);
+            }
+        });
 
         btn_NavStaff.setText("Staff Information");
         btn_NavStaff.addActionListener(new java.awt.event.ActionListener() {
@@ -57,19 +67,15 @@ public class Navigation extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(83, 83, 83)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(83, 83, 83)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(9, 9, 9)
-                                .addComponent(lbl_Navigation))
-                            .addComponent(btn_NavStaff, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
-                            .addComponent(btn_NavCust, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btn_NavProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(btn_QuitNav, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(9, 9, 9)
+                        .addComponent(lbl_Navigation))
+                    .addComponent(btn_NavStaff, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
+                    .addComponent(btn_NavCust, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_NavProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_QuitNav, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(97, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -83,9 +89,9 @@ public class Navigation extends javax.swing.JFrame {
                 .addComponent(btn_NavCust, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btn_NavStaff)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(btn_QuitNav)
-                .addGap(21, 21, 21))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -105,6 +111,14 @@ public class Navigation extends javax.swing.JFrame {
     private void btn_NavStaffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_NavStaffActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_NavStaffActionPerformed
+
+    private void btn_NavProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_NavProdActionPerformed
+        
+    }//GEN-LAST:event_btn_NavProdActionPerformed
+
+    private void btn_QuitNavActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_QuitNavActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_btn_QuitNavActionPerformed
 
     /**
      * @param args the command line arguments

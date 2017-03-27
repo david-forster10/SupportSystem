@@ -48,6 +48,11 @@ public class Login_Form extends javax.swing.JFrame {
         });
 
         btn_Quit.setText("Quit");
+        btn_Quit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_QuitActionPerformed(evt);
+            }
+        });
 
         txt_Username.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -139,6 +144,10 @@ public class Login_Form extends javax.swing.JFrame {
     private void txt_PasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_PasswordActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_PasswordActionPerformed
+
+    private void btn_QuitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_QuitActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_btn_QuitActionPerformed
 
     /**
      * @param args the command line arguments

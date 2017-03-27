@@ -68,6 +68,11 @@ public class Staff_Information extends javax.swing.JFrame {
         });
 
         btn_QuitInfo.setText("Back");
+        btn_QuitInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_QuitInfoActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Edit");
 
@@ -155,6 +160,12 @@ public class Staff_Information extends javax.swing.JFrame {
     private void txt_FNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_FNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_FNameActionPerformed
+
+    private void btn_QuitInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_QuitInfoActionPerformed
+        Navigation BackStaff = new Navigation();
+        BackStaff.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btn_QuitInfoActionPerformed
 
     /**
      * @param args the command line arguments

@@ -213,7 +213,9 @@ public class Products extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_QuitProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_QuitProdActionPerformed
-        // TODO add your handling code here:
+        Navigation ProdBack = new Navigation();
+        ProdBack.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btn_QuitProdActionPerformed
 
     private void txt_SerialNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_SerialNoActionPerformed

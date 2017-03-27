@@ -95,8 +95,18 @@ public class Customer_Report extends javax.swing.JFrame {
         });
 
         btn_Submit.setText("Submit");
+        btn_Submit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SubmitActionPerformed(evt);
+            }
+        });
 
         btn_Back.setText("Back");
+        btn_Back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_BackActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -222,6 +232,16 @@ public class Customer_Report extends javax.swing.JFrame {
     private void txt_RepairCostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_RepairCostActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_RepairCostActionPerformed
+
+    private void btn_SubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SubmitActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_SubmitActionPerformed
+
+    private void btn_BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BackActionPerformed
+        Navigation NavBack = new Navigation();
+        NavBack.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btn_BackActionPerformed
 
     /**
      * @param args the command line arguments

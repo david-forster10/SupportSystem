@@ -44,6 +44,11 @@ public class Navigation extends javax.swing.JFrame {
         });
 
         btn_NavCust.setText("Customer Report");
+        btn_NavCust.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_NavCustActionPerformed(evt);
+            }
+        });
 
         btn_QuitNav.setText("Quit");
         btn_QuitNav.addActionListener(new java.awt.event.ActionListener() {
@@ -109,16 +114,26 @@ public class Navigation extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_NavStaffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_NavStaffActionPerformed
-        // TODO add your handling code here:
+        Staff_Information StaffBtn = new Staff_Information();
+        StaffBtn.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btn_NavStaffActionPerformed
 
     private void btn_NavProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_NavProdActionPerformed
-        
+        Products ProdBtn = new Products();
+        ProdBtn.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btn_NavProdActionPerformed
 
     private void btn_QuitNavActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_QuitNavActionPerformed
         System.exit(0);
     }//GEN-LAST:event_btn_QuitNavActionPerformed
+
+    private void btn_NavCustActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_NavCustActionPerformed
+        Customer_Report CustBtn = new Customer_Report();
+        CustBtn.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btn_NavCustActionPerformed
 
     /**
      * @param args the command line arguments

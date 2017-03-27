@@ -1,5 +1,8 @@
 package helpline;
 
+import java.nio.charset.Charset;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -9,31 +12,23 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-<<<<<<< HEAD
 public class HelpLine 
 {
     ArrayList<String> User = new ArrayList<String>();
+    ArrayList<String> Password = new ArrayList<String>();
     
     public static void main(String[] args) 
     {
         if (DatabaseConnection() == false) 
         {
-        JOptionPane.showMessageDialog(null, "Failed to connect to database", "Fatal Error", JOptionPane.WARNING_MESSAGE);
-        System.exit(0);
+            JOptionPane.showMessageDialog(null, "Failed to connect to database", "Fatal Error", JOptionPane.WARNING_MESSAGE);
+            System.exit(0);
         }
         
         Navigation form = new Navigation();
         form.setVisible(true);   
-=======
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        Login_Form LogForm= new Login_Form();
-        LogForm.setVisible(true);
->>>>>>> master
     }
-    
+
     public static boolean DatabaseConnection()
     {
         try 
@@ -42,7 +37,7 @@ public class HelpLine
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/helpline","user","user");
             Statement stmt = (Statement)con.createStatement();
             
-            String sql = "Select * From Login";
+            String sql = "Select StaffID From Login";
             ResultSet rst;
             rst = stmt.executeQuery(sql);
 
@@ -50,6 +45,15 @@ public class HelpLine
             {
                 
             }
+            
+            /*sql = "Select * From Login Where ";
+            ResultSet rst2;
+            rst2 = stmt.executeQuery(sql);
+
+            while (rst.next()) 
+            {
+                
+            }*/
         } 
         catch (Exception ex) 
         {
@@ -57,5 +61,20 @@ public class HelpLine
             return false;
         }
         return true;
+    }
+    
+    public static String SHA_Hash (String input)
+    {
+        try
+        {
+            MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+            messageDigest.update(input.getBytes(Charset.forName("UTF-8")),0,input.length());
+            return input;
+        }
+        catch (NoSuchAlgorithmException nsgex)
+        {
+            Logger.getLogger(HelpLine.class.getName()).log(Level.SEVERE, null, nsgex);
+            return null;
+        }
     }
 }

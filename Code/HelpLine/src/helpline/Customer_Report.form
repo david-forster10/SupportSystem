@@ -86,11 +86,11 @@
                       </Group>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="txt_Problem" max="32767" attributes="0"/>
-                          <Component id="txt_Severity" max="32767" attributes="0"/>
                           <Component id="txt_StaffRecieving" max="32767" attributes="0"/>
                           <Component id="txt_StaffFixing" max="32767" attributes="0"/>
                           <Component id="txt_DateResolved" max="32767" attributes="0"/>
-                          <Component id="txt_RepairCost" min="-2" pref="130" max="-2" attributes="0"/>
+                          <Component id="txt_RepairCost" max="32767" attributes="0"/>
+                          <Component id="jComboBox1" alignment="0" pref="130" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
@@ -121,7 +121,7 @@
                   <Component id="lbl_Surname" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lbl_Severity" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txt_Surname" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txt_Severity" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -256,8 +256,6 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txt_Problem">
     </Component>
-    <Component class="javax.swing.JTextField" name="txt_Severity">
-    </Component>
     <Component class="javax.swing.JTextField" name="txt_StaffRecieving">
     </Component>
     <Component class="javax.swing.JTextField" name="txt_StaffFixing">
@@ -284,6 +282,23 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_BackActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="jComboBox1">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="3">
+            <StringItem index="0" value="1 (High)"/>
+            <StringItem index="1" value="2 (Medium)"/>
+            <StringItem index="2" value="3 (Low)"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox1ActionPerformed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

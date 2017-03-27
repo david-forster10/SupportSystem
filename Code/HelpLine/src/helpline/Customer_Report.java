@@ -49,13 +49,13 @@ public class Customer_Report extends javax.swing.JFrame {
         txt_ReportDate = new javax.swing.JTextField();
         txt_EquipType = new javax.swing.JTextField();
         txt_Problem = new javax.swing.JTextField();
-        txt_Severity = new javax.swing.JTextField();
         txt_StaffRecieving = new javax.swing.JTextField();
         txt_StaffFixing = new javax.swing.JTextField();
         txt_DateResolved = new javax.swing.JTextField();
         txt_RepairCost = new javax.swing.JTextField();
         btn_Submit = new javax.swing.JButton();
         btn_Back = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -105,6 +105,13 @@ public class Customer_Report extends javax.swing.JFrame {
         btn_Back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_BackActionPerformed(evt);
+            }
+        });
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 (High)", "2 (Medium)", "3 (Low)" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
             }
         });
 
@@ -162,11 +169,11 @@ public class Customer_Report extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txt_Problem)
-                            .addComponent(txt_Severity)
                             .addComponent(txt_StaffRecieving)
                             .addComponent(txt_StaffFixing)
                             .addComponent(txt_DateResolved)
-                            .addComponent(txt_RepairCost, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txt_RepairCost)
+                            .addComponent(jComboBox1, 0, 130, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(44, 44, 44)
                         .addComponent(btn_Back, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -190,7 +197,7 @@ public class Customer_Report extends javax.swing.JFrame {
                     .addComponent(lbl_Surname)
                     .addComponent(lbl_Severity)
                     .addComponent(txt_Surname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_Severity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_Address)
@@ -243,6 +250,10 @@ public class Customer_Report extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btn_BackActionPerformed
 
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -281,6 +292,7 @@ public class Customer_Report extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Back;
     private javax.swing.JButton btn_Submit;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel lbl_Address;
     private javax.swing.JLabel lbl_DateReported;
     private javax.swing.JLabel lbl_DateResolved;
@@ -303,7 +315,6 @@ public class Customer_Report extends javax.swing.JFrame {
     private javax.swing.JTextField txt_Problem;
     private javax.swing.JTextField txt_RepairCost;
     private javax.swing.JTextField txt_ReportDate;
-    private javax.swing.JTextField txt_Severity;
     private javax.swing.JTextField txt_StaffFixing;
     private javax.swing.JTextField txt_StaffRecieving;
     private javax.swing.JTextField txt_Surname;

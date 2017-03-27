@@ -9,6 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
+<<<<<<< HEAD
 public class HelpLine 
 {
     ArrayList<String> User = new ArrayList<String>();
@@ -23,6 +24,14 @@ public class HelpLine
         
         Navigation form = new Navigation();
         form.setVisible(true);   
+=======
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        Login_Form LogForm= new Login_Form();
+        LogForm.setVisible(true);
+>>>>>>> master
     }
     
     public static boolean DatabaseConnection()

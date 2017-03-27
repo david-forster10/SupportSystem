@@ -23,13 +23,261 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="400" max="32767" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="lbl_ReportForm" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="144" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="lbl_FirstName" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                              <Component id="txt_FirstName" min="-2" pref="130" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="lbl_Surname" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+                              <Component id="txt_Surname" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="lbl_Address" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
+                              <Component id="txt_Address" min="-2" pref="130" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lbl_Telephone" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbl_Postcode" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbl_DateReported" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="txt_Postcode" max="32767" attributes="0"/>
+                                  <Component id="txt_Telephone" max="32767" attributes="0"/>
+                                  <Component id="txt_ReportDate" pref="130" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="lbl_EquipType" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="txt_EquipType" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace pref="60" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="lbl_Severity" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lbl_Problem" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbl_RepairCost" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbl_DateResolved" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbl_StaffFixing" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbl_StaffRecieving" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="txt_Problem" max="32767" attributes="0"/>
+                          <Component id="txt_Severity" max="32767" attributes="0"/>
+                          <Component id="txt_StaffRecieving" max="32767" attributes="0"/>
+                          <Component id="txt_StaffFixing" max="32767" attributes="0"/>
+                          <Component id="txt_DateResolved" max="32767" attributes="0"/>
+                          <Component id="txt_RepairCost" min="-2" pref="130" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                      <Component id="btn_Back" min="-2" pref="65" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="btn_Submit" min="-2" pref="65" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="300" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+              <Component id="lbl_ReportForm" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lbl_FirstName" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl_Problem" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txt_FirstName" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txt_Problem" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lbl_Surname" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl_Severity" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txt_Surname" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txt_Severity" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lbl_Address" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl_StaffRecieving" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txt_Address" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txt_StaffRecieving" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lbl_Postcode" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl_StaffFixing" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txt_Postcode" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txt_StaffFixing" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lbl_Telephone" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl_DateResolved" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txt_Telephone" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txt_DateResolved" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lbl_DateReported" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl_RepairCost" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txt_ReportDate" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txt_RepairCost" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lbl_EquipType" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txt_EquipType" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="43" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btn_Back" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btn_Submit" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
   </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="lbl_ReportForm">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="21" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Customer Reporting Form"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbl_FirstName">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="First Name"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbl_Surname">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Surname"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbl_Address">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Address"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbl_Postcode">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Postcode"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbl_Telephone">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Telephone"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbl_DateReported">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Date Reported"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbl_Problem">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Problem"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbl_Severity">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Severity"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbl_StaffRecieving">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Staff Recieving"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbl_StaffFixing">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Staff Fixing"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbl_DateResolved">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Date Resolved"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbl_RepairCost">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Est Repair Cost"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbl_EquipType">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Equipment Type"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txt_FirstName">
+    </Component>
+    <Component class="javax.swing.JTextField" name="txt_Surname">
+    </Component>
+    <Component class="javax.swing.JTextField" name="txt_Address">
+    </Component>
+    <Component class="javax.swing.JTextField" name="txt_Postcode">
+    </Component>
+    <Component class="javax.swing.JTextField" name="txt_Telephone">
+    </Component>
+    <Component class="javax.swing.JTextField" name="txt_ReportDate">
+    </Component>
+    <Component class="javax.swing.JTextField" name="txt_EquipType">
+    </Component>
+    <Component class="javax.swing.JTextField" name="txt_Problem">
+    </Component>
+    <Component class="javax.swing.JTextField" name="txt_Severity">
+    </Component>
+    <Component class="javax.swing.JTextField" name="txt_StaffRecieving">
+    </Component>
+    <Component class="javax.swing.JTextField" name="txt_StaffFixing">
+    </Component>
+    <Component class="javax.swing.JTextField" name="txt_DateResolved">
+    </Component>
+    <Component class="javax.swing.JTextField" name="txt_RepairCost">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_RepairCostActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btn_Submit">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Submit"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btn_Back">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Back"/>
+      </Properties>
+    </Component>
+  </SubComponents>
 </Form>

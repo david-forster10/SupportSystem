@@ -16,6 +16,7 @@ public class Navigation extends javax.swing.JFrame {
      */
     public Navigation() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

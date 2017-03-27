@@ -16,6 +16,7 @@ public class Customer_Report extends javax.swing.JFrame {
      */
     public Customer_Report() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -178,7 +179,7 @@ public class Customer_Report extends javax.swing.JFrame {
                         .addGap(44, 44, 44)
                         .addComponent(btn_Back, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_Submit, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btn_Submit, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(39, 39, 39))
         );
         layout.setVerticalGroup(

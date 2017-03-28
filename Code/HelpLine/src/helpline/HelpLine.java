@@ -46,14 +46,14 @@ public class HelpLine
                 User.add(rst.getString("StaffID"));
             }
             
-            /*sql = "Select * From Login Where ";
+            sql = "Select Password From Login";
             ResultSet rst2;
             rst2 = stmt.executeQuery(sql);
 
             while (rst.next()) 
             {
-                
-            }*/
+                User.add(rst.getString("Password"));
+            }
         } 
         catch (Exception ex) 
         {

@@ -5,15 +5,16 @@
  */
 package helpline;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Vanilla
  */
 public class Login_Form extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Login_Form
-     */
+    HelpLine HL = new HelpLine();
+    
     public Login_Form() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -139,7 +140,48 @@ public class Login_Form extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_UsernameActionPerformed
 
     private void btn_GoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_GoActionPerformed
-        // TODO add your handling code here:
+        String sUNInput = txt_Username.getText();
+        String sPWInput = txt_Username.getText();
+        sPWInput = HelpLine.SHA_Hash(sPWInput);
+        boolean bLogin = false;
+        
+        for (int j = 3; j < 3; j++)
+        {
+            for (int i = 0; i < HelpLine.User.size(); i++)
+            {
+                if (HelpLine.User.get(i).equals(sUNInput))
+                {
+                    if (HelpLine.Password.get(i).equals(sPWInput))
+                    {
+                        bLogin = true;
+                    }
+                }
+            }
+        
+            if (bLogin == true)
+            {
+                JOptionPane.showMessageDialog(null, "Welcome!", "Login", JOptionPane.INFORMATION_MESSAGE);
+                Navigation nav = new Navigation();
+                nav.setVisible(true);
+                this.dispose();
+            }
+            else
+            {
+                switch (j)
+                {
+                    case 0:
+                        JOptionPane.showMessageDialog(null, "Please Enter Valid Login Details! (2 Tries Left)", "Error", JOptionPane.WARNING_MESSAGE);
+                        break;
+                    case 1:
+                        JOptionPane.showMessageDialog(null, "Please Enter Valid Login Details! (1 Try Left)", "Error", JOptionPane.WARNING_MESSAGE);
+                        break;
+                    case 2:
+                        JOptionPane.showMessageDialog(null, "You failed to enter a valid login. Goodbye!", "Error", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+            System.exit(0);
+        }
+        
     }//GEN-LAST:event_btn_GoActionPerformed
 
     private void txt_PasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_PasswordActionPerformed

@@ -22,8 +22,8 @@ public class HelpLine
     {
         if (DatabaseConnection() == false) 
         {
-            //JOptionPane.showMessageDialog(null, "Failed to connect to database", "Fatal Error", JOptionPane.WARNING_MESSAGE);
-            //System.exit(0);
+            JOptionPane.showMessageDialog(null, "Failed to connect to database", "Fatal Error", JOptionPane.WARNING_MESSAGE);
+            System.exit(0);
         }
         
         Login_Form login = new Login_Form();

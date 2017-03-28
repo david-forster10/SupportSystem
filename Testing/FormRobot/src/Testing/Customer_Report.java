@@ -31,8 +31,8 @@ public class Customer_Report
 			e.printStackTrace();
 		}
 		robot.delay(1000);
-		/*keyboard.type("Bertrand");
-		keyboard.type1("Password1");*/
+		keyboard.type("Bertrand");
+		keyboard.type1("Password1");
 	}
 	public Customer_Report() throws AWTException
 	{

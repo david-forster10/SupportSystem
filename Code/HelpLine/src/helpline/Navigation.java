@@ -1,7 +1,19 @@
 package helpline;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class Navigation extends javax.swing.JFrame {
 
+    public static ArrayList<ArrayList<String>> ProductTbl = new ArrayList<ArrayList<String>>();
+    public static ArrayList<ArrayList<String>> StaffTbl = new ArrayList<ArrayList<String>>();
+    public static ArrayList<ArrayList<String>> CustomerReportTbl = new ArrayList<ArrayList<String>>();
+    
     public Navigation() {
         initComponents();
     }
@@ -125,7 +137,9 @@ public class Navigation extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_NavCustActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        
+        LoadProduct();
+        LoadStaff();
+        LoadCustomerReport();
     }//GEN-LAST:event_formWindowOpened
 
     public static void main(String args[]) {
@@ -159,7 +173,172 @@ public class Navigation extends javax.swing.JFrame {
             }
         });
     }
+    
+    public static void LoadProduct() 
+    {
+        try 
+        {
+            ArrayList<String> ProductID = new ArrayList<String>();
+            ArrayList<String> CustomerReportID = new ArrayList<String>();
+            ArrayList<String> StaffID = new ArrayList<String>();
+            ArrayList<String> ProductName = new ArrayList<String>();
+            ArrayList<String> Manufacturer = new ArrayList<String>();
+            ArrayList<String> ModelNum = new ArrayList<String>();
+            ArrayList<String> SerialNum = new ArrayList<String>();
+            ArrayList<String> DateIn = new ArrayList<String>();
+            ArrayList<String> Problem = new ArrayList<String>();
+            ArrayList<String> DateFixed = new ArrayList<String>();
+            ArrayList<String> WorkDone = new ArrayList<String>();
+            
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/helpline?allowMultiQueries=true","user","user");
+            Statement stmt = (Statement)con.createStatement();
+            
+            String sql = "Select * From `product form`;";
+            ResultSet rst;
+            rst = stmt.executeQuery(sql);
 
+            while (rst.next()) 
+            {
+                ProductID.add(rst.getString("productFormID"));
+                CustomerReportID.add(rst.getString("CustomerReportingFormID"));
+                StaffID.add(rst.getString("StaffID"));
+                ProductName.add(rst.getString("Product Name"));
+                Manufacturer.add(rst.getString("Manufacturer"));
+                ModelNum.add(rst.getString("Model Number"));
+                SerialNum.add(rst.getString("Serial Number"));
+                DateIn.add(rst.getString("Date bought in for fixing"));
+                Problem.add(rst.getString("Nature of problem"));
+                DateFixed.add(rst.getString("Date fixed"));
+                WorkDone.add(rst.getString("Work done"));
+            }
+            ProductTbl.add(ProductID);
+            ProductTbl.add(CustomerReportID);
+            ProductTbl.add(StaffID);
+            ProductTbl.add(ProductName);
+            ProductTbl.add(Manufacturer);
+            ProductTbl.add(ModelNum);
+            ProductTbl.add(SerialNum);
+            ProductTbl.add(DateIn);
+            ProductTbl.add(Problem);
+            ProductTbl.add(DateFixed);
+            ProductTbl.add(WorkDone);
+        } 
+        catch (Exception ex) 
+        {
+            Logger.getLogger(HelpLine.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public static void LoadStaff()
+    {
+        try 
+        {
+            ArrayList<String> StaffID = new ArrayList<String>();
+            ArrayList<String> FirstName = new ArrayList<String>();
+            ArrayList<String> LastName = new ArrayList<String>();
+            ArrayList<String> Address = new ArrayList<String>();
+            ArrayList<String> PostCode = new ArrayList<String>();
+            ArrayList<String> Email = new ArrayList<String>();
+            ArrayList<String> DOB = new ArrayList<String>();
+            
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/helpline?allowMultiQueries=true","user","user");
+            Statement stmt = (Statement)con.createStatement();
+            
+            String sql = "Select * From `staff information form`;";
+            ResultSet rst;
+            rst = stmt.executeQuery(sql);
+
+            while (rst.next()) 
+            {
+                StaffID.add(rst.getString("StaffID"));
+                FirstName.add(rst.getString("FirstName"));
+                LastName.add(rst.getString("LastName"));
+                Address.add(rst.getString("Address"));
+                PostCode.add(rst.getString("PostCode"));
+                Email.add(rst.getString("Email"));
+                DOB.add(rst.getString("DateOfBirth"));
+            }
+            StaffTbl.add(StaffID);
+            StaffTbl.add(FirstName);
+            StaffTbl.add(LastName);
+            StaffTbl.add(Address);
+            StaffTbl.add(PostCode);
+            StaffTbl.add(Email);
+            StaffTbl.add(DOB);
+        } 
+        catch (Exception ex) 
+        {
+            Logger.getLogger(HelpLine.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static void LoadCustomerReport()
+    {
+        try 
+        {
+            ArrayList<String> CustomerReportingFormID = new ArrayList<String>();
+            ArrayList<String> FirstName = new ArrayList<String>();
+            ArrayList<String> LastName = new ArrayList<String>();
+            ArrayList<String> Address = new ArrayList<String>();
+            ArrayList<String> PostCode = new ArrayList<String>();
+            ArrayList<String> Telephone = new ArrayList<String>();
+            ArrayList<String> DateReport = new ArrayList<String>();
+            ArrayList<String> EquipmentType = new ArrayList<String>();
+            ArrayList<String> Problem = new ArrayList<String>();
+            ArrayList<String> Severity = new ArrayList<String>();
+            ArrayList<String> ReceiveEquipment = new ArrayList<String>();
+            ArrayList<String> FixedEquipment = new ArrayList<String>();
+            ArrayList<String> DateFixed = new ArrayList<String>();
+            ArrayList<String> Cost = new ArrayList<String>();
+            
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/helpline?allowMultiQueries=true","user","user");
+            Statement stmt = (Statement)con.createStatement();
+            
+            String sql = "Select * From `customer reporting form`;";
+            ResultSet rst;
+            rst = stmt.executeQuery(sql);
+
+            while (rst.next()) 
+            {
+                CustomerReportingFormID.add(rst.getString("CustomerReportingFormID"));
+                FirstName.add(rst.getString("FirstName"));
+                LastName.add(rst.getString("LastName"));
+                Address.add(rst.getString("Address"));
+                PostCode.add(rst.getString("PostCode"));
+                Telephone.add(rst.getString("Telephone"));
+                DateReport.add(rst.getString("Date Reported"));
+                EquipmentType.add(rst.getString("Equipment Type"));
+                Problem.add(rst.getString("Nature of Problem"));
+                Severity.add(rst.getString("Severity"));
+                ReceiveEquipment.add(rst.getString("Staff receiving equipment"));
+                FixedEquipment.add(rst.getString("Staff assigned to fix equipment"));
+                DateFixed.add(rst.getString("Date Resolved"));
+                Cost.add(rst.getString("Estimated cost of repair"));
+            }
+            CustomerReportTbl.add(CustomerReportingFormID);
+            CustomerReportTbl.add(FirstName);
+            CustomerReportTbl.add(LastName);
+            CustomerReportTbl.add(Address);
+            CustomerReportTbl.add(PostCode);
+            CustomerReportTbl.add(Telephone);
+            CustomerReportTbl.add(DateReport);
+            CustomerReportTbl.add(EquipmentType);
+            CustomerReportTbl.add(Problem);
+            CustomerReportTbl.add(Severity);
+            CustomerReportTbl.add(ReceiveEquipment);
+            CustomerReportTbl.add(FixedEquipment);
+            CustomerReportTbl.add(DateFixed);
+            CustomerReportTbl.add(Cost);
+        } 
+        catch (Exception ex) 
+        {
+            Logger.getLogger(HelpLine.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_NavCust;
     private javax.swing.JButton btn_NavProd;

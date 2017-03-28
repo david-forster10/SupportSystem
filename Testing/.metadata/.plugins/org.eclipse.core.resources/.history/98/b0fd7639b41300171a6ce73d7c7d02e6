@@ -39,7 +39,6 @@ public class MainClass
 	    	    si.staffTest();
 	    break;
 	    case 5: quit = true;
-	    
 	    default: System.out.println("Enter a valid choice");
 	    }
 	    

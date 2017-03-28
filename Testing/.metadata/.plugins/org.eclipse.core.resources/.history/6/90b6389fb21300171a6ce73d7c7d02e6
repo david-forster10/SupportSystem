@@ -17,7 +17,6 @@ public class Staff_Information
 	
 	public void staffTest()
 	{
-		
 		runtime = Runtime.getRuntime();
 		Staff_Information keyboard = null;
 		try{

@@ -26,20 +26,16 @@ public class MainClass
 	    String helplineString = null;
 	    switch(HelpLine) {
 	    
-	    case 1: Login_Form lf = new Login_Form();
-	            lf.loginTest();
+	    case 1: Login_Form();
 	    break;
-	    case 2: Products pr = new Products();
-	            pr.productsTest();
+	    case 2: Products();
 	    break;
-	    case 3: Customer_Report cr = new Customer_Report();
-	            cr.reportsTest();
+	    case 3: Customer_Report();
 	    break;
 	    case 4: Staff_Information si = new Staff_Information();
 	    	    si.staffTest();
 	    break;
 	    case 5: quit = true;
-	    
 	    default: System.out.println("Enter a valid choice");
 	    }
 	    
@@ -48,7 +44,7 @@ public class MainClass
 	    } while (quit == false);
 	}
 	    
-	/*public static void Login_Form() 
+	    public static void Login_Form() 
 	    {
 			Login_Form robotprogram = null;
 			try {
@@ -81,7 +77,7 @@ public class MainClass
 			robotprogram.reportsTest();
 	}
 	    
-	    public static void Staff_Information() 
+	   /* public static void Staff_Information() 
 	    {
 			Staff_Information robotprogram = null;
 			try {

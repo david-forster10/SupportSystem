@@ -37,6 +37,7 @@ public class Staff_Information
 	}
 	public Staff_Information() throws AWTException
 	{
+		System.out.println("I am now in staff Infomation constructor");
 		this.robot = new Robot();
 	}
 	

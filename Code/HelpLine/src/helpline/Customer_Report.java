@@ -88,6 +88,72 @@ public class Customer_Report extends javax.swing.JFrame {
 
         lbl_EquipType.setText("Equipment Type");
 
+        txt_FirstName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_FirstNameActionPerformed(evt);
+            }
+        });
+
+        txt_Surname.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_SurnameActionPerformed(evt);
+            }
+        });
+
+        txt_Address.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_AddressActionPerformed(evt);
+            }
+        });
+
+        txt_Postcode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_PostcodeActionPerformed(evt);
+            }
+        });
+
+        txt_Telephone.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_TelephoneActionPerformed(evt);
+            }
+        });
+
+        txt_ReportDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_ReportDateActionPerformed(evt);
+            }
+        });
+
+        txt_EquipType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_EquipTypeActionPerformed(evt);
+            }
+        });
+
+        txt_Problem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_ProblemActionPerformed(evt);
+            }
+        });
+
+        txt_StaffRecieving.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_StaffRecievingActionPerformed(evt);
+            }
+        });
+
+        txt_StaffFixing.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_StaffFixingActionPerformed(evt);
+            }
+        });
+
+        txt_DateResolved.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_DateResolvedActionPerformed(evt);
+            }
+        });
+
         txt_RepairCost.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_RepairCostActionPerformed(evt);
@@ -153,7 +219,7 @@ public class Customer_Report extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lbl_EquipType)
                                 .addGap(18, 18, 18)
-                                .addComponent(txt_EquipType)))
+                                .addComponent(txt_EquipType, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -254,6 +320,50 @@ public class Customer_Report extends javax.swing.JFrame {
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void txt_FirstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_FirstNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_FirstNameActionPerformed
+
+    private void txt_SurnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_SurnameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_SurnameActionPerformed
+
+    private void txt_AddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_AddressActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_AddressActionPerformed
+
+    private void txt_PostcodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_PostcodeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_PostcodeActionPerformed
+
+    private void txt_TelephoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_TelephoneActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_TelephoneActionPerformed
+
+    private void txt_ReportDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_ReportDateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_ReportDateActionPerformed
+
+    private void txt_EquipTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_EquipTypeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_EquipTypeActionPerformed
+
+    private void txt_ProblemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_ProblemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_ProblemActionPerformed
+
+    private void txt_StaffRecievingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_StaffRecievingActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_StaffRecievingActionPerformed
+
+    private void txt_StaffFixingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_StaffFixingActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_StaffFixingActionPerformed
+
+    private void txt_DateResolvedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_DateResolvedActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_DateResolvedActionPerformed
 
     /**
      * @param args the command line arguments

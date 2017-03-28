@@ -18,6 +18,11 @@ public class Navigation extends javax.swing.JFrame {
         lbl_Navigation = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         btn_NavProd.setText("Products");
         btn_NavProd.addActionListener(new java.awt.event.ActionListener() {
@@ -119,9 +124,10 @@ public class Navigation extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btn_NavCustActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        
+    }//GEN-LAST:event_formWindowOpened
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

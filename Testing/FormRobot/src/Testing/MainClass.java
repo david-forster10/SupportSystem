@@ -13,38 +13,58 @@ public class MainClass
 		System.out.println("-----------------------------------");
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		System.out.println("1 - Login Form");
-		System.out.println("2 - Navigation");
-		System.out.println("3 - Products");
-		System.out.println("4 - Customer Report");
-		System.out.println("5 - Staff Information");
+		System.out.println("2 - Products");
+		System.out.println("3 - Customer Report");
+		System.out.println("4 - Staff Information");
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		System.out.println("-----------------------------------");
 		
 	    HelpLine = input.nextInt();
-	    String HelpLineString = null;
-	    switch(HelpLine)
-	    {
+	    
+	    String helplineString = null;
+	    switch(HelpLine) {
 	    
 	    case 1: Login_Form();
 	    break;
-	    case 2: Navigation();
+	    case 2: Products();
 	    break;
-	    case 3: Products();
+	    case 3: Customer_Report();
 	    break;
-	    case 4: Customer_Report();
-	    break;
-	    case 5: Staff_Information();
-	    break;
+	    /*case 4: Staff_Information();
+	    break;*/
 	    default: System.out.println("Enter a valid choice");
-	    
-	    System.out.println(HelpLineString);
+	    }
+	    System.out.println(helplineString);
 	    input.close();
+	    }  	
+	    
+	    public static void Login_Form() {
+			Login_Form robotprogram = null;
+			try {
+				robotprogram = new Login_Form();
+			} catch (AWTException e) {
+				e.printStackTrace();
+			}
+			robotprogram.loginTest();
 	    }
-	    public static void Login_Form();
-	    Navigation_Test robotprogram = null;
-	    try{
-	    	robotprogram = new Navigation_Test();
-	    	
-	    }
+	    
+	    public static void Products() {
+			Products robotprogram = null;
+			try {
+				robotprogram = new Products();
+			} catch (AWTException e) {
+				e.printStackTrace();
+			}
+			robotprogram.productsTest();
+	}
+	    
+	    public static void Customer_Report() {
+			Customer_Report robotprogram = null;
+			try {
+				robotprogram = new Customer_Report();
+			} catch (AWTException e) {
+				e.printStackTrace();
+			}
+			robotprogram.reportsTest();
 	}
 }

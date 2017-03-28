@@ -15,7 +15,7 @@ public class HelpLine {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Navigation LogForm= new Navigation();
+        Login_Form LogForm= new Login_Form();
         LogForm.setVisible(true);
     }
     

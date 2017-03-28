@@ -16,7 +16,6 @@ public class Products extends javax.swing.JFrame {
      */
     public Products() {
         initComponents();
-        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -213,6 +212,7 @@ public class Products extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_QuitProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_QuitProdActionPerformed

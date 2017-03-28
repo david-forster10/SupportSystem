@@ -67,14 +67,16 @@ public class Customer_Report
 		
 		//Navigation
 		robot.delay(1000);
-		robot.mouseMove(800, 364);
+		robot.mouseMove(819, 312);
 		robot.delay(500);
 		robot.mousePress(BUTTON1_DOWN_MASK);
 		robot.delay(1000);
 		robot.mouseRelease(BUTTON1_DOWN_MASK);
-		        
+		
+		//Products
+        robot.delay(1000);
+        
         //Customer_Report
-		robot.delay(1000);
 		
 		}
 	

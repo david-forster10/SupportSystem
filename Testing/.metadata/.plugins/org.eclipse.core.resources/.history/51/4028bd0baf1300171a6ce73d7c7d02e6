@@ -15,12 +15,12 @@ public class Customer_Report
 	private Robot robot;
 	private Runtime runtime;
 	
-	public void reportsTest()
+	public void productsTest()
 	{
 		runtime = Runtime.getRuntime();
-		Customer_Report keyboard = null;
+		Products keyboard = null;
 		try{
-		keyboard = new Customer_Report();
+		keyboard = new Products();
 		} catch (AWTException e) {
 			e.printStackTrace();
 		}
@@ -34,7 +34,7 @@ public class Customer_Report
 		/*keyboard.type("Bertrand");
 		keyboard.type1("Password1");*/
 	}
-	public Customer_Report() throws AWTException
+	public Products() throws AWTException
 	{
 		this.robot = new Robot();
 	}
@@ -67,14 +67,14 @@ public class Customer_Report
 		
 		//Navigation
 		robot.delay(1000);
-		robot.mouseMove(800, 364);
+		robot.mouseMove(819, 312);
 		robot.delay(500);
 		robot.mousePress(BUTTON1_DOWN_MASK);
 		robot.delay(1000);
 		robot.mouseRelease(BUTTON1_DOWN_MASK);
-		        
-        //Customer_Report
-		robot.delay(1000);
+		
+		//Products
+
 		
 		}
 	

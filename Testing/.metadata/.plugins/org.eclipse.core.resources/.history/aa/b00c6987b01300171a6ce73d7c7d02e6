@@ -10,17 +10,17 @@ import org.omg.SendingContext.RunTime;
 import static java.awt.event.InputEvent.BUTTON1_DOWN_MASK;
 import static java.awt.event.KeyEvent.*;
 
-public class Customer_Report 
+public class Staff_Information 
 {
 	private Robot robot;
 	private Runtime runtime;
 	
-	public void reportsTest()
+	public void staffTest()
 	{
 		runtime = Runtime.getRuntime();
-		Customer_Report keyboard = null;
+		Staff_Information keyboard = null;
 		try{
-		keyboard = new Customer_Report();
+		keyboard = new Staff_Information();
 		} catch (AWTException e) {
 			e.printStackTrace();
 		}
@@ -34,7 +34,7 @@ public class Customer_Report
 		/*keyboard.type("Bertrand");
 		keyboard.type1("Password1");*/
 	}
-	public Customer_Report() throws AWTException
+	public Staff_Information() throws AWTException
 	{
 		this.robot = new Robot();
 	}
@@ -67,7 +67,7 @@ public class Customer_Report
 		
 		//Navigation
 		robot.delay(1000);
-		robot.mouseMove(800, 364);
+		robot.mouseMove(800, 405);
 		robot.delay(500);
 		robot.mousePress(BUTTON1_DOWN_MASK);
 		robot.delay(1000);

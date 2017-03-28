@@ -67,7 +67,7 @@ public class Customer_Report
 		
 		//Navigation
 		robot.delay(1000);
-		robot.mouseMove(800, 364);
+		robot.mouseMove(819, 312);
 		robot.delay(500);
 		robot.mousePress(BUTTON1_DOWN_MASK);
 		robot.delay(1000);
@@ -75,7 +75,6 @@ public class Customer_Report
 		        
         //Customer_Report
 		robot.delay(1000);
-		
 		}
 	
 	 public void type(char character) 

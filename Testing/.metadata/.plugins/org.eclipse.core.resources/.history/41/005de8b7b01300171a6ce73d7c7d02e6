@@ -30,8 +30,8 @@ public class MainClass
 	    break;
 	    case 3: Customer_Report();
 	    break;
-	    case 4: Staff_Information();
-	    break;
+	    /*case 4: Staff_Information();
+	    break;*/
 	    default: System.out.println("Enter a valid choice");
 	    }
 	    System.out.println(helplineString);
@@ -76,5 +76,4 @@ public class MainClass
 				e.printStackTrace();
 			}
 			robotprogram.staffTest();
-     }
 }

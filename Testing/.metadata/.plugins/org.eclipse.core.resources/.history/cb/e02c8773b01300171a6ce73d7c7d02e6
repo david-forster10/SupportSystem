@@ -10,7 +10,7 @@ import org.omg.SendingContext.RunTime;
 import static java.awt.event.InputEvent.BUTTON1_DOWN_MASK;
 import static java.awt.event.KeyEvent.*;
 
-public class Customer_Report 
+public class Staff_Information 
 {
 	private Robot robot;
 	private Runtime runtime;

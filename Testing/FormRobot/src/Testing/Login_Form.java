@@ -5,8 +5,6 @@ import java.awt.Robot;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 
-import org.omg.SendingContext.RunTime;
-
 import static java.awt.event.InputEvent.BUTTON1_DOWN_MASK;
 import static java.awt.event.KeyEvent.*;
 
@@ -31,8 +29,8 @@ public class Login_Form
 			e.printStackTrace();
 		}
 		robot.delay(1000);
-		keyboard.type("Bertrand");
-		keyboard.type1("Password1");
+		keyboard.type("2");
+		keyboard.type1("Michelle19700414");
 	}
 	public Login_Form() throws AWTException
 	{
@@ -63,6 +61,9 @@ public class Login_Form
 		robot.mousePress(BUTTON1_DOWN_MASK);
 		robot.delay(500);
 		robot.mouseRelease(BUTTON1_DOWN_MASK);
+		robot.delay(400);
+		robot.keyPress(KeyEvent.VK_ENTER);
+		robot.keyRelease(KeyEvent.VK_ENTER);
 		}
 	
 	
@@ -184,7 +185,7 @@ public class Login_Form
          return;
      }  
      //Entering the text
-     robot.delay(10);
+     robot.delay(50);
 	    robot.keyPress(keyCodes[offset]);
      doType(keyCodes, offset + 1, length - 1);
      robot.keyRelease(keyCodes[offset]);

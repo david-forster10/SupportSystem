@@ -32,8 +32,9 @@ public class Staff_Information
 			e.printStackTrace();
 		}
 		robot.delay(1000);
-		keyboard.type("Bertrand");
-		keyboard.type1("Password1");
+		keyboard.type("2");
+		keyboard.type1("Michelle19700414");
+		
 	}
 	public Staff_Information() throws AWTException
 	{
@@ -65,10 +66,13 @@ public class Staff_Information
 		robot.mousePress(BUTTON1_DOWN_MASK);
 		robot.delay(500);
 		robot.mouseRelease(BUTTON1_DOWN_MASK);
+		robot.delay(400);
+		robot.keyPress(KeyEvent.VK_ENTER);
+		robot.keyRelease(KeyEvent.VK_ENTER);
 		
 		//Navigation
 		robot.delay(1000);
-		robot.mouseMove(800, 405);
+		robot.mouseMove(800, 490);
 		robot.delay(500);
 		robot.mousePress(BUTTON1_DOWN_MASK);
 		robot.delay(1000);
@@ -197,7 +201,7 @@ public class Staff_Information
          return;
      }  
      //Entering the text
-     robot.delay(10);
+     robot.delay(50);
 	    robot.keyPress(keyCodes[offset]);
      doType(keyCodes, offset + 1, length - 1);
      robot.keyRelease(keyCodes[offset]);

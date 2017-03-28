@@ -64,7 +64,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="lbl_EquipType" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="txt_EquipType" max="32767" attributes="0"/>
+                              <Component id="txt_EquipType" min="-2" pref="130" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace pref="60" max="32767" attributes="0"/>

@@ -1,5 +1,6 @@
 package helpline;
 
+import java.math.BigInteger;
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -25,8 +26,8 @@ public class HelpLine
             System.exit(0);
         }
         
-        Navigation form = new Navigation();
-        form.setVisible(true);   
+        Login_Form login = new Login_Form();
+        login.setVisible(true);   
     }
 
     public static boolean DatabaseConnection()
@@ -34,26 +35,45 @@ public class HelpLine
         try 
         {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/helpline","user","user");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/helpline?allowMultiQueries=true","user","user");
             Statement stmt = (Statement)con.createStatement();
             
-            String sql = "Select StaffID From Login";
-            ResultSet rst;
-            rst = stmt.executeQuery(sql);
-
-            while (rst.next()) 
-            {
-                User.add(rst.getString("StaffID"));
-            }
+            String sql = "Select StaffID From Login; Select Password From Login;";
+            boolean hasMoreResultSets = stmt.execute( sql );
             
-            /*sql = "Select * From Login Where ";
-            ResultSet rst2;
-            rst2 = stmt.executeQuery(sql);
-
-            while (rst.next()) 
-            {
-                
-            }*/
+            boolean bLeave = false;
+            int table = 0;
+            while ( hasMoreResultSets || stmt.getUpdateCount() != -1 || bLeave == true) 
+            {  
+                if ( hasMoreResultSets ) 
+                {  
+                    ResultSet rst = stmt.getResultSet();
+                    if (table == 0)
+                    {
+                        while (rst.next()) 
+                        {
+                            User.add(rst.getString("StaffID"));
+                        }
+                        table += 1;
+                    }
+                    if (table == 1)
+                    {
+                        while (rst.next()) 
+                        {
+                            Password.add(rst.getString("Password"));
+                        }
+                    }
+                }
+                else 
+                {
+                    int queryResult = stmt.getUpdateCount();  
+                    if ( queryResult == -1 ) 
+                    { 
+                        bLeave = true;  
+                    }
+                }
+                hasMoreResultSets = stmt.getMoreResults();  
+            }
         } 
         catch (Exception ex) 
         {
@@ -69,7 +89,7 @@ public class HelpLine
         {
             MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
             messageDigest.update(input.getBytes(Charset.forName("UTF-8")),0,input.length());
-            return input;
+            return new BigInteger(1, messageDigest.digest()).toString(16);
         }
         catch (NoSuchAlgorithmException nsgex)
         {

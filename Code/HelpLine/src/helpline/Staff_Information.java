@@ -16,7 +16,6 @@ public class Staff_Information extends javax.swing.JFrame {
      */
     public Staff_Information() {
         initComponents();
-        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -168,6 +167,7 @@ public class Staff_Information extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txt_FNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_FNameActionPerformed

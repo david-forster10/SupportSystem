@@ -17,7 +17,6 @@ public class Login_Form extends javax.swing.JFrame {
     
     public Login_Form() {
         initComponents();
-        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -39,6 +38,11 @@ public class Login_Form extends javax.swing.JFrame {
         lbl_HelpLine = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         lbl_Username.setText("Username");
 
@@ -133,6 +137,7 @@ public class Login_Form extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txt_UsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_UsernameActionPerformed

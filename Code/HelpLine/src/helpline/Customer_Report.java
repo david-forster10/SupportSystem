@@ -16,7 +16,6 @@ public class Customer_Report extends javax.swing.JFrame {
      */
     public Customer_Report() {
         initComponents();
-        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -235,6 +234,7 @@ public class Customer_Report extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txt_RepairCostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_RepairCostActionPerformed

@@ -4,7 +4,6 @@ public class Navigation extends javax.swing.JFrame {
 
     public Navigation() {
         initComponents();
-        this.setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")
@@ -95,6 +94,7 @@ public class Navigation extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_NavStaffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_NavStaffActionPerformed

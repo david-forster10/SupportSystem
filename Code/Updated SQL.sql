@@ -20,7 +20,7 @@ USE `helpline`;
 -- Dumping structure for table helpline.customer reporting form
 DROP TABLE IF EXISTS `customer reporting form`;
 CREATE TABLE IF NOT EXISTS `customer reporting form` (
-  `CustomerReportingFromID` int(11) NOT NULL,
+  `CustomerReportingFormID` int(11) NOT NULL,
   `FirstName` varchar(20) NOT NULL,
   `LastName` varchar(30) NOT NULL,
   `Address` varchar(40) NOT NULL,
@@ -29,12 +29,12 @@ CREATE TABLE IF NOT EXISTS `customer reporting form` (
   `Date Reported` date NOT NULL,
   `Equipment Type` varchar(40) NOT NULL,
   `Nature of Problem` varchar(40) NOT NULL,
-  `Severity (1=high, 2=medium, 3=low)` varchar(11) NOT NULL,
+  `Severity` varchar(11) NOT NULL COMMENT ' (1=high, 2=medium, 3=low)',
   `Staff receiving equipment` int(11) NOT NULL,
   `Staff assigned to fix equipment` int(11) NOT NULL,
   `Date resolved` date NOT NULL,
   `Estimated cost of repair` decimal(10,0) NOT NULL,
-  PRIMARY KEY (`CustomerReportingFromID`),
+  PRIMARY KEY (`CustomerReportingFormID`),
   UNIQUE KEY `Staff receiving equipment` (`Staff receiving equipment`),
   KEY `Staff assigned to fix equipment` (`Staff assigned to fix equipment`),
   CONSTRAINT `customer reporting form_ibfk_1` FOREIGN KEY (`Staff receiving equipment`) REFERENCES `staff information form` (`StaffID`),
@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `customer reporting form` (
 -- Dumping data for table helpline.customer reporting form: ~10 rows (approximately)
 DELETE FROM `customer reporting form`;
 /*!40000 ALTER TABLE `customer reporting form` DISABLE KEYS */;
-INSERT INTO `customer reporting form` (`CustomerReportingFromID`, `FirstName`, `LastName`, `Address`, `Postcode`, `Telephone`, `Date Reported`, `Equipment Type`, `Nature of Problem`, `Severity (1=high, 2=medium, 3=low)`, `Staff receiving equipment`, `Staff assigned to fix equipment`, `Date resolved`, `Estimated cost of repair`) VALUES
+INSERT INTO `customer reporting form` (`CustomerReportingFormID`, `FirstName`, `LastName`, `Address`, `Postcode`, `Telephone`, `Date Reported`, `Equipment Type`, `Nature of Problem`, `Severity`, `Staff receiving equipment`, `Staff assigned to fix equipment`, `Date resolved`, `Estimated cost of repair`) VALUES
 	(1, 'David', 'Hayes', '92 Park Avenue', 'SY4 1AU', '07736270935', '2017-03-20', 'Computer', 'Graphics Card not working', '2', 3, 3, '2017-03-22', 30),
 	(2, 'Delores', 'Benjamin', '78 Ivy Lane', 'L12 7GT', '07744738885', '2017-03-05', 'Printer', 'Printing Jam', '3', 10, 2, '2017-03-07', 15),
 	(3, 'Deanna', 'Smith', '38 Newport Road', 'LE8 1PG', '079 1014 6346', '2017-03-20', 'Router', 'Cant connect to the internet', '2', 2, 1, '2017-03-21', 10),
@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `login` (
   CONSTRAINT `login_ibfk_1` FOREIGN KEY (`StaffID`) REFERENCES `staff information form` (`StaffID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table helpline.login: ~7 rows (approximately)
+-- Dumping data for table helpline.login: ~10 rows (approximately)
 DELETE FROM `login`;
 /*!40000 ALTER TABLE `login` DISABLE KEYS */;
 INSERT INTO `login` (`StaffID`, `Password`) VALUES
@@ -99,7 +99,7 @@ CREATE TABLE IF NOT EXISTS `product form` (
   PRIMARY KEY (`productFormID`),
   KEY `CustomerReportingFormID` (`CustomerReportingFormID`),
   KEY `StaffID` (`StaffID`),
-  CONSTRAINT `product form_ibfk_1` FOREIGN KEY (`CustomerReportingFormID`) REFERENCES `customer reporting form` (`CustomerReportingFromID`),
+  CONSTRAINT `product form_ibfk_1` FOREIGN KEY (`CustomerReportingFormID`) REFERENCES `customer reporting form` (`CustomerReportingFormID`),
   CONSTRAINT `product form_ibfk_2` FOREIGN KEY (`StaffID`) REFERENCES `staff information form` (`StaffID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

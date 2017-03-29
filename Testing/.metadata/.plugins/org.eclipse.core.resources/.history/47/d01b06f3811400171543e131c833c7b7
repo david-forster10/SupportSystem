@@ -1,4 +1,3 @@
-//This is done
 package Testing;
 
 import java.awt.AWTException;
@@ -6,20 +5,23 @@ import java.awt.Robot;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 
+import org.omg.SendingContext.RunTime;
+
 import static java.awt.event.InputEvent.BUTTON1_DOWN_MASK;
 import static java.awt.event.KeyEvent.*;
 
-public class Login_Form 
+public class Staff_Information 
 {
 	private Robot robot;
 	private Runtime runtime;
 	boolean successful = false;
-	public boolean loginTest()
+	public boolean staffTest()
 	{
+		
 		runtime = Runtime.getRuntime();
-		Login_Form keyboard = null;
+		Staff_Information keyboard = null;
 		try{
-		keyboard = new Login_Form();
+		keyboard = new Staff_Information();
 		} catch (AWTException e) {
 			e.printStackTrace();
 		}
@@ -34,9 +36,12 @@ public class Login_Form
 		robot.delay(1000);
 		keyboard.typo("2");
 		keyboard.type1("Michelle19700414");
+		keyboard.type2("Richard");
+		keyboard.type3("Parker");
 		return successful;
+		
 	}
-	public Login_Form() throws AWTException
+	public Staff_Information() throws AWTException
 	{
 		this.robot = new Robot();
 	}
@@ -49,7 +54,6 @@ public class Login_Form
 			char character = characters.charAt(i);
 			type(character);
 		}
-		robot.delay(300);
 		robot.keyPress(KeyEvent.VK_TAB);
 		robot.keyRelease(KeyEvent.VK_TAB);
 	    }
@@ -62,6 +66,7 @@ public class Login_Form
 			char character = characters.charAt(i);
 			type(character);
 		}
+		//Login
 		robot.mouseMove(954, 556);
 		robot.mousePress(BUTTON1_DOWN_MASK);
 		robot.delay(500);
@@ -69,17 +74,28 @@ public class Login_Form
 		robot.delay(400);
 		robot.keyPress(KeyEvent.VK_ENTER);
 		robot.keyRelease(KeyEvent.VK_ENTER);
-		robot.delay(2000);
-		robot.mouseMove(830, 540);
+		
+		//Navigation
 		robot.delay(1000);
-		System.out.println("Press Quit Button");
+		robot.mouseMove(800, 490);
+		robot.delay(500);
 		robot.mousePress(BUTTON1_DOWN_MASK);
 		robot.delay(1000);
 		robot.mouseRelease(BUTTON1_DOWN_MASK);
-		robot.delay(1000);
-		System.out.println("Quit Button Pressed");
 		}
-	
+		public void type2(CharSequence characters)
+		{
+			int length = characters.length();
+			for (int i =0; i < length; i++)
+			{
+				char character = characters.charAt(i);
+				type(character);
+			}
+			robot.keyPress(KeyEvent.VK_TAB);
+			robot.keyRelease(KeyEvent.VK_TAB);
+		    }
+		
+		}
 	
 	 public void type(char character) 
      {
@@ -206,4 +222,3 @@ public class Login_Form
      }
  
 }
-

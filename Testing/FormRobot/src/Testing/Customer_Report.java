@@ -41,7 +41,7 @@ public class Customer_Report
 		keyboard.type7("L17 8PJ");
 		keyboard.type8("Thomas Davis");
 		keyboard.type9("07744738885");
-		keyboard.type9("2017-03-07");
+		keyboard.type9("");
 		keyboard.type10("2017-03-07");
 		keyboard.type11("30");
 		keyboard.type12("Monitor");
@@ -60,6 +60,7 @@ public class Customer_Report
 			char character = characters.charAt(i);
 			type(character);
 		}
+		robot.delay(300);
 		robot.keyPress(KeyEvent.VK_TAB);
 		robot.keyRelease(KeyEvent.VK_TAB);
 	    }

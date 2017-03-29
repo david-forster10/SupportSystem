@@ -49,7 +49,6 @@ public class Login_Form
 			char character = characters.charAt(i);
 			type(character);
 		}
-		robot.delay(300);
 		robot.keyPress(KeyEvent.VK_TAB);
 		robot.keyRelease(KeyEvent.VK_TAB);
 	    }

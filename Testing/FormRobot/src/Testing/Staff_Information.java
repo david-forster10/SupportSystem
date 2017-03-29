@@ -36,6 +36,12 @@ public class Staff_Information
 		robot.delay(1000);
 		keyboard.typo("2");
 		keyboard.type1("Michelle19700414");
+		keyboard.type2("Richard");
+		keyboard.type3("19 Green Street");
+		keyboard.type4("Parker");
+		keyboard.type5("E45 6RD");
+		keyboard.type6("Richyboy19@hotmail.co.uk");
+		keyboard.type7("1908/12/12");
 		return successful;
 		
 	}
@@ -84,14 +90,84 @@ public class Staff_Information
 		public void type2(CharSequence characters)
 		{
 			int length = characters.length();
-		for (int i =0; i < length; i++)
-		{
-			char character = characters.charAt(i);
-			type(character);
-		}    
+			for (int i =0; i < length; i++)
+			{
+				char character = characters.charAt(i);
+				type(character);
+			}
+			robot.delay(300);
+			robot.keyPress(KeyEvent.VK_TAB);
+			robot.keyRelease(KeyEvent.VK_TAB);
+		    }
 		
-		}
+		public void type3(CharSequence characters)
+		{
+			int length = characters.length();
+			for (int i =0; i < length; i++)
+			{
+				char character = characters.charAt(i);
+				type(character);
+			}
+			robot.delay(300);
+			robot.keyPress(KeyEvent.VK_TAB);
+			robot.keyRelease(KeyEvent.VK_TAB);
+		    }
+		
+		public void type4(CharSequence characters)
+		{
+			int length = characters.length();
+			for (int i =0; i < length; i++)
+			{
+				char character = characters.charAt(i);
+				type(character);
+			}
+			robot.delay(300);
+			robot.keyPress(KeyEvent.VK_TAB);
+			robot.keyRelease(KeyEvent.VK_TAB);
+		    }
+		
+		public void type5(CharSequence characters)
+		{
+			int length = characters.length();
+			for (int i =0; i < length; i++)
+			{
+				char character = characters.charAt(i);
+				type(character);
+			}
+			robot.delay(300);
+			robot.keyPress(KeyEvent.VK_TAB);
+			robot.keyRelease(KeyEvent.VK_TAB);
+		    }
 	
+		public void type6(CharSequence characters)
+		{
+			int length = characters.length();
+			for (int i =0; i < length; i++)
+			{
+				char character = characters.charAt(i);
+				type(character);
+			}
+			robot.delay(300);
+			robot.keyPress(KeyEvent.VK_TAB);
+			robot.keyRelease(KeyEvent.VK_TAB);
+		    }
+		
+		public void type7(CharSequence characters)
+		{
+			int length = characters.length();
+			for (int i =0; i < length; i++)
+			{
+				char character = characters.charAt(i);
+				type(character);
+			}
+			robot.delay(1000);
+			robot.mouseMove(1143, 651);
+			robot.delay(500);
+			robot.mousePress(BUTTON1_DOWN_MASK);
+			robot.delay(500);
+			robot.mouseRelease(BUTTON2_DOWN_MASK);
+		    }
+		
 	 public void type(char character) 
      {
      switch (character) {
@@ -162,7 +238,7 @@ public class Staff_Information
      case '=': doType(VK_EQUALS); break;
      case '~': doType(VK_SHIFT, VK_BACK_QUOTE); break;
      case '!': doType(VK_EXCLAMATION_MARK); break;
-     case '@': doType(VK_AT); break;
+     case '@': doType(VK_SHIFT, VK_QUOTE); break;
      case '#': doType(VK_NUMBER_SIGN); break;
      case '$': doType(VK_DOLLAR); break;
      case '%': doType(VK_SHIFT, VK_5); break;
@@ -183,7 +259,7 @@ public class Staff_Information
      case '|': doType(VK_SHIFT, VK_BACK_SLASH); break;
      case ';': doType(VK_SEMICOLON); break;
      case ':': doType(VK_COLON); break;
-     case '\'': doType(VK_QUOTE); break;
+     case '\'': doType(VK_BACK_SLASH); break;
      case '"': doType(VK_QUOTEDBL); break;
      case ',': doType(VK_COMMA); break;
      case '<': doType(VK_SHIFT, VK_COMMA); break;

@@ -34,7 +34,7 @@ public class All_Programs
 			successful = false;
 		}
 		robot.delay(1000);
-		keyboard.typo("2");
+		keyboard.type("2");
 		keyboard.type1("Michelle19700414");
 		return successful;
 		
@@ -44,7 +44,7 @@ public class All_Programs
 		this.robot = new Robot();
 	}
 	
-	public void typo(CharSequence characters)
+	public void type(CharSequence characters)
 	{
 		int length = characters.length();
 		for (int i =0; i < length; i++)

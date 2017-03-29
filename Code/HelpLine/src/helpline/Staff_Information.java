@@ -32,6 +32,7 @@ public class Staff_Information extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         lblPicture = new javax.swing.JLabel();
         tgbtn_Edit = new javax.swing.JToggleButton();
+        btn_submit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -116,7 +117,7 @@ public class Staff_Information extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(77, 77, 77)
                 .addComponent(lblPicture)
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addContainerGap(80, Short.MAX_VALUE))
         );
 
         tgbtn_Edit.setText("Edit Record");
@@ -128,6 +129,13 @@ public class Staff_Information extends javax.swing.JFrame {
         tgbtn_Edit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tgbtn_EditActionPerformed(evt);
+            }
+        });
+
+        btn_submit.setText("Submit");
+        btn_submit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_submitActionPerformed(evt);
             }
         });
 
@@ -174,6 +182,8 @@ public class Staff_Information extends javax.swing.JFrame {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(btn_QuitInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btn_submit)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnDelete)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -218,7 +228,8 @@ public class Staff_Information extends javax.swing.JFrame {
                     .addComponent(btn_QuitInfo)
                     .addComponent(btnDelete)
                     .addComponent(btnSave)
-                    .addComponent(tgbtn_Edit))
+                    .addComponent(tgbtn_Edit)
+                    .addComponent(btn_submit))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -267,6 +278,10 @@ public class Staff_Information extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tgbtn_EditMouseClicked
 
+    private void btn_submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_submitActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_submitActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -304,6 +319,7 @@ public class Staff_Information extends javax.swing.JFrame {
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btn_QuitInfo;
+    private javax.swing.JButton btn_submit;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

@@ -1,5 +1,8 @@
 package helpline;
 
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 public class Staff_Information extends javax.swing.JFrame {
 
     public Staff_Information() {
@@ -32,6 +35,8 @@ public class Staff_Information extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         lblPicture = new javax.swing.JLabel();
         tgbtn_Edit = new javax.swing.JToggleButton();
+        lbl_FName1 = new javax.swing.JLabel();
+        txt_FName1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -42,10 +47,7 @@ public class Staff_Information extends javax.swing.JFrame {
 
         tblDatabase.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Staff ID", "First Name", "Last Name", "Address", "Post Code", "Email", "Date of Birth"
@@ -131,6 +133,14 @@ public class Staff_Information extends javax.swing.JFrame {
             }
         });
 
+        lbl_FName1.setText("Staff ID");
+
+        txt_FName1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_FName1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -145,10 +155,12 @@ public class Staff_Information extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lbl_FName)
+                                    .addComponent(lbl_Email, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(lbl_Surname, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lbl_Email, javax.swing.GroupLayout.Alignment.TRAILING))
+                                    .addComponent(lbl_FName1, javax.swing.GroupLayout.Alignment.TRAILING))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txt_FName1)
                                     .addComponent(txt_Surname)
                                     .addComponent(txt_FName)
                                     .addComponent(txt_Email, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE))
@@ -189,29 +201,37 @@ public class Staff_Information extends javax.swing.JFrame {
                         .addComponent(lbl_Info)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(txt_FName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lbl_Address))
-                            .addComponent(lbl_FName)
-                            .addComponent(txt_Address, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(lbl_PostCode)
-                                .addComponent(txt_PostCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(1, 1, 1)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbl_Address)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(txt_FName1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lbl_FName1)))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txt_FName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbl_FName)))
+                            .addComponent(txt_Address, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lbl_PostCode)
+                                    .addComponent(txt_PostCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(txt_Surname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lbl_Surname))))
-                        .addGap(17, 17, 17)
+                                    .addComponent(lbl_Surname))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbl_Email)
                             .addComponent(txt_Email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lbl_DoB)
                             .addComponent(txt_DoB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 7, Short.MAX_VALUE)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -250,22 +270,34 @@ public class Staff_Information extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_QuitInfoActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        DefaultTableModel tableModel = (DefaultTableModel) tblDatabase.getModel();
         
+        for (int i = 0; i < Navigation.StaffTbl.size(); i++)
+        {
+            Object[] rowData { Navigation.StaffTbl.get(i), data2 };
+            tableModel.addRow(rowData);
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void tgbtn_EditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tgbtn_EditActionPerformed
     }//GEN-LAST:event_tgbtn_EditActionPerformed
 
     private void tgbtn_EditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tgbtn_EditMouseClicked
-        if (tgbtn_Edit.getText() == "Edit Record")
+        if (tgbtn_Edit.getText().equals("Edit Record"))
         {
             tgbtn_Edit.setText("New Record");
+            tblDatabase.setEnabled(true);
         }
-        else if (tgbtn_Edit.getText() == "New Record")
+        else if (tgbtn_Edit.getText().equals("New Record"))
         {
-            tgbtn_Edit.setText("New Record");
+            tgbtn_Edit.setText("Edit Record");
+            tblDatabase.setEnabled(false);
         }
     }//GEN-LAST:event_tgbtn_EditMouseClicked
+
+    private void txt_FName1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_FName1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_FName1ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -312,6 +344,7 @@ public class Staff_Information extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_DoB;
     private javax.swing.JLabel lbl_Email;
     private javax.swing.JLabel lbl_FName;
+    private javax.swing.JLabel lbl_FName1;
     private javax.swing.JLabel lbl_Info;
     private javax.swing.JLabel lbl_PostCode;
     private javax.swing.JLabel lbl_Surname;
@@ -321,6 +354,7 @@ public class Staff_Information extends javax.swing.JFrame {
     private javax.swing.JTextField txt_DoB;
     private javax.swing.JTextField txt_Email;
     private javax.swing.JTextField txt_FName;
+    private javax.swing.JTextField txt_FName1;
     private javax.swing.JTextField txt_PostCode;
     private javax.swing.JTextField txt_Surname;
     // End of variables declaration//GEN-END:variables

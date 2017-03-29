@@ -53,12 +53,8 @@ public class Staff_Information extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         lblPicture = new javax.swing.JLabel();
         tgbtn_Edit = new javax.swing.JToggleButton();
-<<<<<<< HEAD
-        btn_submit = new javax.swing.JButton();
-=======
         lbl_StaffID = new javax.swing.JLabel();
         txt_StaffID = new javax.swing.JTextField();
->>>>>>> Database_Connection
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -162,11 +158,7 @@ public class Staff_Information extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(82, 82, 82)
                 .addComponent(lblPicture)
-<<<<<<< HEAD
-                .addContainerGap(80, Short.MAX_VALUE))
-=======
                 .addContainerGap(84, Short.MAX_VALUE))
->>>>>>> Database_Connection
         );
 
         tgbtn_Edit.setText("Edit Record");
@@ -181,18 +173,11 @@ public class Staff_Information extends javax.swing.JFrame {
             }
         });
 
-<<<<<<< HEAD
-        btn_submit.setText("Submit");
-        btn_submit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_submitActionPerformed(evt);
-=======
         lbl_StaffID.setText("Staff ID");
 
         txt_StaffID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_StaffIDActionPerformed(evt);
->>>>>>> Database_Connection
             }
         });
 
@@ -251,23 +236,7 @@ public class Staff_Information extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(tgbtn_Edit)
                                     .addComponent(lbl_Info))
-<<<<<<< HEAD
-                                .addGap(311, 311, 311))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btn_QuitInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btn_submit)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnDelete)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnSave)))
-                        .addGap(13, 13, 13))))
-=======
                                 .addGap(311, 311, 311))))))
->>>>>>> Database_Connection
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -311,8 +280,7 @@ public class Staff_Information extends javax.swing.JFrame {
                     .addComponent(btn_QuitInfo)
                     .addComponent(btnDelete)
                     .addComponent(btnSave)
-                    .addComponent(tgbtn_Edit)
-                    .addComponent(btn_submit))
+                    .addComponent(tgbtn_Edit))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -381,11 +349,6 @@ public class Staff_Information extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tgbtn_EditMouseClicked
 
-<<<<<<< HEAD
-    private void btn_submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_submitActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_submitActionPerformed
-=======
     private void txt_StaffIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_StaffIDActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_StaffIDActionPerformed
@@ -474,7 +437,6 @@ public class Staff_Information extends javax.swing.JFrame {
             Logger.getLogger(Staff_Information.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jPanel2MouseClicked
->>>>>>> Database_Connection
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -513,7 +475,6 @@ public class Staff_Information extends javax.swing.JFrame {
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btn_QuitInfo;
-    private javax.swing.JButton btn_submit;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

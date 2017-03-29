@@ -1,3 +1,4 @@
+//This is done
 package Testing;
 
 import java.awt.AWTException;
@@ -12,8 +13,8 @@ public class Login_Form
 {
 	private Robot robot;
 	private Runtime runtime;
-	
-	public void loginTest()
+	boolean successful = false;
+	public boolean loginTest()
 	{
 		runtime = Runtime.getRuntime();
 		Login_Form keyboard = null;
@@ -25,19 +26,22 @@ public class Login_Form
 		try {
 			Runtime.getRuntime().exec("cmd /c start C:\\Users\\Vanilla\\Documents\\SupportSystem\\Code\\HelpLine\\dist\\HelpLine.jar");
 			robot.delay(3000);
+			successful = true;
 		} catch (IOException e) {
 			e.printStackTrace();
+			successful = false;
 		}
 		robot.delay(1000);
-		keyboard.type("2");
+		keyboard.typo("2");
 		keyboard.type1("Michelle19700414");
+		return successful;
 	}
 	public Login_Form() throws AWTException
 	{
 		this.robot = new Robot();
 	}
 	
-	public void type(CharSequence characters)
+	public void typo(CharSequence characters)
 	{
 		int length = characters.length();
 		for (int i =0; i < length; i++)
@@ -64,6 +68,15 @@ public class Login_Form
 		robot.delay(400);
 		robot.keyPress(KeyEvent.VK_ENTER);
 		robot.keyRelease(KeyEvent.VK_ENTER);
+		robot.delay(2000);
+		robot.mouseMove(830, 540);
+		robot.delay(1000);
+		System.out.println("Press Quit Button");
+		robot.mousePress(BUTTON1_DOWN_MASK);
+		robot.delay(1000);
+		robot.mouseRelease(BUTTON1_DOWN_MASK);
+		robot.delay(1000);
+		System.out.println("Quit Button Pressed");
 		}
 	
 	

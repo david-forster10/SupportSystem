@@ -14,8 +14,8 @@ public class All_Programs
 {
 	private Robot robot;
 	private Runtime runtime;
-	
-	public void programTest()
+	boolean successful = false;
+	public boolean programTest()
 	{
 		
 		runtime = Runtime.getRuntime();
@@ -28,12 +28,15 @@ public class All_Programs
 		try {
 			Runtime.getRuntime().exec("cmd /c start C:\\Users\\Vanilla\\Documents\\SupportSystem\\Code\\HelpLine\\dist\\HelpLine.jar");
 			robot.delay(3000);
+			successful = true;
 		} catch (IOException e) {
 			e.printStackTrace();
+			successful = false;
 		}
 		robot.delay(1000);
 		keyboard.type("2");
 		keyboard.type1("Michelle19700414");
+		return successful;
 		
 	}
 	public All_Programs() throws AWTException

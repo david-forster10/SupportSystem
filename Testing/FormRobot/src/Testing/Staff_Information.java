@@ -1,4 +1,3 @@
-//This is filled in now
 package Testing;
 
 import java.awt.AWTException;
@@ -15,8 +14,8 @@ public class Staff_Information
 {
 	private Robot robot;
 	private Runtime runtime;
-	
-	public void staffTest()
+	boolean successful = false;
+	public boolean staffTest()
 	{
 		
 		runtime = Runtime.getRuntime();
@@ -29,12 +28,15 @@ public class Staff_Information
 		try {
 			Runtime.getRuntime().exec("cmd /c start C:\\Users\\Vanilla\\Documents\\SupportSystem\\Code\\HelpLine\\dist\\HelpLine.jar");
 			robot.delay(3000);
+			successful = true;
 		} catch (IOException e) {
 			e.printStackTrace();
+			successful = false;
 		}
 		robot.delay(1000);
-		keyboard.type("2");
+		keyboard.typo("2");
 		keyboard.type1("Michelle19700414");
+		return successful;
 		
 	}
 	public Staff_Information() throws AWTException
@@ -42,7 +44,7 @@ public class Staff_Information
 		this.robot = new Robot();
 	}
 	
-	public void type(CharSequence characters)
+	public void typo(CharSequence characters)
 	{
 		int length = characters.length();
 		for (int i =0; i < length; i++)

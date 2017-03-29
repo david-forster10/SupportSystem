@@ -12,8 +12,8 @@ public class Customer_Report
 {
 	private Robot robot;
 	private Runtime runtime;
-	
-	public void reportsTest()
+	boolean successful = false;
+	public boolean reportsTest()
 	{
 		runtime = Runtime.getRuntime();
 		Customer_Report keyboard = null;
@@ -25,11 +25,13 @@ public class Customer_Report
 		try {
 			Runtime.getRuntime().exec("cmd /c start C:\\Users\\Vanilla\\Documents\\SupportSystem\\Code\\HelpLine\\dist\\HelpLine.jar");
 			robot.delay(3000);
+			successful = true;
 		} catch (IOException e) {
 			e.printStackTrace();
+			successful = false;
 		}
 		robot.delay(1000);
-		keyboard.type("2");
+		keyboard.typo("2");
 		keyboard.type1("Michelle19700414");
 		keyboard.type2("Michelle");
 		keyboard.type3("Cracked Monitor");
@@ -43,13 +45,14 @@ public class Customer_Report
 		keyboard.type10("2017-03-07");
 		keyboard.type11("30");
 		keyboard.type12("Monitor");
+		return successful;
 	}
 	public Customer_Report() throws AWTException
 	{
 		this.robot = new Robot();
 	}
-	
-	public void type(CharSequence characters)
+	       
+	public void typo(CharSequence characters)
 	{
 		int length = characters.length();
 		for (int i =0; i < length; i++)
@@ -70,6 +73,7 @@ public class Customer_Report
 			type(character);
 		}
 		//Login
+		robot.delay(1000);
 		robot.mouseMove(954, 556);
 		robot.mousePress(BUTTON1_DOWN_MASK);
 		robot.delay(500);
@@ -238,6 +242,12 @@ public class Customer_Report
 		robot.mouseRelease(BUTTON1_DOWN_MASK);
 		robot.delay(2000);
 		robot.mouseMove(589, 620);
+		robot.delay(1000);
+		robot.mousePress(BUTTON1_DOWN_MASK);
+		robot.delay(1000);
+		robot.mouseRelease(BUTTON1_DOWN_MASK);
+		robot.delay(1000);
+		robot.mouseMove(830, 540);
 		robot.delay(1000);
 		robot.mousePress(BUTTON1_DOWN_MASK);
 		robot.delay(1000);

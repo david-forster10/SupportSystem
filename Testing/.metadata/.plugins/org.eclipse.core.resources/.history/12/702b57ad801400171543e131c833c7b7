@@ -58,7 +58,7 @@ public class MainClass
 	            else { System.out.println("Test Unsuccessful");}
 	    break;
 	    case 5: All_Programs ap = new All_Programs();
-	            success = ap.programTest();
+	            success =ap.programTest();
 	            if (success == true)
 	            {System.out.println("Test Successful");}
 	            else { System.out.println("Test Unsuccessful");}

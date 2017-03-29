@@ -52,13 +52,13 @@ public class MainClass
 	            else { System.out.println("Test Unsuccessful");}
 	    break;
 	    case 4: Staff_Information si = new Staff_Information();
-	            success = si.staffTest();
+	    	    si.staffTest();
 	            if (success == true)
 	            {System.out.println("Test Successful");}
 	            else { System.out.println("Test Unsuccessful");}
 	    break;
 	    case 5: All_Programs ap = new All_Programs();
-	            success = ap.programTest();
+	            ap.programTest();
 	            if (success == true)
 	            {System.out.println("Test Successful");}
 	            else { System.out.println("Test Unsuccessful");}

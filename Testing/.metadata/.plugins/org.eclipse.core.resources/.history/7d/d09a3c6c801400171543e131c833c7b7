@@ -25,7 +25,6 @@ public class MainClass
 		System.out.println("6 - Quit");
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		System.out.println("-----------------------------------");
-		System.out.println("Enter Choice: ");
 		
 	   Line = input.nextLine();
 	   HelpLine = Integer.parseInt(Line);
@@ -40,25 +39,25 @@ public class MainClass
 	            else { System.out.println("Test Unsuccessful");}
 	    break;
 	    case 2: Products pr = new Products();
-	            success = pr.productsTest();
+	            pr.productsTest();
 	            if (success == true)
 	            {System.out.println("Test Successful");}
 	            else { System.out.println("Test Unsuccessful");}
 	    break;
 	    case 3: Customer_Report cr = new Customer_Report();
-	            success = cr.reportsTest();
+	            cr.reportsTest();
 	            if (success == true)
 	            {System.out.println("Test Successful");}
 	            else { System.out.println("Test Unsuccessful");}
 	    break;
 	    case 4: Staff_Information si = new Staff_Information();
-	            success = si.staffTest();
+	    	    si.staffTest();
 	            if (success == true)
 	            {System.out.println("Test Successful");}
 	            else { System.out.println("Test Unsuccessful");}
 	    break;
 	    case 5: All_Programs ap = new All_Programs();
-	            success = ap.programTest();
+	            ap.programTest();
 	            if (success == true)
 	            {System.out.println("Test Successful");}
 	            else { System.out.println("Test Unsuccessful");}

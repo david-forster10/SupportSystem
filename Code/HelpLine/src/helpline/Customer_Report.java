@@ -350,7 +350,8 @@ public class Customer_Report extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_EquipTypeActionPerformed
 
     private void txt_ProblemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_ProblemActionPerformed
-        // TODO add your handling code here:
+        txt_ProblemActionPerformed(evt); 
+
     }//GEN-LAST:event_txt_ProblemActionPerformed
 
     private void txt_StaffRecievingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_StaffRecievingActionPerformed

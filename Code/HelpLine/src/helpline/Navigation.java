@@ -223,6 +223,7 @@ public class Navigation extends javax.swing.JFrame {
             ProductTbl.add(Problem);
             ProductTbl.add(DateFixed);
             ProductTbl.add(WorkDone);
+            con.close();
         } 
         catch (Exception ex) 
         {
@@ -270,6 +271,7 @@ public class Navigation extends javax.swing.JFrame {
             StaffTbl.add(Email);
             StaffTbl.add(DOB);
             StaffTbl.add(Picture);
+            con.close();
         } 
         catch (Exception ex) 
         {
@@ -335,6 +337,7 @@ public class Navigation extends javax.swing.JFrame {
             CustomerReportTbl.add(FixedEquipment);
             CustomerReportTbl.add(DateFixed);
             CustomerReportTbl.add(Cost);
+            con.close();
         } 
         catch (Exception ex) 
         {

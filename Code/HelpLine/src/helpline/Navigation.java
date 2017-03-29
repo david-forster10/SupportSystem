@@ -241,6 +241,7 @@ public class Navigation extends javax.swing.JFrame {
             ArrayList<String> PostCode = new ArrayList<String>();
             ArrayList<String> Email = new ArrayList<String>();
             ArrayList<String> DOB = new ArrayList<String>();
+            ArrayList<String> Picture = new ArrayList<String>();
             
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/helpline?allowMultiQueries=true","user","user");
@@ -259,6 +260,7 @@ public class Navigation extends javax.swing.JFrame {
                 PostCode.add(rst.getString("PostCode"));
                 Email.add(rst.getString("Email"));
                 DOB.add(rst.getString("DateOfBirth"));
+                Picture.add(rst.getString("PictureURL"));
             }
             StaffTbl.add(StaffID);
             StaffTbl.add(FirstName);
@@ -267,6 +269,7 @@ public class Navigation extends javax.swing.JFrame {
             StaffTbl.add(PostCode);
             StaffTbl.add(Email);
             StaffTbl.add(DOB);
+            StaffTbl.add(Picture);
         } 
         catch (Exception ex) 
         {

@@ -54,7 +54,7 @@ public class Staff_Information extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false
@@ -68,7 +68,10 @@ public class Staff_Information extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tblDatabase.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        tblDatabase.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        tblDatabase.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tblDatabase.getTableHeader().setResizingAllowed(false);
+        tblDatabase.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblDatabase);
 
         lbl_Surname.setText("Surname");
@@ -79,6 +82,11 @@ public class Staff_Information extends javax.swing.JFrame {
         lbl_Info.setText("Staff Info");
 
         btnDelete.setText("Delete");
+        btnDelete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDeleteMouseClicked(evt);
+            }
+        });
 
         lbl_Email.setText("Email");
 
@@ -102,15 +110,20 @@ public class Staff_Information extends javax.swing.JFrame {
         });
 
         btnSave.setText("Save");
+        btnSave.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSaveMouseClicked(evt);
+            }
+        });
 
-        lblPicture.setText("Picture");
+        jPanel2.setPreferredSize(new java.awt.Dimension(170, 170));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 136, Short.MAX_VALUE)
+                .addGap(0, 170, Short.MAX_VALUE)
                 .addComponent(lblPicture))
         );
         jPanel2Layout.setVerticalGroup(
@@ -118,7 +131,7 @@ public class Staff_Information extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(77, 77, 77)
                 .addComponent(lblPicture)
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addContainerGap(93, Short.MAX_VALUE))
         );
 
         tgbtn_Edit.setText("Edit Record");
@@ -149,10 +162,20 @@ public class Staff_Information extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 705, Short.MAX_VALUE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btn_QuitInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnDelete)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnSave)))
+                        .addGap(13, 13, 13))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
+                                .addGap(17, 17, 17)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lbl_FName)
                                     .addComponent(lbl_Email, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -175,22 +198,12 @@ public class Staff_Information extends javax.swing.JFrame {
                                     .addComponent(txt_PostCode)
                                     .addComponent(txt_DoB))
                                 .addGap(13, 13, 13))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGap(148, 148, 148)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(tgbtn_Edit)
                                     .addComponent(lbl_Info))
-                                .addGap(311, 311, 311))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btn_QuitInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnDelete)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnSave)))
-                        .addGap(13, 13, 13))))
+                                .addGap(311, 311, 311))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -214,7 +227,7 @@ public class Staff_Information extends javax.swing.JFrame {
                             .addComponent(txt_Address, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(lbl_PostCode)
                                     .addComponent(txt_PostCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -230,8 +243,8 @@ public class Staff_Information extends javax.swing.JFrame {
                             .addComponent(txt_Email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lbl_DoB)
                             .addComponent(txt_DoB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 7, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -272,11 +285,21 @@ public class Staff_Information extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         DefaultTableModel tableModel = (DefaultTableModel) tblDatabase.getModel();
         
-        for (int i = 0; i < Navigation.StaffTbl.size(); i++)
+        for (int i = 0; i < Navigation.StaffTbl.get(1).size(); i++)
         {
-            Object[] rowData { Navigation.StaffTbl.get(i), data2 };
+            Object[] rowData = { 
+                Navigation.StaffTbl.get(0).get(i), 
+                Navigation.StaffTbl.get(1).get(i), 
+                Navigation.StaffTbl.get(2).get(i), 
+                Navigation.StaffTbl.get(3).get(i),
+                Navigation.StaffTbl.get(4).get(i),
+                Navigation.StaffTbl.get(5).get(i),
+                Navigation.StaffTbl.get(6).get(i),
+                Navigation.StaffTbl.get(7).get(i)
+            };
             tableModel.addRow(rowData);
         }
+        tblDatabase.setEnabled(false);
     }//GEN-LAST:event_formWindowOpened
 
     private void tgbtn_EditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tgbtn_EditActionPerformed
@@ -298,6 +321,14 @@ public class Staff_Information extends javax.swing.JFrame {
     private void txt_FName1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_FName1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_FName1ActionPerformed
+
+    private void btnSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSaveMouseClicked
+
+    private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDeleteMouseClicked
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

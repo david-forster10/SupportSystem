@@ -1,7 +1,9 @@
 package helpline;
 
 import static helpline.HelpLine.User;
+import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
@@ -23,6 +25,9 @@ import javax.swing.table.DefaultTableModel;
 
 public class Staff_Information extends javax.swing.JFrame {
 
+    private static final int IMG_WIDTH = 180;
+    private static final int IMG_HEIGHT = 180;    
+    
     public Staff_Information() {
         initComponents();
     }
@@ -427,10 +432,12 @@ public class Staff_Information extends javax.swing.JFrame {
         
         try 
         {
-            Image img = ImageIO.read(fc.getSelectedFile());
-            Image resizedImg = img.getScaledInstance(180, 180, 0);
+            BufferedImage img = ImageIO.read(fc.getSelectedFile());
+            int type = img.getType() == 0? BufferedImage.TYPE_INT_ARGB : img.getType();
+
+            BufferedImage resizeImageJpg = resizeImage(img, type);
             lblPicture.setText("");
-            lblPicture.setIcon(new ImageIcon(resizedImg));
+            lblPicture.setIcon(new ImageIcon(resizeImageJpg));
         } 
         catch (IOException ex) 
         {
@@ -438,6 +445,16 @@ public class Staff_Information extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jPanel2MouseClicked
 
+    private static BufferedImage resizeImage(BufferedImage originalImage, int type){
+	BufferedImage resizedImage = new BufferedImage(IMG_WIDTH, IMG_HEIGHT, type);
+	Graphics2D g = resizedImage.createGraphics();
+	g.drawImage(originalImage, 0, 0, IMG_WIDTH, IMG_HEIGHT, null);
+	g.dispose();
+
+	return resizedImage;
+    }
+
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

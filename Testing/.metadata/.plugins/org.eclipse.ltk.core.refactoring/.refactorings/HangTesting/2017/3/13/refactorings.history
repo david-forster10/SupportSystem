@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;AutoClicker.java&apos; to &apos;FormRobot/src/Testing&apos;&#x0D;&#x0A;- Original project: &apos;HangTesting&apos;&#x0D;&#x0A;- Destination element: &apos;FormRobot/src/Testing&apos;&#x0D;&#x0A;- Original element: &apos;Testing.AutoClicker.java&apos;" description="Copy compilation unit" destination="=FormRobot/src&lt;Testing" element1="/src&lt;Testing{AutoClicker.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1490697460322" units="1" version="1.0"/>
+</session>

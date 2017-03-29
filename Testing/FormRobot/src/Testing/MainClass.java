@@ -5,46 +5,50 @@ import java.util.Scanner;
 
 public class MainClass 
 {
-	public static void main(String[] args)
+	public static void main(String[] args) throws AWTException
 	{
 		int HelpLine = 0;
-		
+		boolean quit = false;
+		do {
 		Scanner input = new Scanner(System.in);
 		System.out.println("-----------------------------------");
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		System.out.println("1 - Login Form");
-		System.out.println("2 - Navigation");
-		System.out.println("3 - Products");
-		System.out.println("4 - Customer Report");
-		System.out.println("5 - Staff Information");
+		System.out.println("2 - Products");
+		System.out.println("3 - Customer Report");
+		System.out.println("4 - Staff Information");
+		System.out.println("5 - Run Through All Pages");
+		System.out.println("6 - Quit");
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		System.out.println("-----------------------------------");
 		
 	    HelpLine = input.nextInt();
-	    String HelpLineString = null;
-	    switch(HelpLine)
-	    {
 	    
-	    case 1: Login_Form();
+	    String helplineString = null;
+	    switch(HelpLine) {
+	    
+	    case 1: Login_Form lf = new Login_Form();
+	            lf.loginTest();
 	    break;
-	    case 2: Navigation();
+	    case 2: Products pr = new Products();
+	            pr.productsTest();
 	    break;
-	    case 3: Products();
+	    case 3: Customer_Report cr = new Customer_Report();
+	            cr.reportsTest();
 	    break;
-	    case 4: Customer_Report();
+	    case 4: Staff_Information si = new Staff_Information();
+	    	    si.staffTest();
 	    break;
-	    case 5: Staff_Information();
+	    case 5: All_Programs ap = new All_Programs();
+	            ap.programTest();
+	    break;
+	    case 6: quit = true;
 	    break;
 	    default: System.out.println("Enter a valid choice");
+	    }
 	    
-	    System.out.println(HelpLineString);
+	    System.out.println(helplineString);
 	    input.close();
-	    }
-	    public static void Login_Form();
-	    Navigation_Test robotprogram = null;
-	    try{
-	    	robotprogram = new Navigation_Test();
-	    	
-	    }
+	    } while (quit == false);
 	}
 }

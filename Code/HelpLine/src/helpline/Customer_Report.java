@@ -219,11 +219,7 @@ public class Customer_Report extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lbl_EquipType)
                                 .addGap(18, 18, 18)
-<<<<<<< HEAD
-                                .addComponent(txt_EquipType, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-=======
                                 .addComponent(txt_EquipType, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)))
->>>>>>> refs/remotes/origin/master
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -354,8 +350,7 @@ public class Customer_Report extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_EquipTypeActionPerformed
 
     private void txt_ProblemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_ProblemActionPerformed
-        txt_ProblemActionPerformed(evt); 
-
+        // TODO add your handling code here:
     }//GEN-LAST:event_txt_ProblemActionPerformed
 
     private void txt_StaffRecievingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_StaffRecievingActionPerformed

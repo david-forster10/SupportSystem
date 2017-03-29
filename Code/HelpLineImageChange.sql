@@ -129,24 +129,24 @@ CREATE TABLE IF NOT EXISTS `staff information form` (
   `PostCode` char(7) NOT NULL,
   `Email` char(30) NOT NULL,
   `DateOfBirth` date NOT NULL,
-  `PictureURL` varchar(50) NOT NULL,
+  `PictureURL` varchar(150) NOT NULL,
   PRIMARY KEY (`StaffID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table helpline.staff information form: ~5 rows (approximately)
+-- Dumping data for table helpline.staff information form: ~10 rows (approximately)
 DELETE FROM `staff information form`;
 /*!40000 ALTER TABLE `staff information form` DISABLE KEYS */;
 INSERT INTO `staff information form` (`StaffID`, `FirstName`, `LastName`, `Address`, `PostCode`, `Email`, `DateOfBirth`, `PictureURL`) VALUES
-	(1, 'Mary', 'Porter', '97 Redcliffe Way', 'WF4 2LG', 'MaryPorter@gmail.com', '1989-10-12', 'C:\\Users\\Vanilla\\Documents\\GitHub\\SupportSystem\\Im'),
-	(2, 'Michelle', 'Hoggard', '34 Constitution St', 'L17 8PJ', 'MichelleLHoggard@gmail.com', '1970-04-14', 'C:\\Users\\Vanilla\\Documents\\GitHub\\SupportSystem\\Im'),
-	(3, 'Thomas', 'Davis', '86 Trinity Crescent', 'LN6 4JX', 'ThomasDavis@hotmail.com', '1948-06-26', 'C:\\Users\\Vanilla\\Documents\\GitHub\\SupportSystem\\Im'),
-	(4, 'Paul', 'Kellum', '39 Exning Road', 'SN4 3SY', 'PaulKellum@hotmail.com', '1976-10-14', 'C:\\Users\\Vanilla\\Documents\\GitHub\\SupportSystem\\Im'),
-	(5, 'Barbara', 'Baldwin', '39 Golf Road', 'N16 2HP', 'BarbaraBaldwin@hotmail.com', '1957-08-04', 'C:\\Users\\Vanilla\\Documents\\GitHub\\SupportSystem\\Im'),
-	(6, 'Kenneth', 'Terry', '89 Greyfriars Road', 'I12 5PT', 'KenTerry@gmail.com', '1965-04-02', 'C:\\Users\\Vanilla\\Documents\\GitHub\\SupportSystem\\Im'),
-	(7, 'William', 'Westover', '10 Haslemere Road', 'N17 6AN', 'WilliamWest@gmail.com', '1976-06-14', 'C:\\Users\\Vanilla\\Documents\\GitHub\\SupportSystem\\Im'),
-	(8, 'John', 'Wilson', '84 Sandyhill Rd', 'WR6 2SL', 'JohnWilson@hotmail.com', '1970-07-07', 'C:\\Users\\Vanilla\\Documents\\GitHub\\SupportSystem\\Im'),
-	(9, 'Wills', 'Jordan', '14 New Dover Rd', 'H43 4JA', 'WIllsJordan@gmail.com', '1976-08-14', 'C:\\Users\\Vanilla\\Documents\\GitHub\\SupportSystem\\Im'),
-	(10, 'Joanna', 'Hall', '5 Boroughbridge Road', 'NP6 9PS', 'JoannaHall@hotmail.com', '1970-02-13', 'C:\\Users\\Vanilla\\Documents\\GitHub\\SupportSystem\\Im');
+	(1, 'Mary', 'Porter', '97 Redcliffe Way', 'WF4 2LG', 'MaryPorter@gmail.com', '1989-10-12', 'C:\\Users\\Vanilla\\Documents\\GitHub\\SupportSystem\\Images\\StaffImages\\1.png'),
+	(2, 'Michelle', 'Hoggard', '34 Constitution St', 'L17 8PJ', 'MichelleLHoggard@gmail.com', '1970-04-14', 'C:\\Users\\Vanilla\\Documents\\GitHub\\SupportSystem\\Images\\StaffImages\\2.png'),
+	(3, 'Thomas', 'Davis', '86 Trinity Crescent', 'LN6 4JX', 'ThomasDavis@hotmail.com', '1948-06-26', 'C:\\Users\\Vanilla\\Documents\\GitHub\\SupportSystem\\Images\\StaffImages\\3.png'),
+	(4, 'Paul', 'Kellum', '39 Exning Road', 'SN4 3SY', 'PaulKellum@hotmail.com', '1976-10-14', 'C:\\Users\\Vanilla\\Documents\\GitHub\\SupportSystem\\Images\\StaffImages\\4.png'),
+	(5, 'Barbara', 'Baldwin', '39 Golf Road', 'N16 2HP', 'BarbaraBaldwin@hotmail.com', '1957-08-04', 'C:\\Users\\Vanilla\\Documents\\GitHub\\SupportSystem\\Images\\StaffImages\\5.png'),
+	(6, 'Kenneth', 'Terry', '89 Greyfriars Road', 'I12 5PT', 'KenTerry@gmail.com', '1965-04-02', 'C:\\Users\\Vanilla\\Documents\\GitHub\\SupportSystem\\Images\\StaffImages\\6.png'),
+	(7, 'William', 'Westover', '10 Haslemere Road', 'N17 6AN', 'WilliamWest@gmail.com', '1976-06-14', 'C:\\Users\\Vanilla\\Documents\\GitHub\\SupportSystem\\Images\\StaffImages\\7.png'),
+	(8, 'John', 'Wilson', '84 Sandyhill Rd', 'WR6 2SL', 'JohnWilson@hotmail.com', '1970-07-07', 'C:\\Users\\Vanilla\\Documents\\GitHub\\SupportSystem\\Images\\StaffImages\\8.png'),
+	(9, 'Wills', 'Jordan', '14 New Dover Rd', 'H43 4JA', 'WIllsJordan@gmail.com', '1976-08-14', 'C:\\Users\\Vanilla\\Documents\\GitHub\\SupportSystem\\Images\\StaffImages\\9.png'),
+	(10, 'Joanna', 'Hall', '5 Boroughbridge Road', 'NP6 9PS', 'JoannaHall@hotmail.com', '1970-02-13', 'C:\\Users\\Vanilla\\Documents\\GitHub\\SupportSystem\\Images\\StaffImages\\10.png');
 /*!40000 ALTER TABLE `staff information form` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

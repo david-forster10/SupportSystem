@@ -1,4 +1,3 @@
-//This is filled in now
 package Testing;
 
 import java.awt.AWTException;
@@ -11,18 +10,18 @@ import org.omg.SendingContext.RunTime;
 import static java.awt.event.InputEvent.BUTTON1_DOWN_MASK;
 import static java.awt.event.KeyEvent.*;
 
-public class Staff_Information 
+public class All_Programs 
 {
 	private Robot robot;
 	private Runtime runtime;
 	
-	public void staffTest()
+	public void programTest()
 	{
 		
 		runtime = Runtime.getRuntime();
-		Staff_Information keyboard = null;
+		All_Programs keyboard = null;
 		try{
-		keyboard = new Staff_Information();
+		keyboard = new All_Programs();
 		} catch (AWTException e) {
 			e.printStackTrace();
 		}
@@ -37,7 +36,7 @@ public class Staff_Information
 		keyboard.type1("Michelle19700414");
 		
 	}
-	public Staff_Information() throws AWTException
+	public All_Programs() throws AWTException
 	{
 		this.robot = new Robot();
 	}

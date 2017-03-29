@@ -40,7 +40,7 @@ public class MainClass
 	    	    si.staffTest();
 	    break;
 	    case 5: All_Programs ap = new All_Programs();
-	            ap.programTest();
+	            ap.programsTest();
 	    break;
 	    case 6: quit = true;
 	    break;

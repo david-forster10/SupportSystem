@@ -39,9 +39,7 @@ public class MainClass
 	    case 4: Staff_Information si = new Staff_Information();
 	    	    si.staffTest();
 	    break;
-	    case 5: All_Programs ap = new All_Programs();
-	            ap.programTest();
-	    break;
+	    
 	    case 6: quit = true;
 	    break;
 	    default: System.out.println("Enter a valid choice");
@@ -51,4 +49,49 @@ public class MainClass
 	    input.close();
 	    } while (quit == false);
 	}
+	    
+	/*public static void Login_Form() 
+	    {
+			Login_Form robotprogram = null;
+			try {
+				robotprogram = new Login_Form();
+			} catch (AWTException e) {
+				e.printStackTrace();
+			}
+			robotprogram.loginTest();
+	    }
+	    
+	    public static void Products() 
+	    {
+			Products robotprogram = null;
+			try {
+				robotprogram = new Products();
+			} catch (AWTException e) {
+				e.printStackTrace();
+			}
+			robotprogram.productsTest();
+	}
+	    
+	    public static void Customer_Report() 
+	    {
+			Customer_Report robotprogram = null;
+			try {
+				robotprogram = new Customer_Report();
+			} catch (AWTException e) {
+				e.printStackTrace();
+			}
+			robotprogram.reportsTest();
+	}
+	    
+	    public static void Staff_Information() 
+	    {
+			Staff_Information robotprogram = null;
+			try {
+				robotprogram = new Staff_Information();
+			} catch (AWTException e) {
+				e.printStackTrace();
+			}
+			robotprogram.staffTest();
+     }*/
+	    
 }

@@ -1,6 +1,10 @@
 package helpline;
 
+<<<<<<< HEAD
 import java.awt.Graphics;
+=======
+import java.awt.Graphics2D;
+>>>>>>> master
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.sql.Connection;
@@ -21,7 +25,11 @@ public class Staff_Information extends javax.swing.JFrame {
 
     private static final int IMG_WIDTH = 180;
     private static final int IMG_HEIGHT = 180;
+<<<<<<< HEAD
     private BufferedImage image;
+=======
+    private static String SelectedImg = "";
+>>>>>>> master
     
     public Staff_Information() {
         initComponents();
@@ -50,7 +58,12 @@ public class Staff_Information extends javax.swing.JFrame {
         lbl_DoB = new javax.swing.JLabel();
         lbl_PostCode = new javax.swing.JLabel();
         btnSave = new javax.swing.JButton();
+<<<<<<< HEAD
         pnlPicture = new javax.swing.JPanel();
+=======
+        jPanel2 = new javax.swing.JPanel();
+        lblPlace = new javax.swing.JLabel();
+>>>>>>> master
         lblPicture = new javax.swing.JLabel();
         tgbtn_Edit = new javax.swing.JToggleButton();
         lbl_StaffID = new javax.swing.JLabel();
@@ -142,7 +155,7 @@ public class Staff_Information extends javax.swing.JFrame {
             }
         });
 
-        lblPicture.setText("Click to add picture");
+        lblPlace.setText("Click to add picture");
 
         javax.swing.GroupLayout pnlPictureLayout = new javax.swing.GroupLayout(pnlPicture);
         pnlPicture.setLayout(pnlPictureLayout);
@@ -150,15 +163,25 @@ public class Staff_Information extends javax.swing.JFrame {
             pnlPictureLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPictureLayout.createSequentialGroup()
                 .addContainerGap(48, Short.MAX_VALUE)
-                .addComponent(lblPicture)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblPicture)
+                    .addComponent(lblPlace))
                 .addGap(41, 41, 41))
         );
+<<<<<<< HEAD
         pnlPictureLayout.setVerticalGroup(
             pnlPictureLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlPictureLayout.createSequentialGroup()
                 .addGap(82, 82, 82)
+=======
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+>>>>>>> master
                 .addComponent(lblPicture)
-                .addContainerGap(84, Short.MAX_VALUE))
+                .addGap(68, 68, 68)
+                .addComponent(lblPlace)
+                .addContainerGap(98, Short.MAX_VALUE))
         );
 
         tgbtn_Edit.setText("Edit Record");
@@ -313,8 +336,10 @@ public class Staff_Information extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         txt_StaffID.setEnabled(false);
-        int StaffIDGen = Navigation.StaffTbl.get(1).size();
-        txt_StaffID.setText(Integer.toString(Integer.parseInt(Navigation.StaffTbl.get(1).get(StaffIDGen)) + 1));
+        int StaffIDGen = Navigation.StaffTbl.get(0).size();
+        String StaffIDLast = Navigation.StaffTbl.get(0).get(StaffIDGen - 1);
+        int NewID = Integer.parseInt(StaffIDLast) + 1;
+        txt_StaffID.setText(Integer.toString(NewID));
         DefaultTableModel tableModel = (DefaultTableModel) tblDatabase.getModel();
         
         for (int i = 0; i < Navigation.StaffTbl.get(1).size(); i++)
@@ -372,27 +397,30 @@ public class Staff_Information extends javax.swing.JFrame {
         }
         else
         {
-            if (match1.find() || match2.find() || match3.find() || match4.find() || match5.find() || match6.find())
+            if (SelectedImg.equals(""))
             {
-                if (txt_Email.getText().contains("@"))
+                if (match1.find() || match2.find() || match3.find() || match4.find() || match5.find() || match6.find())
                 {
-                    if (txt_PostCode.getText().length() < 9)
+                    if (txt_Email.getText().contains("@"))
                     {
-                        AddData();
+                        if (txt_PostCode.getText().length() < 9)
+                        {
+                            AddData();
+                        }
+                        else
+                        {
+                            JOptionPane.showMessageDialog(null, "Please enter a valid Post Code!", "Error", JOptionPane.WARNING_MESSAGE);
+                        }
                     }
                     else
                     {
-                        JOptionPane.showMessageDialog(null, "Please enter a valid Post Code!", "Error", JOptionPane.WARNING_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Please enter a valid Email!", "Error", JOptionPane.WARNING_MESSAGE);
                     }
                 }
                 else
                 {
-                    JOptionPane.showMessageDialog(null, "Please enter a valid Email!", "Error", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Please only input valid characters!", "Error", JOptionPane.WARNING_MESSAGE);
                 }
-            }
-            else
-            {
-                JOptionPane.showMessageDialog(null, "Please only input valid characters!", "Error", JOptionPane.WARNING_MESSAGE);
             }
         }
     }//GEN-LAST:event_btnSaveMouseClicked
@@ -405,7 +433,11 @@ public class Staff_Information extends javax.swing.JFrame {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/helpline?allowMultiQueries=true","user","user");
             Statement stmt = (Statement)con.createStatement();
             
+<<<<<<< HEAD
             String sql = "INSERT INTO `staff information form` (`StaffID`, `FirstName`, `LastName`, `Address`, `PostCode`, `Email`, `DateOfBirth`) VALUES ('"+Integer.parseInt(txt_StaffID.getText())+"', '"+txt_FName.getText()+"', '"+txt_Surname.getText()+"', '"+txt_Address.getText()+"', '"+txt_PostCode.getText()+"', '"+txt_Email.getText()+"', '"+txt_DoB.getText()+"')";
+=======
+            String sql = "INSERT INTO `staff information form` (`StaffID`, `FirstName`, `LastName`, `Address`, `PostCode`, `Email`, `DateOfBirth`, `PictureURL`) VALUES ('"+Integer.parseInt(txt_StaffID.getText())+"', '"+txt_FName.getText()+"', '"+txt_Surname.getText()+"', '"+txt_Address.getText()+"', '"+txt_PostCode.getText()+"', '"+txt_Email.getText()+"', '"+txt_DoB.getText()+"', '"+SelectedImg+"')";
+>>>>>>> master
             stmt.execute(sql);
             con.close();            
         } 
@@ -416,7 +448,6 @@ public class Staff_Information extends javax.swing.JFrame {
     }
     
     private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked
-        // TODO add your handling code here:
     }//GEN-LAST:event_btnDeleteMouseClicked
 
     private void pnlPictureMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlPictureMouseClicked
@@ -428,12 +459,25 @@ public class Staff_Information extends javax.swing.JFrame {
                
         try 
         {
+<<<<<<< HEAD
             image = ImageIO.read(fc.getSelectedFile());
             int type = image.getType() == 0? BufferedImage.TYPE_INT_ARGB : image.getType();
             pnlPicture.repaint();
+=======
+            SelectedImg = fc.getSelectedFile().getPath();
+            BufferedImage img = ImageIO.read(fc.getSelectedFile());
+            int type = img.getType() == 0? BufferedImage.TYPE_INT_ARGB : img.getType();
+
+            BufferedImage resizeImageJpg = resizeImage(img, type);
+            lblPlace.setText("");
+            lblPicture.setIcon(new ImageIcon(resizeImageJpg));
+>>>>>>> master
         } 
         catch (IOException ex) 
         {
+            SelectedImg = "";
+            lblPicture.setIcon(null);
+            lblPlace.setText("Click to add picture");
             Logger.getLogger(Staff_Information.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_pnlPictureMouseClicked
@@ -446,12 +490,15 @@ public class Staff_Information extends javax.swing.JFrame {
 
 	return resizedImage;
     }
+<<<<<<< HEAD
 
     @Override
     protected void paintComponents(Graphics g) {
         super.paintComponent(g);
         g.drawImage(image, 0, 0, this);
     }
+=======
+>>>>>>> master
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -493,6 +540,7 @@ public class Staff_Information extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblPicture;
+    private javax.swing.JLabel lblPlace;
     private javax.swing.JLabel lbl_Address;
     private javax.swing.JLabel lbl_DoB;
     private javax.swing.JLabel lbl_Email;

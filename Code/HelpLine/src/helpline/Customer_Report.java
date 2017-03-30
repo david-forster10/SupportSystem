@@ -5,6 +5,20 @@
  */
 package helpline;
 
+import java.sql.Connection;
+import java.util.Date;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Vanilla
@@ -56,8 +70,19 @@ public class Customer_Report extends javax.swing.JFrame {
         btn_Submit = new javax.swing.JButton();
         btn_Back = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
+        lbl_FirstName1 = new javax.swing.JLabel();
+        txt_Customer = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        btn_Delete = new javax.swing.JButton();
+        btn_Edit = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         lbl_ReportForm.setFont(new java.awt.Font("Tahoma", 0, 21)); // NOI18N
         lbl_ReportForm.setText("Customer Reporting Form");
@@ -181,6 +206,43 @@ public class Customer_Report extends javax.swing.JFrame {
             }
         });
 
+        lbl_FirstName1.setText("Customer ID");
+
+        txt_Customer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_CustomerActionPerformed(evt);
+            }
+        });
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "CustomerReportingFormID", "FirstName", "Surname", "Address", "Postcode", "Telephone", "Date Reported", "Equipment Type", "Nature of Problem", "Severity", "Staff receiving equipment", "Staff assigned to fix equipment", "Date resolved", "Estimated cost of repair"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+
+        btn_Delete.setText("Delete");
+
+        btn_Edit.setText("Edit");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -191,112 +253,131 @@ public class Customer_Report extends javax.swing.JFrame {
                 .addGap(144, 144, 144))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(32, 32, 32)
+                        .addComponent(btn_Back, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_Edit)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_Delete)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btn_Submit, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(lbl_FirstName)
-                                .addGap(44, 44, 44)
-                                .addComponent(txt_FirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lbl_Surname)
-                                .addGap(53, 53, 53)
-                                .addComponent(txt_Surname))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lbl_Address)
-                                .addGap(56, 56, 56)
-                                .addComponent(txt_Address, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lbl_Telephone)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lbl_FirstName)
+                                    .addComponent(lbl_FirstName1)
+                                    .addComponent(lbl_Surname)
+                                    .addComponent(lbl_Address)
                                     .addComponent(lbl_Postcode)
+                                    .addComponent(lbl_Telephone)
                                     .addComponent(lbl_DateReported))
-                                .addGap(24, 24, 24)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txt_Postcode)
-                                    .addComponent(txt_Telephone)
-                                    .addComponent(txt_ReportDate, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txt_Customer, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(lbl_EquipType)
-                                .addGap(18, 18, 18)
-                                .addComponent(txt_EquipType, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(lbl_Severity)
-                                .addGap(67, 67, 67))
-                            .addGroup(layout.createSequentialGroup()
+                                .addGap(95, 95, 95)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lbl_Problem)
-                                    .addComponent(lbl_RepairCost)
-                                    .addComponent(lbl_DateResolved)
-                                    .addComponent(lbl_StaffFixing)
-                                    .addComponent(lbl_StaffRecieving))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(txt_FirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txt_Surname, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txt_Address, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txt_Postcode, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txt_Telephone, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txt_ReportDate, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbl_Problem, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lbl_Severity, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lbl_StaffRecieving, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lbl_StaffFixing, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lbl_DateResolved, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lbl_RepairCost, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lbl_EquipType, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txt_EquipType)
                             .addComponent(txt_Problem)
                             .addComponent(txt_StaffRecieving)
                             .addComponent(txt_StaffFixing)
                             .addComponent(txt_DateResolved)
                             .addComponent(txt_RepairCost)
-                            .addComponent(jComboBox1, 0, 130, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addComponent(btn_Back, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_Submit, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(39, 39, 39))
+                            .addComponent(jComboBox1, 0, 130, Short.MAX_VALUE))))
+                .addGap(21, 21, 21))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addComponent(lbl_ReportForm)
-                .addGap(46, 46, 46)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_FirstName)
-                    .addComponent(lbl_Problem)
-                    .addComponent(txt_FirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_Problem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_Surname)
-                    .addComponent(lbl_Severity)
-                    .addComponent(txt_Surname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_Address)
-                    .addComponent(lbl_StaffRecieving)
-                    .addComponent(txt_Address, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_StaffRecieving, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_Postcode)
-                    .addComponent(lbl_StaffFixing)
-                    .addComponent(txt_Postcode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_StaffFixing, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_Telephone)
-                    .addComponent(lbl_DateResolved)
-                    .addComponent(txt_Telephone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_DateResolved, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_DateReported)
-                    .addComponent(lbl_RepairCost)
-                    .addComponent(txt_ReportDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_RepairCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_EquipType)
-                    .addComponent(txt_EquipType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbl_EquipType)
+                            .addComponent(txt_EquipType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbl_Problem)
+                            .addComponent(txt_Problem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbl_Severity)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbl_StaffRecieving)
+                            .addComponent(txt_StaffRecieving, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbl_StaffFixing)
+                            .addComponent(txt_StaffFixing, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbl_DateResolved)
+                            .addComponent(txt_DateResolved, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbl_RepairCost)
+                            .addComponent(txt_RepairCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbl_FirstName1)
+                            .addComponent(txt_Customer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbl_FirstName)
+                            .addComponent(txt_FirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbl_Surname)
+                            .addComponent(txt_Surname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbl_Address)
+                            .addComponent(txt_Address, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbl_Postcode)
+                            .addComponent(txt_Postcode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbl_Telephone)
+                            .addComponent(txt_Telephone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbl_DateReported)
+                            .addComponent(txt_ReportDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_Back)
-                    .addComponent(btn_Submit))
-                .addGap(25, 25, 25))
+                    .addComponent(btn_Submit)
+                    .addComponent(btn_Delete)
+                    .addComponent(btn_Edit))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
@@ -308,9 +389,97 @@ public class Customer_Report extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_RepairCostActionPerformed
 
     private void btn_SubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SubmitActionPerformed
-        // TODO add your handling code here:
+    Pattern pat = Pattern.compile("[^a-z ]", Pattern.CASE_INSENSITIVE); //allows only text inputs e.g. name fields
+    Pattern pat2 = Pattern.compile("[^0-9.]");
+    Pattern pat3 = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE); //validation for only allowing numbers & letters, e.g. an address
+    Pattern pat4 = Pattern.compile("\\d{4}-\\d{2}-\\d{2}", Pattern.CASE_INSENSITIVE); //validation for a date, format "YYYY/MM/DD"
+    Pattern pat5 = Pattern.compile("[^0-9]");
+     
+    Matcher customerID = pat5.matcher(txt_Customer.getText());
+    Matcher firstName = pat.matcher(txt_FirstName.getText());
+    Matcher Surname = pat.matcher(txt_Surname.getText());
+    Matcher address = pat3.matcher(txt_Address.getText());
+    Matcher postcode = pat3.matcher(txt_Postcode.getText());
+    Matcher telephone = pat3.matcher(txt_Telephone.getText());
+    Matcher dateReported = pat4.matcher(txt_ReportDate.getText());
+    Matcher equiptype = pat.matcher(txt_EquipType.getText());  
+    Matcher problem = pat.matcher(txt_Problem.getText());
+    Matcher combo = pat.matcher(jComboBox1.getSelectedItem().toString());
+    Matcher staffrecieving = pat2.matcher(txt_StaffRecieving.getText());
+    Matcher fixing = pat2.matcher(txt_StaffFixing.getText());
+    Matcher dateReolved = pat4.matcher(txt_DateResolved.getText());
+    Matcher repairCost = pat2.matcher(txt_RepairCost.getText());
+    
+    if (txt_Customer.getText().equals("") || txt_FirstName.getText().equals("") || txt_Surname.getText().equals("") || txt_Address.getText().equals("") || txt_Postcode.getText().equals("") || txt_Telephone.getText().equals("") || txt_ReportDate.getText().equals("") || txt_EquipType.getText().equals("") || txt_Problem.getText().equals("") || jComboBox1.getSelectedItem().toString().equals("") || txt_StaffRecieving.getText().equals("") || txt_StaffFixing.getText().equals("") || txt_DateResolved.getText().equals("") || txt_RepairCost.getText().equals("")) //validating making sure fields aren't empty (add names of text boxes)
+    {
+        JOptionPane.showMessageDialog(null, "Please fill in all sections of the form!", "Error", JOptionPane.WARNING_MESSAGE);
+    }
+    else
+    {
+        if (customerID.find() || firstName.find() || Surname.find() || address.find() || postcode.find() || telephone.find() || dateReported.find() || equiptype.find() || problem.find() || combo.find() || staffrecieving.find() || fixing.find() || dateReolved.find() || repairCost.find()) //uses matchers from above, add/remove as needed
+        {
+            if (txt_Postcode.getText().length() < 8) { //ensuring the postcode field isn't too long
+		AddData(); //calls function for generating the sql
+            } else {
+                   JOptionPane.showMessageDialog(null, "Please enter a valid Post Code!", "Error", JOptionPane.WARNING_MESSAGE);
+                }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Please only input valid characters!", "Error", JOptionPane.WARNING_MESSAGE);
+        }
+    }
     }//GEN-LAST:event_btn_SubmitActionPerformed
 
+    public void AddData(){
+        try {
+        Class.forName("com.mysql.jdbc.Driver"); //don't need to change anything here
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/helpline?allowMultiQueries=true","user","user");
+ 
+    	//in first marks input table name, then in the marks in the brackets, the column headings, add/remove as needed.
+	//in second brackets, change names of text fields, add more as needed
+        
+        String DateReported = txt_ReportDate.getText();
+        String DateResolved = txt_DateResolved.getText();
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        Date reported;
+        Date resolved;
+        try {
+            reported = (Date) df.parse(DateReported);
+            resolved = (Date) df.parse(DateResolved);  
+            String dteReported = df.format(reported);
+            String dteResolved = df.format(resolved);
+            
+            String insert = "INSERT INTO `customer reporting form` VALUES (?, ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ?) ";
+            PreparedStatement ps = con.prepareStatement(insert);
+            ps.setInt(1, Integer.parseInt(txt_Customer.getText()));
+            ps.setString(2, txt_FirstName.getText());
+            ps.setString(3, txt_Surname.getText());
+            ps.setString(4, txt_Address.getText());
+            ps.setString(5, txt_Postcode.getText());
+            ps.setString(6, txt_Telephone.getText());
+            ps.setString(7, dteReported);
+            ps.setString(8, txt_EquipType.getText());
+            ps.setString(9, txt_Problem.getText());
+            ps.setString(10, jComboBox1.getSelectedItem().toString());
+            ps.setInt(11, Integer.parseInt(txt_StaffRecieving.getText()));
+            ps.setInt(12, Integer.parseInt(txt_StaffFixing.getText()));
+            ps.setString(13, dteResolved);
+            ps.setDouble(14, Double.parseDouble(txt_RepairCost.getText()));
+
+            ps.executeUpdate();
+            
+            ps.execute(insert);
+            con.close(); // FIX 
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }           
+    } 
+    catch (Exception ex) {
+	Logger.getLogger(HelpLine.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    }
+    
     private void btn_BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BackActionPerformed
         Navigation NavBack = new Navigation();
         NavBack.setVisible(true);
@@ -365,6 +534,39 @@ public class Customer_Report extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_DateResolvedActionPerformed
 
+    private void txt_CustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_CustomerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_CustomerActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+    txt_Customer.setEnabled(false); //disabling the autogenerated StaffID text file
+    int IDGen = Navigation.CustomerReportTbl.get(1).size(); //getting size of array for last ID generated
+    txt_Customer.setText(Integer.toString(Integer.parseInt(Navigation.CustomerReportTbl.get(1).get(IDGen)) + 1)); //Generating a new ID
+    DefaultTableModel tableModel = (DefaultTableModel) jTable1.getModel(); //declaring a tablemodel for adding records to the JTable
+       
+    for (int i = 0; i < Navigation.CustomerReportTbl.get(1).size(); i++) //loop to add all records to table
+    {
+       Object[] rowData = { 
+          Navigation.CustomerReportTbl.get(0).get(i), //each comma is info for a new row
+          Navigation.CustomerReportTbl.get(1).get(i), 
+          Navigation.CustomerReportTbl.get(2).get(i), 
+          Navigation.CustomerReportTbl.get(3).get(i),
+          Navigation.CustomerReportTbl.get(4).get(i),
+          Navigation.CustomerReportTbl.get(5).get(i),
+          Navigation.CustomerReportTbl.get(6).get(i),
+          Navigation.CustomerReportTbl.get(7).get(i),
+          Navigation.CustomerReportTbl.get(8).get(i),
+          Navigation.CustomerReportTbl.get(9).get(i),
+          Navigation.CustomerReportTbl.get(10).get(i),
+          Navigation.CustomerReportTbl.get(11).get(i),
+          Navigation.CustomerReportTbl.get(12).get(i),
+          Navigation.CustomerReportTbl.get(13).get(i)
+       };
+      tableModel.addRow(rowData); //adding the data into the table
+    }
+    jTable1.setEnabled(false); //disabling the table on load
+    }//GEN-LAST:event_formWindowOpened
+
     /**
      * @param args the command line arguments
      */
@@ -402,13 +604,18 @@ public class Customer_Report extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Back;
+    private javax.swing.JButton btn_Delete;
+    private javax.swing.JToggleButton btn_Edit;
     private javax.swing.JButton btn_Submit;
     private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbl_Address;
     private javax.swing.JLabel lbl_DateReported;
     private javax.swing.JLabel lbl_DateResolved;
     private javax.swing.JLabel lbl_EquipType;
     private javax.swing.JLabel lbl_FirstName;
+    private javax.swing.JLabel lbl_FirstName1;
     private javax.swing.JLabel lbl_Postcode;
     private javax.swing.JLabel lbl_Problem;
     private javax.swing.JLabel lbl_RepairCost;
@@ -419,6 +626,7 @@ public class Customer_Report extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_Surname;
     private javax.swing.JLabel lbl_Telephone;
     private javax.swing.JTextField txt_Address;
+    private javax.swing.JTextField txt_Customer;
     private javax.swing.JTextField txt_DateResolved;
     private javax.swing.JTextField txt_EquipType;
     private javax.swing.JTextField txt_FirstName;

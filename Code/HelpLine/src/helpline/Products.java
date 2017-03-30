@@ -91,6 +91,11 @@ public class Products extends javax.swing.JFrame {
         });
 
         jButton1.setText("Submit");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Product Form ID");
 
@@ -262,6 +267,10 @@ public class Products extends javax.swing.JFrame {
     private void ProductFormIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProductFormIDActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ProductFormIDActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -222,6 +222,11 @@ public class Products
 				robot.mousePress(BUTTON1_DOWN_MASK);
 				robot.delay(1000);
 				robot.mouseRelease(BUTTON1_DOWN_MASK);
+				System.out.println("                                            ");
+				System.out.println("Completing Test....");
+				System.out.println("                                            ");
+				robot.delay(1000);
+				System.out.print("Test Completed and ");
 			    }
 		
 		 public void type(char character) 

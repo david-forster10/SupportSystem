@@ -50,8 +50,9 @@ public class All_Programs
 		keyboard.Finished("------");
 		
 		//Customer Reports Page
+		keyboard.EquipType("Monitor");
 		keyboard.FirstName("Michelle");
-		keyboard.Problem("Cracked Monitor");
+		keyboard.CustProblem("Cracked Monitor");
 		keyboard.Surname("Hoggard");
 		keyboard.Address("34 Constitution St");
 		keyboard.StaffRec("Mary Porter");
@@ -61,7 +62,6 @@ public class All_Programs
 		keyboard.DateRes("2017-03-07");
 		keyboard.DateRep("2017-03-07");
 		keyboard.EstCost("30");
-		keyboard.EquipType("Monitor");
 		
 		//Staff Information Page
 		keyboard.Staff_Address("19 Green Street");
@@ -90,7 +90,7 @@ public class All_Programs
 		robot.keyPress(KeyEvent.VK_TAB);
 		robot.keyRelease(KeyEvent.VK_TAB);
 	    }
-	//figure out the keyboards...
+
 		public void Password(CharSequence characters)
 
 		{
@@ -250,43 +250,18 @@ public class All_Programs
 			robot.mousePress(BUTTON1_DOWN_MASK);
 			robot.delay(1000);
 			robot.mouseRelease(BUTTON1_DOWN_MASK);
-		    }
-		
-		public void SubBack(CharSequence characters)
-		{
-			int length = characters.length();
-			for (int i =0; i < length; i++)
-			{
-				char character = characters.charAt(i);
-				type(character);
-			}
-			robot.delay(300);
-			robot.keyPress(KeyEvent.VK_TAB);
-			robot.keyRelease(KeyEvent.VK_TAB);
+			
 			robot.delay(1000);
-			robot.mouseMove(1041, 550);
-			robot.delay(1000);
-			robot.mousePress(BUTTON1_DOWN_MASK);
-			robot.delay(1000);
-			robot.mouseRelease(BUTTON1_DOWN_MASK);
-			robot.delay(2000);
-			robot.mouseMove(596, 550);
-			robot.delay(1000);
-			robot.mousePress(BUTTON1_DOWN_MASK);
-			robot.delay(1000);
-			robot.mouseRelease(BUTTON1_DOWN_MASK);
-			robot.delay(1000);
-			robot.delay(1000);
-			robot.mouseMove(770, 445);
+			robot.mouseMove(955, 322);
 			robot.delay(500);
 			robot.mousePress(BUTTON1_DOWN_MASK);
-			robot.delay(1000);
+			robot.delay(500);
 			robot.mouseRelease(BUTTON1_DOWN_MASK);
-		}
+		    }
 		//Products Page Ends
 	    
 	   //Customer Report Starts
-		public void FirstName(CharSequence characters)
+		public void EquipType(CharSequence characters)
 		{
 			int length = characters.length();
 		for (int i =0; i < length; i++)
@@ -300,6 +275,32 @@ public class All_Programs
 		robot.delay(1000);
 		}
 		
+		public void FirstName(CharSequence characters)
+		{
+			int length = characters.length();
+		for (int i =0; i < length; i++)
+		{
+			char character = characters.charAt(i);
+			type(character);
+		}
+		robot.delay(300);
+		robot.keyPress(KeyEvent.VK_TAB);
+		robot.keyRelease(KeyEvent.VK_TAB);
+		}
+		
+		public void CustProblem(CharSequence characters)
+		{
+			int length = characters.length();
+		for (int i =0; i < length; i++)
+		{
+			char character = characters.charAt(i);
+			type(character);
+		}
+		robot.delay(300);
+		robot.keyPress(KeyEvent.VK_TAB);
+		robot.keyRelease(KeyEvent.VK_TAB);
+		}
+		
 		public void Surname(CharSequence characters)
 		{
 			int length = characters.length();
@@ -309,11 +310,11 @@ public class All_Programs
 			type(character);
 		}
 		robot.delay(1000);
-		robot.mouseMove(996, 375);
+		robot.mouseMove(985, 410);
 		robot.delay(1000);
 		robot.mousePress(BUTTON1_DOWN_MASK);
 		robot.delay(800);
-		robot.mouseMove(996, 415);
+		robot.mouseMove(985, 440);
 		robot.delay(1000);
 		robot.mouseRelease(BUTTON1_DOWN_MASK);
 		robot.keyPress(KeyEvent.VK_TAB);
@@ -328,11 +329,10 @@ public class All_Programs
 			char character = characters.charAt(i);
 			type(character);
 		}
-		robot.delay(300);
 		robot.keyPress(KeyEvent.VK_TAB);
 		robot.keyRelease(KeyEvent.VK_TAB);
 		}
-		
+	
 		public void StaffRec(CharSequence characters)
 		{
 			int length = characters.length();
@@ -356,7 +356,7 @@ public class All_Programs
 		robot.keyPress(KeyEvent.VK_TAB);
 		robot.keyRelease(KeyEvent.VK_TAB);
 		}
-	
+		
 		public void StaffFix(CharSequence characters)
 		{
 			int length = characters.length();
@@ -401,6 +401,7 @@ public class All_Programs
 			char character = characters.charAt(i);
 			type(character);
 		}
+		robot.delay(300);
 		robot.keyPress(KeyEvent.VK_TAB);
 		robot.keyRelease(KeyEvent.VK_TAB);
 		}
@@ -413,43 +414,32 @@ public class All_Programs
 			char character = characters.charAt(i);
 			type(character);
 		}
-		robot.keyPress(KeyEvent.VK_TAB);
-		robot.keyRelease(KeyEvent.VK_TAB);
-		}
-		
-		public void EquipType(CharSequence characters)
-		{
-			int length = characters.length();
-		for (int i =0; i < length; i++)
-		{
-			char character = characters.charAt(i);
-			type(character);
-		}
-		robot.delay(1000);
-		robot.mouseMove(990, 620);
-		robot.delay(1000);
-		robot.mousePress(BUTTON1_DOWN_MASK);
-		robot.delay(1000);
-		robot.mouseRelease(BUTTON1_DOWN_MASK);
-		robot.delay(2000);
-		robot.mouseMove(589, 620);
-		robot.delay(1000);
-		robot.mousePress(BUTTON1_DOWN_MASK);
-		robot.delay(1000);
-		robot.mouseRelease(BUTTON1_DOWN_MASK);
-		robot.delay(1000);
-		robot.delay(1000);
-		robot.mouseMove(800, 490);
-		robot.delay(500);
-		robot.mousePress(BUTTON1_DOWN_MASK);
-		robot.delay(1000);
-		robot.mouseRelease(BUTTON1_DOWN_MASK);
-		robot.delay(1000);
-		robot.mouseMove(1025, 280);
-		robot.delay(500);
-		robot.mousePress(BUTTON1_DOWN_MASK);
-		robot.delay(500);
-		robot.mouseRelease(BUTTON1_DOWN_MASK);
+
+            robot.delay(1000);
+            robot.mouseMove(990, 620);
+            robot.delay(1000);
+            robot.mousePress(BUTTON1_DOWN_MASK);
+            robot.delay(1000);
+            robot.mouseRelease(BUTTON1_DOWN_MASK);
+            robot.delay(2000);
+            robot.mouseMove(589, 620);
+            robot.delay(1000);
+            robot.mousePress(BUTTON1_DOWN_MASK);
+            robot.delay(1000);
+            robot.mouseRelease(BUTTON1_DOWN_MASK);
+            robot.delay(1000);
+            robot.delay(1000);
+            robot.mouseMove(800, 490);
+            robot.delay(500);
+            robot.mousePress(BUTTON1_DOWN_MASK);
+            robot.delay(1000);
+            robot.mouseRelease(BUTTON1_DOWN_MASK);
+            robot.delay(1000);
+            robot.mouseMove(1025, 280);
+            robot.delay(500);
+            robot.mousePress(BUTTON1_DOWN_MASK);
+            robot.delay(500);
+            robot.mouseRelease(BUTTON1_DOWN_MASK);
 		}
 		//Customer Report Ends
 		

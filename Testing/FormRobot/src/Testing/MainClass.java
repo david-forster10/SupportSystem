@@ -30,42 +30,42 @@ public class MainClass
 	   Line = input.nextLine();
 	   HelpLine = Integer.parseInt(Line);
 	    
-	    String helplineString = "Process Ended";
+	    String helplineString = "";
 	    switch(HelpLine) {
 	    
 	    case 1: Login_Form lf = new Login_Form();
 	            success = lf.loginTest();
 	            if (success == true)
-	            {System.out.println("Test Successful");}
-	            else { System.out.println("Test Unsuccessful");}
+	            {System.out.print("Was a Success");}
+	            else { System.out.print("Has Failed");}
 	    break;
 	    
 	    case 2: Products pr = new Products();
 	            success = pr.productsTest();
 	            if (success == true)
-	            {System.out.println("Test Successful");}
-	            else { System.out.println("Test Unsuccessful");}
+	            {System.out.print("Was a Success");}
+	            else { System.out.print("Has Failed");}
 	    break;
 	    
 	    case 3: Customer_Report cr = new Customer_Report();
 	            success = cr.reportsTest();
 	            if (success == true)
-	            {System.out.println("Test Successful");}
-	            else { System.out.println("Test Unsuccessful");}
+	            {System.out.print("Was a Success");}
+	            else { System.out.print("Has Failed");}
 	    break;
 	    
 	    case 4: Staff_Information si = new Staff_Information();
 	            success = si.staffTest();
 	            if (success == true)
-	            {System.out.println("Test Successful");}
-	            else { System.out.println("Test Unsuccessful");}
+	            {System.out.print("Was a Success");}
+	            else { System.out.print("Has Failed");}
 	    break;
 	    
 	    case 5: All_Programs ap = new All_Programs();
 	            success = ap.programTest();
 	            if (success == true)
-	            {System.out.println("Test Successful");}
-	            else { System.out.println("Test Unsuccessful");}
+	            {System.out.print("Was a Success");}
+	            else { System.out.print("Has Failed");}
 	    break;
 	    
 	    case 6: quit = true;

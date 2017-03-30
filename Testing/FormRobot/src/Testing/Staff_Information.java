@@ -183,6 +183,11 @@ public class Staff_Information
 			robot.mousePress(BUTTON1_DOWN_MASK);
 			robot.delay(500);
 			robot.mouseRelease(BUTTON2_DOWN_MASK);
+			System.out.println("                                            ");
+			System.out.println("Completing Test....");
+			System.out.println("                                            ");
+			robot.delay(1000);
+			System.out.print("Test Completed and ");
 		}
 		
 	 public void type(char character) 

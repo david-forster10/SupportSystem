@@ -72,12 +72,14 @@ public class Login_Form
 		robot.delay(2000);
 		robot.mouseMove(830, 540);
 		robot.delay(1000);
-		System.out.println("Press Quit Button");
 		robot.mousePress(BUTTON1_DOWN_MASK);
 		robot.delay(1000);
 		robot.mouseRelease(BUTTON1_DOWN_MASK);
+		System.out.println("                                            ");
+		System.out.println("Completing Test....");
+		System.out.println("                                            ");
 		robot.delay(1000);
-		System.out.println("Quit Button Pressed");
+		System.out.print("Test Completed and ");
 		}
 	
 	

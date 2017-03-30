@@ -318,7 +318,8 @@ public class Staff_Information extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         txt_StaffID.setEnabled(false);
-        txt_StaffID.setText(Integer.toString(Navigation.StaffTbl.get(1).size() + 1));
+        int StaffIDGen = Navigation.StaffTbl.get(1).size();
+        txt_StaffID.setText(Integer.toString(Integer.parseInt(Navigation.StaffTbl.get(1).get(StaffIDGen)) + 1));
         DefaultTableModel tableModel = (DefaultTableModel) tblDatabase.getModel();
         
         for (int i = 0; i < Navigation.StaffTbl.get(1).size(); i++)
@@ -380,7 +381,7 @@ public class Staff_Information extends javax.swing.JFrame {
             {
                 if (txt_Email.getText().contains("@"))
                 {
-                    if (txt_PostCode.getText().length() < 8)
+                    if (txt_PostCode.getText().length() < 9)
                     {
                         AddData();
                     }

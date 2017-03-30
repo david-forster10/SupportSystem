@@ -84,6 +84,7 @@ public class Login_Form
 	 public void type(char character) 
      {
      switch (character) {
+     switch (character) {
      case 'a': doType(VK_A); break;
      case 'b': doType(VK_B); break;
      case 'c': doType(VK_C); break;

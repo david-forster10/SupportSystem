@@ -151,7 +151,7 @@ public class Login_Form
      case '=': doType(VK_EQUALS); break;
      case '~': doType(VK_SHIFT, VK_BACK_QUOTE); break;
      case '!': doType(VK_EXCLAMATION_MARK); break;
-     case '@': doType(VK_SHIFT, VK_QUOTE); break;
+     case '@': doType(VK_AT); break;
      case '#': doType(VK_NUMBER_SIGN); break;
      case '$': doType(VK_DOLLAR); break;
      case '%': doType(VK_SHIFT, VK_5); break;
@@ -172,7 +172,7 @@ public class Login_Form
      case '|': doType(VK_SHIFT, VK_BACK_SLASH); break;
      case ';': doType(VK_SEMICOLON); break;
      case ':': doType(VK_COLON); break;
-     case '\'': doType(VK_BACK_SLASH); break;
+     case '\'': doType(VK_QUOTE); break;
      case '"': doType(VK_QUOTEDBL); break;
      case ',': doType(VK_COMMA); break;
      case '<': doType(VK_SHIFT, VK_COMMA); break;

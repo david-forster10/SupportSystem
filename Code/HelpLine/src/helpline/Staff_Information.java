@@ -1,6 +1,6 @@
 package helpline;
 
-import java.awt.Graphics2D;
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.sql.Connection;
@@ -15,13 +15,13 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.plaf.PanelUI;
 import javax.swing.table.DefaultTableModel;
 
 public class Staff_Information extends javax.swing.JFrame {
 
     private static final int IMG_WIDTH = 180;
-    private static final int IMG_HEIGHT = 180;    
+    private static final int IMG_HEIGHT = 180;
+    private BufferedImage image;
     
     public Staff_Information() {
         initComponents();
@@ -428,10 +428,9 @@ public class Staff_Information extends javax.swing.JFrame {
                
         try 
         {
-            BufferedImage img = ImageIO.read(fc.getSelectedFile());
-            int type = img.getType() == 0? BufferedImage.TYPE_INT_ARGB : img.getType();
-            
-            PanelUI Picture = pnlPicture.getUI();
+            image = ImageIO.read(fc.getSelectedFile());
+            int type = image.getType() == 0? BufferedImage.TYPE_INT_ARGB : image.getType();
+            pnlPicture.repaint();
         } 
         catch (IOException ex) 
         {
@@ -448,6 +447,11 @@ public class Staff_Information extends javax.swing.JFrame {
 	return resizedImage;
     }
 
+    @Override
+    protected void paintComponents(Graphics g) {
+        super.paintComponent(g);
+        g.drawImage(image, 0, 0, this);
+    }
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

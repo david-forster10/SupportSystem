@@ -1,30 +1,21 @@
 package helpline;
 
-import static helpline.HelpLine.User;
-import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.accessibility.AccessibleContext;
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTable;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.plaf.PanelUI;
 import javax.swing.table.DefaultTableModel;
 
 public class Staff_Information extends javax.swing.JFrame {
@@ -414,7 +405,7 @@ public class Staff_Information extends javax.swing.JFrame {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/helpline?allowMultiQueries=true","user","user");
             Statement stmt = (Statement)con.createStatement();
             
-            String sql = "INSERT INTO `staff information form` (`StaffID`, `FirstName`, `LastName`, `Address`, `PostCode`, `Email`, `DateOfBirth`) VALUES ('"+txt_StaffID.getText()+"', '"+txt_FName.getText()+"', '"+txt_Surname.getText()+"', '"+txt_Address.getText()+"', '"+txt_PostCode.getText()+"', '"+txt_Email.getText()+"', '"+txt_DoB.getText()+"')";
+            String sql = "INSERT INTO `staff information form` (`StaffID`, `FirstName`, `LastName`, `Address`, `PostCode`, `Email`, `DateOfBirth`) VALUES ('"+Integer.parseInt(txt_StaffID.getText())+"', '"+txt_FName.getText()+"', '"+txt_Surname.getText()+"', '"+txt_Address.getText()+"', '"+txt_PostCode.getText()+"', '"+txt_Email.getText()+"', '"+txt_DoB.getText()+"')";
             stmt.execute(sql);
             con.close();            
         } 
@@ -439,20 +430,8 @@ public class Staff_Information extends javax.swing.JFrame {
         {
             BufferedImage img = ImageIO.read(fc.getSelectedFile());
             int type = img.getType() == 0? BufferedImage.TYPE_INT_ARGB : img.getType();
-
             
-            Image img = new ImageIcon(ImageIO.read(fc.getSelectedFile())).getImage();
-        Dimension size = new Dimension(img.getWidth(null), img.getHeight(null));
-        setPreferredSize(size);
-        setMinimumSize(size);
-        setMaximumSize(size);
-        setSize(size);
-        setLayout(null);
-        g.drawImage(img, 0, 0, null);
-            BufferedImage resizeImageJpg = resizeImage(img, type);
-            lblPicture.setText("");
-                     
-            pnlPicture.update(resizeImageJpg);
+            PanelUI Picture = pnlPicture.getUI();
         } 
         catch (IOException ex) 
         {

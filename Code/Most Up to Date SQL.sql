@@ -26,19 +26,19 @@ CREATE TABLE IF NOT EXISTS `customer reporting form` (
   `Address` varchar(40) NOT NULL,
   `Postcode` varchar(8) NOT NULL,
   `Telephone` varchar(15) NOT NULL,
-  `Date Reported` date NOT NULL,
+  `Date Reported` varchar(50) NOT NULL,
   `Equipment Type` varchar(40) NOT NULL,
   `Nature of Problem` varchar(40) NOT NULL,
   `Severity` varchar(11) NOT NULL COMMENT ' (1=high, 2=medium, 3=low)',
   `Staff receiving equipment` int(11) NOT NULL,
   `Staff assigned to fix equipment` int(11) NOT NULL,
-  `Date resolved` date NOT NULL,
+  `Date resolved` varchar(50) NOT NULL,
   `Estimated cost of repair` decimal(10,0) NOT NULL,
   PRIMARY KEY (`CustomerReportingFormID`),
-  UNIQUE KEY `Staff receiving equipment` (`Staff receiving equipment`),
   KEY `Staff assigned to fix equipment` (`Staff assigned to fix equipment`),
-  CONSTRAINT `customer reporting form_ibfk_1` FOREIGN KEY (`Staff receiving equipment`) REFERENCES `staff information form` (`StaffID`),
-  CONSTRAINT `customer reporting form_ibfk_2` FOREIGN KEY (`Staff assigned to fix equipment`) REFERENCES `staff information form` (`StaffID`)
+  KEY `Staff receiving equipment` (`Staff receiving equipment`),
+  CONSTRAINT `customer reporting form_ibfk_1` FOREIGN KEY (`Staff receiving equipment`) REFERENCES `staff information form` (`StaffID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `customer reporting form_ibfk_2` FOREIGN KEY (`Staff assigned to fix equipment`) REFERENCES `staff information form` (`StaffID`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Dumping data for table helpline.customer reporting form: ~10 rows (approximately)
@@ -92,9 +92,9 @@ CREATE TABLE IF NOT EXISTS `product form` (
   `Manufacturer` varchar(40) NOT NULL,
   `Model Number` decimal(10,0) NOT NULL,
   `Serial Number` decimal(10,0) NOT NULL,
-  `Date bought in for fixing` date NOT NULL,
+  `Date bought in for fixing` varchar(50) NOT NULL,
   `Nature of problem` varchar(200) NOT NULL,
-  `Date fixed` date NOT NULL,
+  `Date fixed` varchar(50) NOT NULL,
   `Work done` varchar(200) NOT NULL,
   PRIMARY KEY (`productFormID`),
   KEY `CustomerReportingFormID` (`CustomerReportingFormID`),
@@ -128,7 +128,7 @@ CREATE TABLE IF NOT EXISTS `staff information form` (
   `Address` char(40) NOT NULL,
   `PostCode` char(7) NOT NULL,
   `Email` char(30) NOT NULL,
-  `DateOfBirth` date NOT NULL,
+  `DateOfBirth` varchar(50) NOT NULL,
   `PictureURL` varchar(150) NOT NULL,
   PRIMARY KEY (`StaffID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

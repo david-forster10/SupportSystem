@@ -5,6 +5,12 @@
  */
 package helpline;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Vanilla
@@ -308,7 +314,24 @@ public class Customer_Report extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_RepairCostActionPerformed
 
     private void btn_SubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SubmitActionPerformed
-        // TODO add your handling code here:
+    try {
+        Class.forName("com.mysql.jdbc.Driver"); //don't need to change anything here
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/helpline?allowMultiQueries=true","user","user");
+        Statement stmt = (Statement)con.createStatement(); 
+ 
+    	//in first marks input table name, then in the marks in the brackets, the column headings, add/remove as needed.
+	//in second brackets, change names of text fields, add more as needed
+        String sql = "INSERT INTO CUSTOMER_REPORT "
+                + "(CustomerReportingFormID, FirstName, LastName , Address, Postcode, Telephone, Date Reported, Equipment Type, Nature of Problem, Severity (1=high, 2=medium, 3=low), Staff receiving equipment, Staff assigned to fix equipment, Date resolved, Estimated cost of repair) "
+                + "VALUES "
+                + "('"+txt_FirstName.getText()+"', '"+txt_Surname.getText()+"', '"+txt_Address.getText()+"', '"+txt_Postcode.getText()+"', '"+txt_Telephone.getText()+"', '"+txt_ReportDate.getText()+"', '"+txt_EquipType.getText()+"', '"+txt_Problem.getText()+"', '"+jComboBox1.getSelectedItem().toString()+"', '"+txt_StaffRecieving.getText()+"', '"+txt_StaffFixing.getText()+"', '"+txt_DateResolved.getText()+"', '"+txt_RepairCost.getText()+"')";  
+
+        stmt.execute(sql);
+        con.close();            
+    } 
+    catch (Exception ex) {
+	Logger.getLogger(HelpLine.class.getName()).log(Level.SEVERE, null, ex);
+    }
     }//GEN-LAST:event_btn_SubmitActionPerformed
 
     private void btn_BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BackActionPerformed

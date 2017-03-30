@@ -1,7 +1,9 @@
 package helpline;
 
 import static helpline.HelpLine.User;
+import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
@@ -23,6 +25,9 @@ import javax.swing.table.DefaultTableModel;
 
 public class Staff_Information extends javax.swing.JFrame {
 
+    private static final int IMG_WIDTH = 180;
+    private static final int IMG_HEIGHT = 180;    
+    
     public Staff_Information() {
         initComponents();
     }
@@ -313,7 +318,8 @@ public class Staff_Information extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         txt_StaffID.setEnabled(false);
-        txt_StaffID.setText(Integer.toString(Navigation.StaffTbl.get(1).size() + 1));
+        int StaffIDGen = Navigation.StaffTbl.get(1).size();
+        txt_StaffID.setText(Integer.toString(Integer.parseInt(Navigation.StaffTbl.get(1).get(StaffIDGen)) + 1));
         DefaultTableModel tableModel = (DefaultTableModel) tblDatabase.getModel();
         
         for (int i = 0; i < Navigation.StaffTbl.get(1).size(); i++)
@@ -375,7 +381,7 @@ public class Staff_Information extends javax.swing.JFrame {
             {
                 if (txt_Email.getText().contains("@"))
                 {
-                    if (txt_PostCode.getText().length() < 8)
+                    if (txt_PostCode.getText().length() < 9)
                     {
                         AddData();
                     }
@@ -427,10 +433,12 @@ public class Staff_Information extends javax.swing.JFrame {
         
         try 
         {
-            Image img = ImageIO.read(fc.getSelectedFile());
-            Image resizedImg = img.getScaledInstance(180, 180, 0);
+            BufferedImage img = ImageIO.read(fc.getSelectedFile());
+            int type = img.getType() == 0? BufferedImage.TYPE_INT_ARGB : img.getType();
+
+            BufferedImage resizeImageJpg = resizeImage(img, type);
             lblPicture.setText("");
-            lblPicture.setIcon(new ImageIcon(resizedImg));
+            lblPicture.setIcon(new ImageIcon(resizeImageJpg));
         } 
         catch (IOException ex) 
         {
@@ -438,6 +446,16 @@ public class Staff_Information extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jPanel2MouseClicked
 
+    private static BufferedImage resizeImage(BufferedImage originalImage, int type){
+	BufferedImage resizedImage = new BufferedImage(IMG_WIDTH, IMG_HEIGHT, type);
+	Graphics2D g = resizedImage.createGraphics();
+	g.drawImage(originalImage, 0, 0, IMG_WIDTH, IMG_HEIGHT, null);
+	g.dispose();
+
+	return resizedImage;
+    }
+
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

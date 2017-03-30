@@ -6,14 +6,18 @@
 package helpline;
 
 import java.sql.Connection;
-import java.sql.Date;
+import java.util.Date;
 import java.sql.DriverManager;
-import java.sql.Statement;
+import java.sql.PreparedStatement;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -68,8 +72,17 @@ public class Customer_Report extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox<>();
         lbl_FirstName1 = new javax.swing.JLabel();
         txt_Customer = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        btn_Delete = new javax.swing.JButton();
+        btn_Edit = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         lbl_ReportForm.setFont(new java.awt.Font("Tahoma", 0, 21)); // NOI18N
         lbl_ReportForm.setText("Customer Reporting Form");
@@ -201,20 +214,54 @@ public class Customer_Report extends javax.swing.JFrame {
             }
         });
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "CustomerReportingFormID", "FirstName", "Surname", "Address", "Postcode", "Telephone", "Date Reported", "Equipment Type", "Nature of Problem", "Severity", "Staff receiving equipment", "Staff assigned to fix equipment", "Date resolved", "Estimated cost of repair"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+
+        btn_Delete.setText("Delete");
+
+        btn_Edit.setText("Edit");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(148, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lbl_ReportForm)
                 .addGap(144, 144, 144))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(44, 44, 44)
+                        .addGap(32, 32, 32)
                         .addComponent(btn_Back, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_Edit)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_Delete)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btn_Submit, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(24, 24, 24)
@@ -239,7 +286,7 @@ public class Customer_Report extends javax.swing.JFrame {
                                     .addComponent(txt_Postcode, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txt_Telephone, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txt_ReportDate, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbl_Problem, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lbl_Severity, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -264,7 +311,7 @@ public class Customer_Report extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addComponent(lbl_ReportForm)
-                .addGap(46, 46, 46)
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -322,11 +369,15 @@ public class Customer_Report extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbl_DateReported)
                             .addComponent(txt_ReportDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_Back)
-                    .addComponent(btn_Submit))
-                .addGap(25, 25, 25))
+                    .addComponent(btn_Submit)
+                    .addComponent(btn_Delete)
+                    .addComponent(btn_Edit))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
@@ -338,28 +389,88 @@ public class Customer_Report extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_RepairCostActionPerformed
 
     private void btn_SubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SubmitActionPerformed
-    try {
+    Pattern pat = Pattern.compile("[^a-z ]", Pattern.CASE_INSENSITIVE); //allows only text inputs e.g. name fields
+    Pattern pat2 = Pattern.compile("[^0-9.]");
+    Pattern pat3 = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE); //validation for only allowing numbers & letters, e.g. an address
+    Pattern pat4 = Pattern.compile("\\d{4}-\\d{2}-\\d{2}", Pattern.CASE_INSENSITIVE); //validation for a date, format "YYYY/MM/DD"
+    Pattern pat5 = Pattern.compile("[^0-9]");
+     
+    Matcher customerID = pat5.matcher(txt_Customer.getText());
+    Matcher firstName = pat.matcher(txt_FirstName.getText());
+    Matcher Surname = pat.matcher(txt_Surname.getText());
+    Matcher address = pat3.matcher(txt_Address.getText());
+    Matcher postcode = pat3.matcher(txt_Postcode.getText());
+    Matcher telephone = pat3.matcher(txt_Telephone.getText());
+    Matcher dateReported = pat4.matcher(txt_ReportDate.getText());
+    Matcher equiptype = pat.matcher(txt_EquipType.getText());  
+    Matcher problem = pat.matcher(txt_Problem.getText());
+    Matcher combo = pat.matcher(jComboBox1.getSelectedItem().toString());
+    Matcher staffrecieving = pat2.matcher(txt_StaffRecieving.getText());
+    Matcher fixing = pat2.matcher(txt_StaffFixing.getText());
+    Matcher dateReolved = pat4.matcher(txt_DateResolved.getText());
+    Matcher repairCost = pat2.matcher(txt_RepairCost.getText());
+    
+    if (txt_Customer.getText().equals("") || txt_FirstName.getText().equals("") || txt_Surname.getText().equals("") || txt_Address.getText().equals("") || txt_Postcode.getText().equals("") || txt_Telephone.getText().equals("") || txt_ReportDate.getText().equals("") || txt_EquipType.getText().equals("") || txt_Problem.getText().equals("") || jComboBox1.getSelectedItem().toString().equals("") || txt_StaffRecieving.getText().equals("") || txt_StaffFixing.getText().equals("") || txt_DateResolved.getText().equals("") || txt_RepairCost.getText().equals("")) //validating making sure fields aren't empty (add names of text boxes)
+    {
+        JOptionPane.showMessageDialog(null, "Please fill in all sections of the form!", "Error", JOptionPane.WARNING_MESSAGE);
+    }
+    else
+    {
+        if (customerID.find() || firstName.find() || Surname.find() || address.find() || postcode.find() || telephone.find() || dateReported.find() || equiptype.find() || problem.find() || combo.find() || staffrecieving.find() || fixing.find() || dateReolved.find() || repairCost.find()) //uses matchers from above, add/remove as needed
+        {
+            if (txt_Postcode.getText().length() < 8) { //ensuring the postcode field isn't too long
+		AddData(); //calls function for generating the sql
+            } else {
+                   JOptionPane.showMessageDialog(null, "Please enter a valid Post Code!", "Error", JOptionPane.WARNING_MESSAGE);
+                }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Please only input valid characters!", "Error", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+    }//GEN-LAST:event_btn_SubmitActionPerformed
+
+    public void AddData(){
+        try {
         Class.forName("com.mysql.jdbc.Driver"); //don't need to change anything here
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/helpline?allowMultiQueries=true","user","user");
-        Statement stmt = (Statement)con.createStatement(); 
  
     	//in first marks input table name, then in the marks in the brackets, the column headings, add/remove as needed.
 	//in second brackets, change names of text fields, add more as needed
         
         String DateReported = txt_ReportDate.getText();
         String DateResolved = txt_DateResolved.getText();
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd"); 
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Date reported;
         Date resolved;
         try {
             reported = (Date) df.parse(DateReported);
-            resolved = (Date) df.parse(DateResolved);
-            String dteDateReported = df.format(reported);
-            String dteDateResolved = df.format(resolved);
+            resolved = (Date) df.parse(DateResolved);  
+            String dteReported = df.format(reported);
+            String dteResolved = df.format(resolved);
             
-            String sql = "INSERT INTO `customer reporting form` (`CustomerReportingFormID`, `FirstName`, `LastName`, `Address`, `Postcode`, `Telephone`, `Date Reported`, `Equipment Type`, `Nature of Problem`, `Severity`, `Staff receiving equipment`, `Staff assigned to fix equipment`, `Date resolved`, `Estimated cost of repair`) VALUES ('"+Integer.parseInt(txt_Customer.getText())+"', '"+txt_FirstName.getText()+"', '"+txt_Surname.getText()+"', '"+txt_Address.getText()+"', '"+txt_Postcode.getText()+"', '"+txt_Telephone.getText()+"', '"+dteDateReported+"', '"+txt_EquipType.getText()+"', '"+txt_Problem.getText()+"', '"+jComboBox1.getSelectedItem().toString()+"', '"+Integer.parseInt(txt_StaffRecieving.getText())+"', '"+Integer.parseInt(txt_StaffFixing.getText())+"', '"+dteDateResolved+"', '"+Double.parseDouble(txt_RepairCost.getText())+"')";  
-            stmt.execute(sql);
-            con.close(); // FIX THE SQL STATEMENT USING THIS LINK http://stackoverflow.com/questions/7335599/how-to-insert-a-string-date-to-a-mysql-database-date-field
+            String insert = "INSERT INTO `customer reporting form` VALUES (?, ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ?) ";
+            PreparedStatement ps = con.prepareStatement(insert);
+            ps.setInt(1, Integer.parseInt(txt_Customer.getText()));
+            ps.setString(2, txt_FirstName.getText());
+            ps.setString(3, txt_Surname.getText());
+            ps.setString(4, txt_Address.getText());
+            ps.setString(5, txt_Postcode.getText());
+            ps.setString(6, txt_Telephone.getText());
+            ps.setString(7, dteReported);
+            ps.setString(8, txt_EquipType.getText());
+            ps.setString(9, txt_Problem.getText());
+            ps.setString(10, jComboBox1.getSelectedItem().toString());
+            ps.setInt(11, Integer.parseInt(txt_StaffRecieving.getText()));
+            ps.setInt(12, Integer.parseInt(txt_StaffFixing.getText()));
+            ps.setString(13, dteResolved);
+            ps.setDouble(14, Double.parseDouble(txt_RepairCost.getText()));
+
+            ps.executeUpdate();
+            
+            ps.execute(insert);
+            con.close(); // FIX 
         } catch (ParseException e) {
             e.printStackTrace();
         }           
@@ -367,8 +478,8 @@ public class Customer_Report extends javax.swing.JFrame {
     catch (Exception ex) {
 	Logger.getLogger(HelpLine.class.getName()).log(Level.SEVERE, null, ex);
     }
-    }//GEN-LAST:event_btn_SubmitActionPerformed
-
+    }
+    
     private void btn_BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BackActionPerformed
         Navigation NavBack = new Navigation();
         NavBack.setVisible(true);
@@ -427,6 +538,35 @@ public class Customer_Report extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_CustomerActionPerformed
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+    txt_Customer.setEnabled(false); //disabling the autogenerated StaffID text file
+    int IDGen = Navigation.CustomerReportTbl.get(1).size(); //getting size of array for last ID generated
+    txt_Customer.setText(Integer.toString(Integer.parseInt(Navigation.CustomerReportTbl.get(1).get(IDGen)) + 1)); //Generating a new ID
+    DefaultTableModel tableModel = (DefaultTableModel) jTable1.getModel(); //declaring a tablemodel for adding records to the JTable
+       
+    for (int i = 0; i < Navigation.CustomerReportTbl.get(1).size(); i++) //loop to add all records to table
+    {
+       Object[] rowData = { 
+          Navigation.CustomerReportTbl.get(0).get(i), //each comma is info for a new row
+          Navigation.CustomerReportTbl.get(1).get(i), 
+          Navigation.CustomerReportTbl.get(2).get(i), 
+          Navigation.CustomerReportTbl.get(3).get(i),
+          Navigation.CustomerReportTbl.get(4).get(i),
+          Navigation.CustomerReportTbl.get(5).get(i),
+          Navigation.CustomerReportTbl.get(6).get(i),
+          Navigation.CustomerReportTbl.get(7).get(i),
+          Navigation.CustomerReportTbl.get(8).get(i),
+          Navigation.CustomerReportTbl.get(9).get(i),
+          Navigation.CustomerReportTbl.get(10).get(i),
+          Navigation.CustomerReportTbl.get(11).get(i),
+          Navigation.CustomerReportTbl.get(12).get(i),
+          Navigation.CustomerReportTbl.get(13).get(i)
+       };
+      tableModel.addRow(rowData); //adding the data into the table
+    }
+    jTable1.setEnabled(false); //disabling the table on load
+    }//GEN-LAST:event_formWindowOpened
+
     /**
      * @param args the command line arguments
      */
@@ -464,8 +604,12 @@ public class Customer_Report extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Back;
+    private javax.swing.JButton btn_Delete;
+    private javax.swing.JToggleButton btn_Edit;
     private javax.swing.JButton btn_Submit;
     private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbl_Address;
     private javax.swing.JLabel lbl_DateReported;
     private javax.swing.JLabel lbl_DateResolved;

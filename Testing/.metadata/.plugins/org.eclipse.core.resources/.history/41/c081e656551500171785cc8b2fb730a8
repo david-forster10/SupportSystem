@@ -23,7 +23,6 @@ public class MainClass
 		System.out.println("4 - Staff Information");
 		System.out.println("5 - Run Through All Pages");
 		System.out.println("6 - Quit");
-		System.out.println("7 - Easy Login (no Quit)");
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		System.out.println("-----------------------------------");
 		System.out.println("Enter Choice: ");
@@ -72,13 +71,6 @@ public class MainClass
 	    case 6: quit = true;
 	    break;
 	    
-	    case 7 : CbaToLoginManually cba = new CbaToLoginManually();
-	             success = cba.Cba();
-	             if (success == true)
-	             {System.out.print("Was a success");}
-	             else {System.out.print("Has Failed");}
-	    	break;
-	    	
 	    default: System.out.println("Enter a valid choice");
 	    }
 	    

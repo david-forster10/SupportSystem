@@ -45,6 +45,7 @@ public class Products
 			keyboard.ModelNumber("11");
 			keyboard.FixDate("2017-03-22");
 			keyboard.serialNumber("77");
+			keyboard.Finished("------");
 			return successful;
 		}
 		public Products() throws AWTException
@@ -187,7 +188,22 @@ public class Products
 				robot.delay(300);
 				robot.keyPress(KeyEvent.VK_TAB);
 				robot.keyRelease(KeyEvent.VK_TAB);
-				
+			    }
+			
+			public void Finished(CharSequence characters)
+			{
+				int length = characters.length();
+				for (int i =0; i < length; i++)
+				{
+					char character = characters.charAt(i);
+					type(character);
+				}
+				robot.delay(300);
+				robot.keyPress(KeyEvent.VK_TAB);
+				robot.keyRelease(KeyEvent.VK_TAB);
+				robot.delay(300);
+				robot.keyPress(KeyEvent.VK_TAB);
+				robot.keyRelease(KeyEvent.VK_TAB);
 				robot.delay(1000);
 				robot.mouseMove(1041, 550);
 				robot.delay(1000);

@@ -31,20 +31,23 @@ public class Customer_Report
 			successful = false;
 		}
 		robot.delay(1000);
+		// -u -p
 		keyboard.Username("2");
 		keyboard.Password("Michelle19700414");
-		keyboard.EquipType("Monitor");
-		keyboard.FirstName("Michelle");
-		keyboard.CustProblem("Cracked Monitor");
-		keyboard.Surname("Hoggard");
-		keyboard.Address("34 Constitution St");
-		keyboard.StaffRec("Mary Porter");
-		keyboard.Postcode("L17 8PJ");
-		keyboard.StaffFix("Thomas Davis");
-		keyboard.Telephone("07744738885");
-		keyboard.DateRes("2017-03-07");
-		keyboard.DateRep("2017-03-07");
-		keyboard.EstCost("30");
+		
+		//Sauce
+		keyboard.EquipType("Router");
+		keyboard.FirstName("Gloria");
+		keyboard.CustProblem("faulty Cable");
+		keyboard.Surname("Priest");
+		keyboard.Address("67 Bishopgate Street");
+		//keyboard.StaffRec("Mary Porter");
+		keyboard.Postcode("LA10 7SN");
+		//keyboard.StaffFix("Thomas Davis");
+		keyboard.Telephone("07757143071");
+		keyboard.DateRes("2017-03-28");
+		keyboard.DateRep("2017-03-27");
+		keyboard.EstCost("5");
 		return successful;
 	}
 	public Customer_Report() throws AWTException
@@ -172,8 +175,8 @@ public class Customer_Report
 		robot.keyPress(KeyEvent.VK_TAB);
 		robot.keyRelease(KeyEvent.VK_TAB);
 		}
-	
-		public void StaffRec(CharSequence characters)
+	    //I need to adjust the mouseMove/mousePress here
+		/*public void StaffRec(CharSequence characters)
 		{
 			int length = characters.length();
 		for (int i =0; i < length; i++)
@@ -183,7 +186,7 @@ public class Customer_Report
 		}
 		robot.keyPress(KeyEvent.VK_TAB);
 		robot.keyRelease(KeyEvent.VK_TAB);
-		}
+		}*/
 		
 		public void Postcode(CharSequence characters)
 		{
@@ -196,8 +199,8 @@ public class Customer_Report
 		robot.keyPress(KeyEvent.VK_TAB);
 		robot.keyRelease(KeyEvent.VK_TAB);
 		}
-		
-		public void StaffFix(CharSequence characters)
+		//I need to adjust the mouseMove/mousePress here
+		/*public void StaffFix(CharSequence characters)
 		{
 			int length = characters.length();
 		for (int i =0; i < length; i++)
@@ -207,7 +210,7 @@ public class Customer_Report
 		}
 		robot.keyPress(KeyEvent.VK_TAB);
 		robot.keyRelease(KeyEvent.VK_TAB);
-		}
+		}*/
 		
 		public void Telephone(CharSequence characters)
 		{

@@ -38,12 +38,12 @@ public class Staff_Information
 		keyboard.Username("2");
 		keyboard.Password("Michelle19700414");
 		
-		keyboard.Staff_Address("5 Boroughbridge Road");
-		keyboard.StaffF_Name("Joanna");
-		keyboard.Staff_Postcode("NP6 9PS");
-		keyboard.Staff_Surname("Hall");
-		keyboard.Staff_Dob("1970-02-13");
-		keyboard.Email("JoannaHall@hotmail.com");
+		keyboard.Staff_Address("19 Green Street");
+		keyboard.StaffF_Name("Richard");
+		keyboard.Staff_Postcode("E45 6RD");
+		keyboard.Staff_Surname("Parker");
+		keyboard.Staff_Dob("1998/12/12");
+		keyboard.Email("Richyboy19@hotmail.co.uk");
 		return successful;
 		
 	}
@@ -111,6 +111,7 @@ public class Staff_Information
 			robot.keyRelease(KeyEvent.VK_TAB);
 		    }
 		
+		
 		public void StaffF_Name(CharSequence characters)
 		{
 			int length = characters.length();
@@ -150,6 +151,7 @@ public class Staff_Information
 			robot.keyRelease(KeyEvent.VK_TAB);
 		    }
 		
+	
 		public void Staff_Dob(CharSequence characters)
 		{
 			int length = characters.length();
@@ -162,6 +164,7 @@ public class Staff_Information
 			robot.keyPress(KeyEvent.VK_TAB);
 			robot.keyRelease(KeyEvent.VK_TAB);
 		    }
+		
 		
 		public void Email(CharSequence characters)
 		{

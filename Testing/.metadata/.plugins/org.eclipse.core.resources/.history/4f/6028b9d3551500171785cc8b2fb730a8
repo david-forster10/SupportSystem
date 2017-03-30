@@ -78,7 +78,6 @@ public class MainClass
 	             {System.out.print("Was a success");}
 	             else {System.out.print("Has Failed");}
 	    	break;
-	    	
 	    default: System.out.println("Enter a valid choice");
 	    }
 	    

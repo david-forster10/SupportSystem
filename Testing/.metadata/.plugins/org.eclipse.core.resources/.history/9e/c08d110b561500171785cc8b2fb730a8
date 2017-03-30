@@ -72,11 +72,7 @@ public class MainClass
 	    case 6: quit = true;
 	    break;
 	    
-	    case 7 : CbaToLoginManually cba = new CbaToLoginManually();
-	             success = cba.Cba();
-	             if (success == true)
-	             {System.out.print("Was a success");}
-	             else {System.out.print("Has Failed");}
+	    case 7 : CbaToLoginManually = new CbaToLoginManually();
 	    	break;
 	    	
 	    default: System.out.println("Enter a valid choice");

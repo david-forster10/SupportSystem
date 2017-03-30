@@ -212,6 +212,8 @@ public class Products
 				robot.delay(1000);
 				System.out.print("Test Completed and ");
 			    }
+			    }
+			
 		
 		 public void type(char character) 
 	     {

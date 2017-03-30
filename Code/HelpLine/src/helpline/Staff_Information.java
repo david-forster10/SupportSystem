@@ -1,14 +1,10 @@
 package helpline;
 
-import static helpline.HelpLine.User;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,7 +14,6 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
@@ -26,7 +21,8 @@ import javax.swing.table.DefaultTableModel;
 public class Staff_Information extends javax.swing.JFrame {
 
     private static final int IMG_WIDTH = 180;
-    private static final int IMG_HEIGHT = 180;    
+    private static final int IMG_HEIGHT = 180;
+    private static String SelectedImg = "";
     
     public Staff_Information() {
         initComponents();
@@ -383,27 +379,30 @@ public class Staff_Information extends javax.swing.JFrame {
         }
         else
         {
-            if (match1.find() || match2.find() || match3.find() || match4.find() || match5.find() || match6.find())
+            if (SelectedImg.equals(""))
             {
-                if (txt_Email.getText().contains("@"))
+                if (match1.find() || match2.find() || match3.find() || match4.find() || match5.find() || match6.find())
                 {
-                    if (txt_PostCode.getText().length() < 9)
+                    if (txt_Email.getText().contains("@"))
                     {
-                        AddData();
+                        if (txt_PostCode.getText().length() < 9)
+                        {
+                            AddData();
+                        }
+                        else
+                        {
+                            JOptionPane.showMessageDialog(null, "Please enter a valid Post Code!", "Error", JOptionPane.WARNING_MESSAGE);
+                        }
                     }
                     else
                     {
-                        JOptionPane.showMessageDialog(null, "Please enter a valid Post Code!", "Error", JOptionPane.WARNING_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Please enter a valid Email!", "Error", JOptionPane.WARNING_MESSAGE);
                     }
                 }
                 else
                 {
-                    JOptionPane.showMessageDialog(null, "Please enter a valid Email!", "Error", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Please only input valid characters!", "Error", JOptionPane.WARNING_MESSAGE);
                 }
-            }
-            else
-            {
-                JOptionPane.showMessageDialog(null, "Please only input valid characters!", "Error", JOptionPane.WARNING_MESSAGE);
             }
         }
     }//GEN-LAST:event_btnSaveMouseClicked
@@ -416,7 +415,7 @@ public class Staff_Information extends javax.swing.JFrame {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/helpline?allowMultiQueries=true","user","user");
             Statement stmt = (Statement)con.createStatement();
             
-            String sql = "INSERT INTO `staff information form` (`StaffID`, `FirstName`, `LastName`, `Address`, `PostCode`, `Email`, `DateOfBirth`) VALUES ('"+Integer.parseInt(txt_StaffID.getText())+"', '"+txt_FName.getText()+"', '"+txt_Surname.getText()+"', '"+txt_Address.getText()+"', '"+txt_PostCode.getText()+"', '"+txt_Email.getText()+"', '"+txt_DoB.getText()+"')";
+            String sql = "INSERT INTO `staff information form` (`StaffID`, `FirstName`, `LastName`, `Address`, `PostCode`, `Email`, `DateOfBirth`, `PictureURL`) VALUES ('"+Integer.parseInt(txt_StaffID.getText())+"', '"+txt_FName.getText()+"', '"+txt_Surname.getText()+"', '"+txt_Address.getText()+"', '"+txt_PostCode.getText()+"', '"+txt_Email.getText()+"', '"+txt_DoB.getText()+"', '"+SelectedImg+"')";
             stmt.execute(sql);
             con.close();            
         } 
@@ -438,6 +437,7 @@ public class Staff_Information extends javax.swing.JFrame {
         
         try 
         {
+            SelectedImg = fc.getSelectedFile().getPath();
             BufferedImage img = ImageIO.read(fc.getSelectedFile());
             int type = img.getType() == 0? BufferedImage.TYPE_INT_ARGB : img.getType();
 
@@ -447,6 +447,9 @@ public class Staff_Information extends javax.swing.JFrame {
         } 
         catch (IOException ex) 
         {
+            SelectedImg = "";
+            lblPicture.setIcon(null);
+            lblPlace.setText("Click to add picture");
             Logger.getLogger(Staff_Information.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jPanel2MouseClicked

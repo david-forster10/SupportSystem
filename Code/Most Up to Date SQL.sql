@@ -26,13 +26,13 @@ CREATE TABLE IF NOT EXISTS `customer reporting form` (
   `Address` varchar(40) NOT NULL,
   `Postcode` varchar(8) NOT NULL,
   `Telephone` varchar(15) NOT NULL,
-  `Date Reported` date NOT NULL,
+  `Date Reported` varchar(50) NOT NULL,
   `Equipment Type` varchar(40) NOT NULL,
   `Nature of Problem` varchar(40) NOT NULL,
   `Severity` varchar(11) NOT NULL COMMENT ' (1=high, 2=medium, 3=low)',
   `Staff receiving equipment` int(11) NOT NULL,
   `Staff assigned to fix equipment` int(11) NOT NULL,
-  `Date resolved` date NOT NULL,
+  `Date resolved` varchar(50) NOT NULL,
   `Estimated cost of repair` decimal(10,0) NOT NULL,
   PRIMARY KEY (`CustomerReportingFormID`),
   UNIQUE KEY `Staff receiving equipment` (`Staff receiving equipment`),
@@ -92,9 +92,9 @@ CREATE TABLE IF NOT EXISTS `product form` (
   `Manufacturer` varchar(40) NOT NULL,
   `Model Number` decimal(10,0) NOT NULL,
   `Serial Number` decimal(10,0) NOT NULL,
-  `Date bought in for fixing` date NOT NULL,
+  `Date bought in for fixing` varchar(50) NOT NULL,
   `Nature of problem` varchar(200) NOT NULL,
-  `Date fixed` date NOT NULL,
+  `Date fixed` varchar(50) NOT NULL,
   `Work done` varchar(200) NOT NULL,
   PRIMARY KEY (`productFormID`),
   KEY `CustomerReportingFormID` (`CustomerReportingFormID`),
@@ -128,12 +128,12 @@ CREATE TABLE IF NOT EXISTS `staff information form` (
   `Address` char(40) NOT NULL,
   `PostCode` char(7) NOT NULL,
   `Email` char(30) NOT NULL,
-  `DateOfBirth` date NOT NULL,
+  `DateOfBirth` varchar(50) NOT NULL,
   `PictureURL` varchar(150) NOT NULL,
   PRIMARY KEY (`StaffID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table helpline.staff information form: ~10 rows (approximately)
+-- Dumping data for table helpline.staff information form: ~5 rows (approximately)
 DELETE FROM `staff information form`;
 /*!40000 ALTER TABLE `staff information form` DISABLE KEYS */;
 INSERT INTO `staff information form` (`StaffID`, `FirstName`, `LastName`, `Address`, `PostCode`, `Email`, `DateOfBirth`, `PictureURL`) VALUES

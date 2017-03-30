@@ -74,6 +74,7 @@ public class HelpLine
                 }
                 hasMoreResultSets = stmt.getMoreResults();  
             }
+            con.close();
         } 
         catch (Exception ex) 
         {

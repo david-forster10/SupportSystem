@@ -1,5 +1,26 @@
 package helpline;
 
+import static helpline.HelpLine.User;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableModel;
+
 public class Staff_Information extends javax.swing.JFrame {
 
     public Staff_Information() {
@@ -13,26 +34,27 @@ public class Staff_Information extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDatabase = new javax.swing.JTable();
+        txt_FName = new javax.swing.JTextField();
         txt_Surname = new javax.swing.JTextField();
+        txt_Email = new javax.swing.JTextField();
         txt_Address = new javax.swing.JTextField();
+        txt_PostCode = new javax.swing.JTextField();
+        txt_DoB = new javax.swing.JTextField();
         lbl_Surname = new javax.swing.JLabel();
         lbl_Address = new javax.swing.JLabel();
-        txt_DoB = new javax.swing.JTextField();
         lbl_Info = new javax.swing.JLabel();
         btnDelete = new javax.swing.JButton();
         lbl_Email = new javax.swing.JLabel();
         lbl_FName = new javax.swing.JLabel();
-        txt_Email = new javax.swing.JTextField();
         btn_QuitInfo = new javax.swing.JButton();
-        txt_PostCode = new javax.swing.JTextField();
         lbl_DoB = new javax.swing.JLabel();
         lbl_PostCode = new javax.swing.JLabel();
-        txt_FName = new javax.swing.JTextField();
         btnSave = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         lblPicture = new javax.swing.JLabel();
         tgbtn_Edit = new javax.swing.JToggleButton();
-        btn_submit = new javax.swing.JButton();
+        lbl_StaffID = new javax.swing.JLabel();
+        txt_StaffID = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -43,17 +65,14 @@ public class Staff_Information extends javax.swing.JFrame {
 
         tblDatabase.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Staff ID", "First Name", "Last Name", "Address", "Post Code", "Email", "Date of Birth"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false
@@ -67,17 +86,31 @@ public class Staff_Information extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tblDatabase.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        tblDatabase.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        tblDatabase.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tblDatabase.getTableHeader().setResizingAllowed(false);
+        tblDatabase.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblDatabase);
+
+        txt_FName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_FNameActionPerformed(evt);
+            }
+        });
 
         lbl_Surname.setText("Surname");
 
-        lbl_Address.setText("Address");
+        lbl_Address.setText("House Number/Name");
 
         lbl_Info.setFont(new java.awt.Font("Tahoma", 0, 21)); // NOI18N
         lbl_Info.setText("Staff Info");
 
         btnDelete.setText("Delete");
+        btnDelete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDeleteMouseClicked(evt);
+            }
+        });
 
         lbl_Email.setText("Email");
 
@@ -90,34 +123,42 @@ public class Staff_Information extends javax.swing.JFrame {
             }
         });
 
-        lbl_DoB.setText("DOB (yyyy/mm/dd)");
+        lbl_DoB.setText("DOB (YYYY/MM/DD)");
 
         lbl_PostCode.setText("Post Code");
 
-        txt_FName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_FNameActionPerformed(evt);
+        btnSave.setText("Save");
+        btnSave.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSaveMouseClicked(evt);
             }
         });
 
-        btnSave.setText("Save");
+        jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel2.setPreferredSize(new java.awt.Dimension(170, 170));
+        jPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel2MouseClicked(evt);
+            }
+        });
 
-        lblPicture.setText("Picture");
+        lblPicture.setText("Click to add picture");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 136, Short.MAX_VALUE)
-                .addComponent(lblPicture))
+                .addContainerGap(48, Short.MAX_VALUE)
+                .addComponent(lblPicture)
+                .addGap(41, 41, 41))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(77, 77, 77)
+                .addGap(82, 82, 82)
                 .addComponent(lblPicture)
-                .addContainerGap(80, Short.MAX_VALUE))
+                .addContainerGap(84, Short.MAX_VALUE))
         );
 
         tgbtn_Edit.setText("Edit Record");
@@ -132,10 +173,11 @@ public class Staff_Information extends javax.swing.JFrame {
             }
         });
 
-        btn_submit.setText("Submit");
-        btn_submit.addActionListener(new java.awt.event.ActionListener() {
+        lbl_StaffID.setText("Staff ID");
+
+        txt_StaffID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_submitActionPerformed(evt);
+                txt_StaffIDActionPerformed(evt);
             }
         });
 
@@ -147,89 +189,98 @@ public class Staff_Information extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lbl_FName)
-                                    .addComponent(lbl_Surname, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lbl_Email, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txt_Surname)
-                                    .addComponent(txt_FName)
-                                    .addComponent(txt_Email, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lbl_DoB)
-                                    .addComponent(lbl_PostCode, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lbl_Address, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txt_Address, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
-                                    .addComponent(txt_PostCode)
-                                    .addComponent(txt_DoB))
-                                .addGap(13, 13, 13))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGap(148, 148, 148)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(tgbtn_Edit)
-                                    .addComponent(lbl_Info))
-                                .addGap(311, 311, 311))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 717, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(btn_QuitInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btn_submit)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnDelete)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnSave)))
-                        .addGap(13, 13, 13))))
+                        .addGap(13, 13, 13))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(17, 17, 17)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(lbl_FName)
+                                        .addComponent(lbl_Surname, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(lbl_StaffID, javax.swing.GroupLayout.Alignment.TRAILING))
+                                    .addComponent(lbl_Email))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txt_StaffID, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                                    .addComponent(txt_Surname)
+                                    .addComponent(txt_Email, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txt_FName))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lbl_PostCode, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(lbl_Address, javax.swing.GroupLayout.Alignment.TRAILING))
+                                        .addGap(18, 18, 18))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(lbl_DoB)
+                                        .addGap(19, 19, 19)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txt_PostCode, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                                    .addComponent(txt_Address, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txt_DoB))
+                                .addGap(13, 13, 13))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(tgbtn_Edit)
+                                    .addComponent(lbl_Info))
+                                .addGap(311, 311, 311))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
                         .addComponent(lbl_Info)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(txt_FName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lbl_Address))
-                            .addComponent(lbl_FName)
-                            .addComponent(txt_Address, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(lbl_PostCode)
-                                .addComponent(txt_PostCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txt_Surname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lbl_Surname))))
-                        .addGap(17, 17, 17)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbl_Address)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(txt_StaffID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lbl_StaffID)))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(txt_FName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lbl_PostCode)
+                                        .addComponent(txt_PostCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(lbl_FName)))
+                            .addComponent(txt_Address, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txt_Surname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbl_Surname)
+                            .addComponent(lbl_DoB)
+                            .addComponent(txt_DoB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbl_Email)
-                            .addComponent(txt_Email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_DoB)
-                            .addComponent(txt_DoB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(txt_Email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(16, Short.MAX_VALUE)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_QuitInfo)
                     .addComponent(btnDelete)
                     .addComponent(btnSave)
-                    .addComponent(tgbtn_Edit)
-                    .addComponent(btn_submit))
+                    .addComponent(tgbtn_Edit))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -261,26 +312,131 @@ public class Staff_Information extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_QuitInfoActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        txt_StaffID.setEnabled(false);
+        txt_StaffID.setText(Integer.toString(Navigation.StaffTbl.get(1).size() + 1));
+        DefaultTableModel tableModel = (DefaultTableModel) tblDatabase.getModel();
         
+        for (int i = 0; i < Navigation.StaffTbl.get(1).size(); i++)
+        {
+            Object[] rowData = { 
+                Navigation.StaffTbl.get(0).get(i), 
+                Navigation.StaffTbl.get(1).get(i), 
+                Navigation.StaffTbl.get(2).get(i), 
+                Navigation.StaffTbl.get(3).get(i),
+                Navigation.StaffTbl.get(4).get(i),
+                Navigation.StaffTbl.get(5).get(i),
+                Navigation.StaffTbl.get(6).get(i),
+                Navigation.StaffTbl.get(7).get(i)
+            };
+            tableModel.addRow(rowData);
+        }
+        tblDatabase.setEnabled(false);
     }//GEN-LAST:event_formWindowOpened
 
     private void tgbtn_EditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tgbtn_EditActionPerformed
     }//GEN-LAST:event_tgbtn_EditActionPerformed
 
     private void tgbtn_EditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tgbtn_EditMouseClicked
-        if (tgbtn_Edit.getText() == "Edit Record")
+        if (tgbtn_Edit.getText().equals("Edit Record"))
         {
             tgbtn_Edit.setText("New Record");
+            tblDatabase.setEnabled(true);
         }
-        else if (tgbtn_Edit.getText() == "New Record")
+        else if (tgbtn_Edit.getText().equals("New Record"))
         {
-            tgbtn_Edit.setText("New Record");
+            tgbtn_Edit.setText("Edit Record");
+            tblDatabase.setEnabled(false);
         }
     }//GEN-LAST:event_tgbtn_EditMouseClicked
 
-    private void btn_submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_submitActionPerformed
+    private void txt_StaffIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_StaffIDActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btn_submitActionPerformed
+    }//GEN-LAST:event_txt_StaffIDActionPerformed
+
+    private void btnSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveMouseClicked
+        Pattern pat = Pattern.compile("[^a-z ]", Pattern.CASE_INSENSITIVE);
+        Pattern pat2 = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+        Pattern pat3 = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
+        Pattern pat4 = Pattern.compile("\\d{4}/\\d{2}/\\d{2}", Pattern.CASE_INSENSITIVE);
+        Matcher match1 = pat.matcher(txt_FName.getText());
+        Matcher match2 = pat.matcher(txt_Surname.getText());
+        Matcher match3 = pat2.matcher(txt_Email.getText());
+        Matcher match4 = pat3.matcher(txt_Address.getText());
+        Matcher match5 = pat3.matcher(txt_PostCode.getText());
+        Matcher match6 = pat4.matcher(txt_DoB.getText());
+        
+        if (txt_FName.getText().equals("") || txt_Surname.getText().equals("") || txt_Email.getText().equals("") || txt_Address.getText().equals("") || txt_PostCode.getText().equals("") || txt_DoB.getText().equals(""))
+        {
+            JOptionPane.showMessageDialog(null, "Please fill in all sections of the form!", "Error", JOptionPane.WARNING_MESSAGE);
+        }
+        else
+        {
+            if (match1.find() || match2.find() || match3.find() || match4.find() || match5.find() || match6.find())
+            {
+                if (txt_Email.getText().contains("@"))
+                {
+                    if (txt_PostCode.getText().length() < 8)
+                    {
+                        AddData();
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null, "Please enter a valid Post Code!", "Error", JOptionPane.WARNING_MESSAGE);
+                    }
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Please enter a valid Email!", "Error", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Please only input valid characters!", "Error", JOptionPane.WARNING_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_btnSaveMouseClicked
+
+    public void AddData()
+    {
+        try 
+        {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/helpline?allowMultiQueries=true","user","user");
+            Statement stmt = (Statement)con.createStatement();
+            
+            String sql = "INSERT INTO `staff information form` (`StaffID`, `FirstName`, `LastName`, `Address`, `PostCode`, `Email`, `DateOfBirth`) VALUES ('"+txt_StaffID.getText()+"', '"+txt_FName.getText()+"', '"+txt_Surname.getText()+"', '"+txt_Address.getText()+"', '"+txt_PostCode.getText()+"', '"+txt_Email.getText()+"', '"+txt_DoB.getText()+"')";
+            stmt.execute(sql);
+            con.close();            
+        } 
+        catch (Exception ex) 
+        {
+            Logger.getLogger(HelpLine.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDeleteMouseClicked
+
+    private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
+        final JFileChooser fc = new JFileChooser();
+        FileFilter imageFilter = new FileNameExtensionFilter("Image files", ImageIO.getReaderFileSuffixes());
+        fc.addChoosableFileFilter(imageFilter);
+        fc.setAcceptAllFileFilterUsed(false);
+        int returnVal = fc.showDialog(Staff_Information.this, "Open");      
+        
+        try 
+        {
+            Image img = ImageIO.read(fc.getSelectedFile());
+            Image resizedImg = img.getScaledInstance(180, 180, 0);
+            lblPicture.setText("");
+            lblPicture.setIcon(new ImageIcon(resizedImg));
+        } 
+        catch (IOException ex) 
+        {
+            Logger.getLogger(Staff_Information.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jPanel2MouseClicked
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -319,7 +475,6 @@ public class Staff_Information extends javax.swing.JFrame {
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btn_QuitInfo;
-    private javax.swing.JButton btn_submit;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -330,6 +485,7 @@ public class Staff_Information extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_FName;
     private javax.swing.JLabel lbl_Info;
     private javax.swing.JLabel lbl_PostCode;
+    private javax.swing.JLabel lbl_StaffID;
     private javax.swing.JLabel lbl_Surname;
     private javax.swing.JTable tblDatabase;
     private javax.swing.JToggleButton tgbtn_Edit;
@@ -338,6 +494,7 @@ public class Staff_Information extends javax.swing.JFrame {
     private javax.swing.JTextField txt_Email;
     private javax.swing.JTextField txt_FName;
     private javax.swing.JTextField txt_PostCode;
+    private javax.swing.JTextField txt_StaffID;
     private javax.swing.JTextField txt_Surname;
     // End of variables declaration//GEN-END:variables
 }

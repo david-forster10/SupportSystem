@@ -1,10 +1,6 @@
 package helpline;
 
-<<<<<<< HEAD
-import java.awt.Graphics;
-=======
 import java.awt.Graphics2D;
->>>>>>> master
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.sql.Connection;
@@ -15,6 +11,7 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
@@ -25,11 +22,7 @@ public class Staff_Information extends javax.swing.JFrame {
 
     private static final int IMG_WIDTH = 180;
     private static final int IMG_HEIGHT = 180;
-<<<<<<< HEAD
-    private BufferedImage image;
-=======
     private static String SelectedImg = "";
->>>>>>> master
     
     public Staff_Information() {
         initComponents();
@@ -58,12 +51,8 @@ public class Staff_Information extends javax.swing.JFrame {
         lbl_DoB = new javax.swing.JLabel();
         lbl_PostCode = new javax.swing.JLabel();
         btnSave = new javax.swing.JButton();
-<<<<<<< HEAD
-        pnlPicture = new javax.swing.JPanel();
-=======
         jPanel2 = new javax.swing.JPanel();
         lblPlace = new javax.swing.JLabel();
->>>>>>> master
         lblPicture = new javax.swing.JLabel();
         tgbtn_Edit = new javax.swing.JToggleButton();
         lbl_StaffID = new javax.swing.JLabel();
@@ -147,37 +136,30 @@ public class Staff_Information extends javax.swing.JFrame {
             }
         });
 
-        pnlPicture.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        pnlPicture.setPreferredSize(new java.awt.Dimension(170, 170));
-        pnlPicture.addMouseListener(new java.awt.event.MouseAdapter() {
+        jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel2.setPreferredSize(new java.awt.Dimension(170, 170));
+        jPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pnlPictureMouseClicked(evt);
+                jPanel2MouseClicked(evt);
             }
         });
 
         lblPlace.setText("Click to add picture");
 
-        javax.swing.GroupLayout pnlPictureLayout = new javax.swing.GroupLayout(pnlPicture);
-        pnlPicture.setLayout(pnlPictureLayout);
-        pnlPictureLayout.setHorizontalGroup(
-            pnlPictureLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPictureLayout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(48, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblPicture)
                     .addComponent(lblPlace))
                 .addGap(41, 41, 41))
         );
-<<<<<<< HEAD
-        pnlPictureLayout.setVerticalGroup(
-            pnlPictureLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlPictureLayout.createSequentialGroup()
-                .addGap(82, 82, 82)
-=======
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
->>>>>>> master
                 .addComponent(lblPicture)
                 .addGap(68, 68, 68)
                 .addComponent(lblPlace)
@@ -222,7 +204,7 @@ public class Staff_Information extends javax.swing.JFrame {
                                 .addComponent(btnSave)))
                         .addGap(13, 13, 13))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(pnlPicture, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(17, 17, 17)
@@ -297,7 +279,7 @@ public class Staff_Information extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap(16, Short.MAX_VALUE)
-                        .addComponent(pnlPicture, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_QuitInfo)
@@ -433,11 +415,7 @@ public class Staff_Information extends javax.swing.JFrame {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/helpline?allowMultiQueries=true","user","user");
             Statement stmt = (Statement)con.createStatement();
             
-<<<<<<< HEAD
-            String sql = "INSERT INTO `staff information form` (`StaffID`, `FirstName`, `LastName`, `Address`, `PostCode`, `Email`, `DateOfBirth`) VALUES ('"+Integer.parseInt(txt_StaffID.getText())+"', '"+txt_FName.getText()+"', '"+txt_Surname.getText()+"', '"+txt_Address.getText()+"', '"+txt_PostCode.getText()+"', '"+txt_Email.getText()+"', '"+txt_DoB.getText()+"')";
-=======
             String sql = "INSERT INTO `staff information form` (`StaffID`, `FirstName`, `LastName`, `Address`, `PostCode`, `Email`, `DateOfBirth`, `PictureURL`) VALUES ('"+Integer.parseInt(txt_StaffID.getText())+"', '"+txt_FName.getText()+"', '"+txt_Surname.getText()+"', '"+txt_Address.getText()+"', '"+txt_PostCode.getText()+"', '"+txt_Email.getText()+"', '"+txt_DoB.getText()+"', '"+SelectedImg+"')";
->>>>>>> master
             stmt.execute(sql);
             con.close();            
         } 
@@ -450,20 +428,15 @@ public class Staff_Information extends javax.swing.JFrame {
     private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked
     }//GEN-LAST:event_btnDeleteMouseClicked
 
-    private void pnlPictureMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlPictureMouseClicked
+    private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
         final JFileChooser fc = new JFileChooser();
         FileFilter imageFilter = new FileNameExtensionFilter("Image files", ImageIO.getReaderFileSuffixes());
         fc.addChoosableFileFilter(imageFilter);
         fc.setAcceptAllFileFilterUsed(false);
         int returnVal = fc.showDialog(Staff_Information.this, "Open");      
-               
+        
         try 
         {
-<<<<<<< HEAD
-            image = ImageIO.read(fc.getSelectedFile());
-            int type = image.getType() == 0? BufferedImage.TYPE_INT_ARGB : image.getType();
-            pnlPicture.repaint();
-=======
             SelectedImg = fc.getSelectedFile().getPath();
             BufferedImage img = ImageIO.read(fc.getSelectedFile());
             int type = img.getType() == 0? BufferedImage.TYPE_INT_ARGB : img.getType();
@@ -471,7 +444,6 @@ public class Staff_Information extends javax.swing.JFrame {
             BufferedImage resizeImageJpg = resizeImage(img, type);
             lblPlace.setText("");
             lblPicture.setIcon(new ImageIcon(resizeImageJpg));
->>>>>>> master
         } 
         catch (IOException ex) 
         {
@@ -480,7 +452,7 @@ public class Staff_Information extends javax.swing.JFrame {
             lblPlace.setText("Click to add picture");
             Logger.getLogger(Staff_Information.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_pnlPictureMouseClicked
+    }//GEN-LAST:event_jPanel2MouseClicked
 
     private static BufferedImage resizeImage(BufferedImage originalImage, int type){
 	BufferedImage resizedImage = new BufferedImage(IMG_WIDTH, IMG_HEIGHT, type);
@@ -490,15 +462,6 @@ public class Staff_Information extends javax.swing.JFrame {
 
 	return resizedImage;
     }
-<<<<<<< HEAD
-
-    @Override
-    protected void paintComponents(Graphics g) {
-        super.paintComponent(g);
-        g.drawImage(image, 0, 0, this);
-    }
-=======
->>>>>>> master
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -538,6 +501,7 @@ public class Staff_Information extends javax.swing.JFrame {
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btn_QuitInfo;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblPicture;
     private javax.swing.JLabel lblPlace;
@@ -549,7 +513,6 @@ public class Staff_Information extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_PostCode;
     private javax.swing.JLabel lbl_StaffID;
     private javax.swing.JLabel lbl_Surname;
-    private javax.swing.JPanel pnlPicture;
     private javax.swing.JTable tblDatabase;
     private javax.swing.JToggleButton tgbtn_Edit;
     private javax.swing.JTextField txt_Address;

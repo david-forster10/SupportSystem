@@ -268,7 +268,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lbl_DoB">
           <Properties>
-            <Property name="text" type="java.lang.String" value="DOB (YYYY/MM/DD)"/>
+            <Property name="text" type="java.lang.String" value="DOB (YYYY-MM-DD)"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lbl_PostCode">

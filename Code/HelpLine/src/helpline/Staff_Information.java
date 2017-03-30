@@ -23,6 +23,7 @@ public class Staff_Information extends javax.swing.JFrame {
     private static final int IMG_WIDTH = 180;
     private static final int IMG_HEIGHT = 180;
     private static String SelectedImg = "";
+    private static int Size = 0;
     
     public Staff_Information() {
         initComponents();
@@ -125,7 +126,7 @@ public class Staff_Information extends javax.swing.JFrame {
             }
         });
 
-        lbl_DoB.setText("DOB (YYYY/MM/DD)");
+        lbl_DoB.setText("DOB (YYYY-MM-DD)");
 
         lbl_PostCode.setText("Post Code");
 
@@ -307,7 +308,6 @@ public class Staff_Information extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txt_FNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_FNameActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_txt_FNameActionPerformed
 
     private void btn_QuitInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_QuitInfoActionPerformed
@@ -318,8 +318,8 @@ public class Staff_Information extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         txt_StaffID.setEnabled(false);
-        int StaffIDGen = Navigation.StaffTbl.get(0).size();
-        String StaffIDLast = Navigation.StaffTbl.get(0).get(StaffIDGen - 1);
+        Size = Navigation.StaffTbl.get(0).size();
+        String StaffIDLast = Navigation.StaffTbl.get(0).get(Size - 1);
         int NewID = Integer.parseInt(StaffIDLast) + 1;
         txt_StaffID.setText(Integer.toString(NewID));
         DefaultTableModel tableModel = (DefaultTableModel) tblDatabase.getModel();
@@ -358,14 +358,13 @@ public class Staff_Information extends javax.swing.JFrame {
     }//GEN-LAST:event_tgbtn_EditMouseClicked
 
     private void txt_StaffIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_StaffIDActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_txt_StaffIDActionPerformed
 
     private void btnSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveMouseClicked
         Pattern pat = Pattern.compile("[^a-z ]", Pattern.CASE_INSENSITIVE);
         Pattern pat2 = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
         Pattern pat3 = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
-        Pattern pat4 = Pattern.compile("\\d{4}/\\d{2}/\\d{2}", Pattern.CASE_INSENSITIVE);
+        Pattern pat4 = Pattern.compile("\\d{4}-\\d{2}-\\d{2}", Pattern.CASE_INSENSITIVE);
         Matcher match1 = pat.matcher(txt_FName.getText());
         Matcher match2 = pat.matcher(txt_Surname.getText());
         Matcher match3 = pat2.matcher(txt_Email.getText());
@@ -379,7 +378,7 @@ public class Staff_Information extends javax.swing.JFrame {
         }
         else
         {
-            if (SelectedImg.equals(""))
+            if (!SelectedImg.equals(""))
             {
                 if (match1.find() || match2.find() || match3.find() || match4.find() || match5.find() || match6.find())
                 {
@@ -404,6 +403,10 @@ public class Staff_Information extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Please only input valid characters!", "Error", JOptionPane.WARNING_MESSAGE);
                 }
             }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Please select a picture for the member of staff!", "Error", JOptionPane.WARNING_MESSAGE);
+            }
         }
     }//GEN-LAST:event_btnSaveMouseClicked
 
@@ -423,6 +426,15 @@ public class Staff_Information extends javax.swing.JFrame {
         {
             Logger.getLogger(HelpLine.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        Navigation.StaffTbl.get(0).add(txt_StaffID.getText());
+        Navigation.StaffTbl.get(1).add(txt_FName.getText());
+        Navigation.StaffTbl.get(2).add(txt_Surname.getText());
+        Navigation.StaffTbl.get(3).add(txt_Address.getText());
+        Navigation.StaffTbl.get(4).add(txt_PostCode.getText());
+        Navigation.StaffTbl.get(5).add(txt_Email.getText());
+        Navigation.StaffTbl.get(6).add(txt_DoB.getText());
+        Navigation.StaffTbl.get(7).add(SelectedImg);
     }
     
     private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked
@@ -438,6 +450,7 @@ public class Staff_Information extends javax.swing.JFrame {
         try 
         {
             SelectedImg = fc.getSelectedFile().getPath();
+            ExtensionFormat();
             BufferedImage img = ImageIO.read(fc.getSelectedFile());
             int type = img.getType() == 0? BufferedImage.TYPE_INT_ARGB : img.getType();
 
@@ -454,6 +467,10 @@ public class Staff_Information extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jPanel2MouseClicked
 
+    private static void ExtensionFormat() {
+        SelectedImg = SelectedImg.replaceAll("\\\\", "\\\\\\\\");
+    }
+    
     private static BufferedImage resizeImage(BufferedImage originalImage, int type){
 	BufferedImage resizedImage = new BufferedImage(IMG_WIDTH, IMG_HEIGHT, type);
 	Graphics2D g = resizedImage.createGraphics();

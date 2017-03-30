@@ -1,6 +1,8 @@
 package helpline;
 
 import static helpline.HelpLine.User;
+import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -14,10 +16,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.accessibility.AccessibleContext;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -55,7 +59,7 @@ public class Staff_Information extends javax.swing.JFrame {
         lbl_DoB = new javax.swing.JLabel();
         lbl_PostCode = new javax.swing.JLabel();
         btnSave = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
+        pnlPicture = new javax.swing.JPanel();
         lblPicture = new javax.swing.JLabel();
         tgbtn_Edit = new javax.swing.JToggleButton();
         lbl_StaffID = new javax.swing.JLabel();
@@ -139,28 +143,28 @@ public class Staff_Information extends javax.swing.JFrame {
             }
         });
 
-        jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel2.setPreferredSize(new java.awt.Dimension(170, 170));
-        jPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
+        pnlPicture.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        pnlPicture.setPreferredSize(new java.awt.Dimension(170, 170));
+        pnlPicture.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel2MouseClicked(evt);
+                pnlPictureMouseClicked(evt);
             }
         });
 
         lblPicture.setText("Click to add picture");
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlPictureLayout = new javax.swing.GroupLayout(pnlPicture);
+        pnlPicture.setLayout(pnlPictureLayout);
+        pnlPictureLayout.setHorizontalGroup(
+            pnlPictureLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPictureLayout.createSequentialGroup()
                 .addContainerGap(48, Short.MAX_VALUE)
                 .addComponent(lblPicture)
                 .addGap(41, 41, 41))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        pnlPictureLayout.setVerticalGroup(
+            pnlPictureLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlPictureLayout.createSequentialGroup()
                 .addGap(82, 82, 82)
                 .addComponent(lblPicture)
                 .addContainerGap(84, Short.MAX_VALUE))
@@ -204,7 +208,7 @@ public class Staff_Information extends javax.swing.JFrame {
                                 .addComponent(btnSave)))
                         .addGap(13, 13, 13))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(pnlPicture, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(17, 17, 17)
@@ -279,7 +283,7 @@ public class Staff_Information extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap(16, Short.MAX_VALUE)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(pnlPicture, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_QuitInfo)
@@ -424,27 +428,37 @@ public class Staff_Information extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnDeleteMouseClicked
 
-    private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
+    private void pnlPictureMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlPictureMouseClicked
         final JFileChooser fc = new JFileChooser();
         FileFilter imageFilter = new FileNameExtensionFilter("Image files", ImageIO.getReaderFileSuffixes());
         fc.addChoosableFileFilter(imageFilter);
         fc.setAcceptAllFileFilterUsed(false);
         int returnVal = fc.showDialog(Staff_Information.this, "Open");      
-        
+               
         try 
         {
             BufferedImage img = ImageIO.read(fc.getSelectedFile());
             int type = img.getType() == 0? BufferedImage.TYPE_INT_ARGB : img.getType();
 
+            
+            Image img = new ImageIcon(ImageIO.read(fc.getSelectedFile())).getImage();
+        Dimension size = new Dimension(img.getWidth(null), img.getHeight(null));
+        setPreferredSize(size);
+        setMinimumSize(size);
+        setMaximumSize(size);
+        setSize(size);
+        setLayout(null);
+        g.drawImage(img, 0, 0, null);
             BufferedImage resizeImageJpg = resizeImage(img, type);
             lblPicture.setText("");
-            lblPicture.setIcon(new ImageIcon(resizeImageJpg));
+                     
+            pnlPicture.update(resizeImageJpg);
         } 
         catch (IOException ex) 
         {
             Logger.getLogger(Staff_Information.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jPanel2MouseClicked
+    }//GEN-LAST:event_pnlPictureMouseClicked
 
     private static BufferedImage resizeImage(BufferedImage originalImage, int type){
 	BufferedImage resizedImage = new BufferedImage(IMG_WIDTH, IMG_HEIGHT, type);
@@ -494,7 +508,6 @@ public class Staff_Information extends javax.swing.JFrame {
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btn_QuitInfo;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblPicture;
     private javax.swing.JLabel lbl_Address;
@@ -505,6 +518,7 @@ public class Staff_Information extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_PostCode;
     private javax.swing.JLabel lbl_StaffID;
     private javax.swing.JLabel lbl_Surname;
+    private javax.swing.JPanel pnlPicture;
     private javax.swing.JTable tblDatabase;
     private javax.swing.JToggleButton tgbtn_Edit;
     private javax.swing.JTextField txt_Address;

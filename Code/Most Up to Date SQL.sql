@@ -35,10 +35,10 @@ CREATE TABLE IF NOT EXISTS `customer reporting form` (
   `Date resolved` varchar(50) NOT NULL,
   `Estimated cost of repair` decimal(10,0) NOT NULL,
   PRIMARY KEY (`CustomerReportingFormID`),
-  UNIQUE KEY `Staff receiving equipment` (`Staff receiving equipment`),
   KEY `Staff assigned to fix equipment` (`Staff assigned to fix equipment`),
-  CONSTRAINT `customer reporting form_ibfk_1` FOREIGN KEY (`Staff receiving equipment`) REFERENCES `staff information form` (`StaffID`),
-  CONSTRAINT `customer reporting form_ibfk_2` FOREIGN KEY (`Staff assigned to fix equipment`) REFERENCES `staff information form` (`StaffID`)
+  KEY `Staff receiving equipment` (`Staff receiving equipment`),
+  CONSTRAINT `customer reporting form_ibfk_1` FOREIGN KEY (`Staff receiving equipment`) REFERENCES `staff information form` (`StaffID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `customer reporting form_ibfk_2` FOREIGN KEY (`Staff assigned to fix equipment`) REFERENCES `staff information form` (`StaffID`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Dumping data for table helpline.customer reporting form: ~10 rows (approximately)
@@ -133,7 +133,7 @@ CREATE TABLE IF NOT EXISTS `staff information form` (
   PRIMARY KEY (`StaffID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table helpline.staff information form: ~5 rows (approximately)
+-- Dumping data for table helpline.staff information form: ~10 rows (approximately)
 DELETE FROM `staff information form`;
 /*!40000 ALTER TABLE `staff information form` DISABLE KEYS */;
 INSERT INTO `staff information form` (`StaffID`, `FirstName`, `LastName`, `Address`, `PostCode`, `Email`, `DateOfBirth`, `PictureURL`) VALUES

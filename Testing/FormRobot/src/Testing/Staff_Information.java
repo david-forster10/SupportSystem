@@ -161,11 +161,12 @@ public class Staff_Information
 				type(character);
 			}
 			robot.delay(1000);
-			robot.mouseMove(1143, 651);
+			robot.mouseMove(1143, 440);
 			robot.delay(500);
 			robot.mousePress(BUTTON1_DOWN_MASK);
 			robot.delay(500);
 			robot.mouseRelease(BUTTON2_DOWN_MASK);
+			//select the record and delete it, go back and quit needs to go here
 		    }
 		
 	 public void type(char character) 

@@ -8,6 +8,7 @@ import java.io.IOException;
 import org.omg.SendingContext.RunTime;
 
 import static java.awt.event.InputEvent.BUTTON1_DOWN_MASK;
+import static java.awt.event.InputEvent.BUTTON2_DOWN_MASK;
 import static java.awt.event.KeyEvent.*;
 
 public class All_Programs 
@@ -34,8 +35,40 @@ public class All_Programs
 			successful = false;
 		}
 		robot.delay(1000);
+		//Login Page
 		keyboard.typo("2");
 		keyboard.type1("Michelle19700414");
+		//Products Page
+		keyboard.FormID("1");
+		//keyboard.StaffID("3");
+		keyboard.CustRepID("1");
+		//keyboard.ProdName("Graphics Card");
+		keyboard.type6("2017-03-21");
+		keyboard.type7("MSI");
+		keyboard.type8("Ports on Hard not working");
+		keyboard.type9("11");
+		keyboard.type10("2017-03-22");
+		keyboard.type11("77");
+		keyboard.type12("------");
+		//Customer Reports Page
+		keyboard.type13("Michelle");
+		keyboard.type14("Cracked Monitor");
+		keyboard.type15("Hoggard");
+		keyboard.type16("34 Constitution St");
+		keyboard.type17("Mary Porter");
+		keyboard.type18("L17 8PJ");
+		keyboard.type19("Thomas Davis");
+		keyboard.type20("07744738885");
+		keyboard.type21("");
+		keyboard.type22("2017-03-07");
+		keyboard.type23("30");
+		keyboard.type24("Monitor");
+		//Staff Information Page
+		keyboard.type25("Richard");
+		keyboard.type26("19 Green Street");
+		keyboard.type27("Parker");
+		keyboard.type28("E45 6RD");
+		keyboard.type29("Richyboy19@hotmail.co.uk");
 		return successful;
 		
 	}
@@ -44,6 +77,7 @@ public class All_Programs
 		this.robot = new Robot();
 	}
 	
+	//Login Page Start
 	public void typo(CharSequence characters)
 	{
 		int length = characters.length();
@@ -55,7 +89,7 @@ public class All_Programs
 		robot.keyPress(KeyEvent.VK_TAB);
 		robot.keyRelease(KeyEvent.VK_TAB);
 	    }
-	
+	//figure out the keyboards...
 		public void type1(CharSequence characters)
 		{
 			int length = characters.length();
@@ -73,19 +107,424 @@ public class All_Programs
 		robot.keyPress(KeyEvent.VK_ENTER);
 		robot.keyRelease(KeyEvent.VK_ENTER);
 		
-		//Navigation
+		//Product Page Starts
+		robot.delay(1000);
+		robot.mouseMove(819, 420);
+		robot.delay(500);
+		robot.mousePress(BUTTON1_DOWN_MASK);
+		robot.delay(1000);
+		robot.mouseRelease(BUTTON1_DOWN_MASK);
+		}
+        
+		public void FormID(CharSequence characters)
+		{
+			int length = characters.length();
+			for (int i =0; i < length; i++)
+			{
+				char character = characters.charAt(i);
+				type(character);
+			}
+			robot.delay(500);
+			robot.keyPress(KeyEvent.VK_TAB);
+			robot.keyRelease(KeyEvent.VK_TAB);
+		    }
+	
+		public void CustRepID(CharSequence characters)
+		{
+			int length = characters.length();
+			for (int i =0; i < length; i++)
+			{
+				char character = characters.charAt(i);
+				type(character);
+			}
+			robot.delay(300);
+			robot.keyPress(KeyEvent.VK_TAB);
+			robot.keyRelease(KeyEvent.VK_TAB);
+		    }
+		
+		public void type4(CharSequence characters)
+		{
+			int length = characters.length();
+			for (int i =0; i < length; i++)
+			{
+				char character = characters.charAt(i);
+				type(character);
+			}
+			robot.delay(300);
+			robot.keyPress(KeyEvent.VK_TAB);
+			robot.keyRelease(KeyEvent.VK_TAB);
+		    }
+		
+		public void type5(CharSequence characters)
+		{
+			int length = characters.length();
+			for (int i =0; i < length; i++)
+			{
+				char character = characters.charAt(i);
+				type(character);
+			}
+			robot.delay(300);
+			robot.keyPress(KeyEvent.VK_TAB);
+			robot.keyRelease(KeyEvent.VK_TAB);
+		    }
+		
+		public void type6(CharSequence characters)
+		{
+			int length = characters.length();
+			for (int i =0; i < length; i++)
+			{
+				char character = characters.charAt(i);
+				type(character);
+			}
+			robot.delay(300);
+			robot.keyPress(KeyEvent.VK_TAB);
+			robot.keyRelease(KeyEvent.VK_TAB);
+		    }
+		
+		public void type7(CharSequence characters)
+		{
+			int length = characters.length();
+			for (int i =0; i < length; i++)
+			{
+				char character = characters.charAt(i);
+				type(character);
+			}
+			robot.delay(300);
+			robot.keyPress(KeyEvent.VK_TAB);
+			robot.keyRelease(KeyEvent.VK_TAB);
+		    }
+		
+		public void type8(CharSequence characters)
+		{
+			int length = characters.length();
+			for (int i =0; i < length; i++)
+			{
+				char character = characters.charAt(i);
+				type(character);
+			}
+			robot.delay(300);
+			robot.keyPress(KeyEvent.VK_TAB);
+			robot.keyRelease(KeyEvent.VK_TAB);
+		    }
+		
+		public void type9(CharSequence characters)
+		{
+			int length = characters.length();
+			for (int i =0; i < length; i++)
+			{
+				char character = characters.charAt(i);
+				type(character);
+			}
+			robot.delay(300);
+			robot.keyPress(KeyEvent.VK_TAB);
+			robot.keyRelease(KeyEvent.VK_TAB);
+		    }
+		
+		public void type10(CharSequence characters)
+		{
+			int length = characters.length();
+			for (int i =0; i < length; i++)
+			{
+				char character = characters.charAt(i);
+				type(character);
+			}
+			robot.delay(300);
+			robot.keyPress(KeyEvent.VK_TAB);
+			robot.keyRelease(KeyEvent.VK_TAB);
+		    }
+		public void type11(CharSequence characters)
+		{
+			int length = characters.length();
+			for (int i =0; i < length; i++)
+			{
+				char character = characters.charAt(i);
+				type(character);
+			}
+			robot.delay(300);
+			robot.keyPress(KeyEvent.VK_TAB);
+			robot.keyRelease(KeyEvent.VK_TAB);
+		    }
+		
+		public void type12(CharSequence characters)
+		{
+			int length = characters.length();
+			for (int i =0; i < length; i++)
+			{
+				char character = characters.charAt(i);
+				type(character);
+			}
+			robot.delay(300);
+			robot.keyPress(KeyEvent.VK_TAB);
+			robot.keyRelease(KeyEvent.VK_TAB);
+			robot.delay(1000);
+			robot.mouseMove(1041, 550);
+			robot.delay(1000);
+			robot.mousePress(BUTTON1_DOWN_MASK);
+			robot.delay(1000);
+			robot.mouseRelease(BUTTON1_DOWN_MASK);
+			robot.delay(2000);
+			robot.mouseMove(596, 550);
+			robot.delay(1000);
+			robot.mousePress(BUTTON1_DOWN_MASK);
+			robot.delay(1000);
+			robot.mouseRelease(BUTTON1_DOWN_MASK);
+			robot.delay(1000);
+			robot.delay(1000);
+			robot.mouseMove(770, 445);
+			robot.delay(500);
+			robot.mousePress(BUTTON1_DOWN_MASK);
+			robot.delay(1000);
+			robot.mouseRelease(BUTTON1_DOWN_MASK);
+		}
+		//Products Page Ends
+	    
+	   //Customer Report Starts
+		public void type13(CharSequence characters)
+		{
+			int length = characters.length();
+		for (int i =0; i < length; i++)
+		{
+			char character = characters.charAt(i);
+			type(character);
+		}
+		robot.delay(1000);
+		robot.keyPress(KeyEvent.VK_TAB);
+		robot.keyRelease(KeyEvent.VK_TAB);
+		robot.delay(1000);
+		}
+		
+		public void type14(CharSequence characters)
+		{
+			int length = characters.length();
+		for (int i =0; i < length; i++)
+		{
+			char character = characters.charAt(i);
+			type(character);
+		}
+		robot.delay(1000);
+		robot.keyPress(KeyEvent.VK_TAB);
+		robot.keyRelease(KeyEvent.VK_TAB);
+		robot.delay(1000);
+		}
+		
+		public void type15(CharSequence characters)
+		{
+			int length = characters.length();
+		for (int i =0; i < length; i++)
+		{
+			char character = characters.charAt(i);
+			type(character);
+		}
+		robot.delay(1000);
+		robot.mouseMove(996, 375);
+		robot.delay(1000);
+		robot.mousePress(BUTTON1_DOWN_MASK);
+		robot.delay(800);
+		robot.mouseMove(996, 415);
+		robot.delay(1000);
+		robot.mouseRelease(BUTTON1_DOWN_MASK);
+		robot.keyPress(KeyEvent.VK_TAB);
+		robot.keyRelease(KeyEvent.VK_TAB);
+		}
+		
+		public void type16(CharSequence characters)
+		{
+			int length = characters.length();
+		for (int i =0; i < length; i++)
+		{
+			char character = characters.charAt(i);
+			type(character);
+		}
+		robot.keyPress(KeyEvent.VK_TAB);
+		robot.keyRelease(KeyEvent.VK_TAB);
+		}
+		
+		public void type17(CharSequence characters)
+		{
+			int length = characters.length();
+		for (int i =0; i < length; i++)
+		{
+			char character = characters.charAt(i);
+			type(character);
+		}
+		robot.keyPress(KeyEvent.VK_TAB);
+		robot.keyRelease(KeyEvent.VK_TAB);
+		}
+	
+		public void type18(CharSequence characters)
+		{
+			int length = characters.length();
+		for (int i =0; i < length; i++)
+		{
+			char character = characters.charAt(i);
+			type(character);
+		}
+		robot.keyPress(KeyEvent.VK_TAB);
+		robot.keyRelease(KeyEvent.VK_TAB);
+		}
+		
+		public void type19(CharSequence characters)
+		{
+			int length = characters.length();
+		for (int i =0; i < length; i++)
+		{
+			char character = characters.charAt(i);
+			type(character);
+		}
+		robot.keyPress(KeyEvent.VK_TAB);
+		robot.keyRelease(KeyEvent.VK_TAB);
+		}
+		
+		public void type20(CharSequence characters)
+		{
+			int length = characters.length();
+		for (int i =0; i < length; i++)
+		{
+			char character = characters.charAt(i);
+			type(character);
+		}
+		robot.keyPress(KeyEvent.VK_TAB);
+		robot.keyRelease(KeyEvent.VK_TAB);
+		}
+		
+		public void type21(CharSequence characters)
+		{
+			int length = characters.length();
+		for (int i =0; i < length; i++)
+		{
+			char character = characters.charAt(i);
+			type(character);
+		}
+		robot.keyPress(KeyEvent.VK_TAB);
+		robot.keyRelease(KeyEvent.VK_TAB);
+		}
+		
+		public void type22(CharSequence characters)
+		{
+			int length = characters.length();
+		for (int i =0; i < length; i++)
+		{
+			char character = characters.charAt(i);
+			type(character);
+		}
+		robot.keyPress(KeyEvent.VK_TAB);
+		robot.keyRelease(KeyEvent.VK_TAB);
+		}
+		
+		public void type23(CharSequence characters)
+		{
+			int length = characters.length();
+		for (int i =0; i < length; i++)
+		{
+			char character = characters.charAt(i);
+			type(character);
+		}
+		robot.keyPress(KeyEvent.VK_TAB);
+		robot.keyRelease(KeyEvent.VK_TAB);
+		robot.delay(1000);
+		robot.mouseMove(990, 620);
+		robot.delay(1000);
+		robot.mousePress(BUTTON1_DOWN_MASK);
+		robot.delay(1000);
+		robot.mouseRelease(BUTTON1_DOWN_MASK);
+		robot.delay(2000);
+		robot.mouseMove(589, 620);
+		robot.delay(1000);
+		robot.mousePress(BUTTON1_DOWN_MASK);
+		robot.delay(1000);
+		robot.mouseRelease(BUTTON1_DOWN_MASK);
+		robot.delay(1000);
 		robot.delay(1000);
 		robot.mouseMove(800, 490);
 		robot.delay(500);
 		robot.mousePress(BUTTON1_DOWN_MASK);
 		robot.delay(1000);
 		robot.mouseRelease(BUTTON1_DOWN_MASK);
-		        
-        //Staff_Information
-		robot.delay(1000);
-		
 		}
+		//Customer Report Ends
+		
+		//Staff Info Starts
+		public void type24(CharSequence characters)
+		{
+			int length = characters.length();
+			for (int i =0; i < length; i++)
+			{
+				char character = characters.charAt(i);
+				type(character);
+			}
+			robot.delay(300);
+			robot.keyPress(KeyEvent.VK_TAB);
+			robot.keyRelease(KeyEvent.VK_TAB);
+		    }
+		
+		public void type25(CharSequence characters)
+		{
+			int length = characters.length();
+			for (int i =0; i < length; i++)
+			{
+				char character = characters.charAt(i);
+				type(character);
+			}
+			robot.delay(300);
+			robot.keyPress(KeyEvent.VK_TAB);
+			robot.keyRelease(KeyEvent.VK_TAB);
+		    }
+		
+		public void type26(CharSequence characters)
+		{
+			int length = characters.length();
+			for (int i =0; i < length; i++)
+			{
+				char character = characters.charAt(i);
+				type(character);
+			}
+			robot.delay(300);
+			robot.keyPress(KeyEvent.VK_TAB);
+			robot.keyRelease(KeyEvent.VK_TAB);
+		    }
+		
+		public void type27(CharSequence characters)
+		{
+			int length = characters.length();
+			for (int i =0; i < length; i++)
+			{
+				char character = characters.charAt(i);
+				type(character);
+			}
+			robot.delay(300);
+			robot.keyPress(KeyEvent.VK_TAB);
+			robot.keyRelease(KeyEvent.VK_TAB);
+		    }
 	
+		public void type28(CharSequence characters)
+		{
+			int length = characters.length();
+			for (int i =0; i < length; i++)
+			{
+				char character = characters.charAt(i);
+				type(character);
+			}
+			robot.delay(300);
+			robot.keyPress(KeyEvent.VK_TAB);
+			robot.keyRelease(KeyEvent.VK_TAB);
+		    }
+		
+		public void type29(CharSequence characters)
+		{
+			int length = characters.length();
+			for (int i =0; i < length; i++)
+			{
+				char character = characters.charAt(i);
+				type(character);
+			}
+			robot.delay(1000);
+			robot.mouseMove(1143, 440);
+			robot.delay(500);
+			robot.mousePress(BUTTON1_DOWN_MASK);
+			robot.delay(500);
+			robot.mouseRelease(BUTTON2_DOWN_MASK);
+		}
+		//staff Info Ends
 	 public void type(char character) 
      {
      switch (character) {

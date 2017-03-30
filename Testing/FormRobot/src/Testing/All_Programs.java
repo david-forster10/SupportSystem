@@ -40,65 +40,36 @@ public class All_Programs
 		keyboard.Password("Michelle19700414");
 		
 		//Products Page
-		keyboard.FormID("1");
-		//*
-		keyboard.StaffID("3");
-		//*
-		keyboard.CustRepID("1");
-		//*
 		keyboard.ProdName("Graphics Card");
-		//*
 		keyboard.DateIn("2017-03-21");
-		//*
 		keyboard.Manufacturer("MSI");
-		//*
 		keyboard.Problem("Ports on Hard not working");
-		//*
 		keyboard.ModelNumber("11");
-		//*
 		keyboard.FixDate("2017-03-22");
-		//*
 		keyboard.serialNumber("77");
-		//*
 		keyboard.Finished("------");
 		
 		//Customer Reports Page
 		keyboard.FirstName("Michelle");
-		//*
 		keyboard.Problem("Cracked Monitor");
-		//*
 		keyboard.Surname("Hoggard");
-		//*
 		keyboard.Address("34 Constitution St");
-		//*
 		keyboard.StaffRec("Mary Porter");
-		//*
 		keyboard.Postcode("L17 8PJ");
-		//*
 		keyboard.StaffFix("Thomas Davis");
-		//*
 		keyboard.Telephone("07744738885");
-		//*
 		keyboard.DateRes("2017-03-07");
-		//*
 		keyboard.DateRep("2017-03-07");
-		//*
 		keyboard.EstCost("30");
-		//*
 		keyboard.EquipType("Monitor");
 		
 		//Staff Information Page
-		keyboard.StaffF_Name("Richard");
-		//*
 		keyboard.Staff_Address("19 Green Street");
-		//*
-		keyboard.Staff_Surname("Parker");
-		//*
+		keyboard.StaffF_Name("Richard");
 		keyboard.Staff_Postcode("E45 6RD");
-		//*
-		keyboard.Email("Richyboy19@hotmail.co.uk");
-		//*
+		keyboard.Staff_Surname("Parker");
 		keyboard.Staff_Dob("1998/12/12");
+		keyboard.Email("Richyboy19@hotmail.co.uk");
 		return successful;
 		
 	}
@@ -121,6 +92,7 @@ public class All_Programs
 	    }
 	//figure out the keyboards...
 		public void Password(CharSequence characters)
+
 		{
 			int length = characters.length();
 		for (int i =0; i < length; i++)
@@ -146,46 +118,15 @@ public class All_Programs
 		robot.mousePress(BUTTON1_DOWN_MASK);
 		robot.delay(1000);
 		robot.mouseRelease(BUTTON1_DOWN_MASK);
+		
+		//Select Text Box
+		robot.delay(1200);
+		robot.mouseMove(725, 410);
+		robot.mousePress(BUTTON1_DOWN_MASK);
+		robot.delay(500);
+		robot.mouseRelease(BUTTON1_DOWN_MASK);
 		}
-		
-		public void FormID(CharSequence characters)
-		{
-			int length = characters.length();
-			for (int i =0; i < length; i++)
-			{
-				char character = characters.charAt(i);
-				type(character);
-			}
-			robot.keyPress(KeyEvent.VK_TAB);
-			robot.keyRelease(KeyEvent.VK_TAB);
-		    }
-		
-		public void StaffID(CharSequence characters)
-		{
-			int length = characters.length();
-			for (int i =0; i < length; i++)
-			{
-				char character = characters.charAt(i);
-				type(character);
-			}
-			robot.delay(500);
-			robot.keyPress(KeyEvent.VK_TAB);
-			robot.keyRelease(KeyEvent.VK_TAB);
-		    }
 	
-		public void CustRepID(CharSequence characters)
-		{
-			int length = characters.length();
-			for (int i =0; i < length; i++)
-			{
-				char character = characters.charAt(i);
-				type(character);
-			}
-			robot.delay(300);
-			robot.keyPress(KeyEvent.VK_TAB);
-			robot.keyRelease(KeyEvent.VK_TAB);
-		    }
-		
 		public void ProdName(CharSequence characters)
 		{
 			int length = characters.length();
@@ -503,10 +444,30 @@ public class All_Programs
 		robot.mousePress(BUTTON1_DOWN_MASK);
 		robot.delay(1000);
 		robot.mouseRelease(BUTTON1_DOWN_MASK);
+		robot.delay(1000);
+		robot.mouseMove(1025, 280);
+		robot.delay(500);
+		robot.mousePress(BUTTON1_DOWN_MASK);
+		robot.delay(500);
+		robot.mouseRelease(BUTTON1_DOWN_MASK);
 		}
 		//Customer Report Ends
 		
 		//Staff Info Starts
+		public void Staff_Address(CharSequence characters)
+		{
+			int length = characters.length();
+			for (int i =0; i < length; i++)
+			{
+				char character = characters.charAt(i);
+				type(character);
+			}
+			robot.delay(300);
+			robot.keyPress(KeyEvent.VK_TAB);
+			robot.keyRelease(KeyEvent.VK_TAB);
+		    }
+		
+		
 		public void StaffF_Name(CharSequence characters)
 		{
 			int length = characters.length();
@@ -520,7 +481,7 @@ public class All_Programs
 			robot.keyRelease(KeyEvent.VK_TAB);
 		    }
 		
-		public void Staff_Address(CharSequence characters)
+		public void Staff_Postcode(CharSequence characters)
 		{
 			int length = characters.length();
 			for (int i =0; i < length; i++)
@@ -546,20 +507,8 @@ public class All_Programs
 			robot.keyRelease(KeyEvent.VK_TAB);
 		    }
 		
-		public void Staff_Postcode(CharSequence characters)
-		{
-			int length = characters.length();
-			for (int i =0; i < length; i++)
-			{
-				char character = characters.charAt(i);
-				type(character);
-			}
-			robot.delay(300);
-			robot.keyPress(KeyEvent.VK_TAB);
-			robot.keyRelease(KeyEvent.VK_TAB);
-		    }
 	
-		public void Email(CharSequence characters)
+		public void Staff_Dob(CharSequence characters)
 		{
 			int length = characters.length();
 			for (int i =0; i < length; i++)
@@ -572,7 +521,8 @@ public class All_Programs
 			robot.keyRelease(KeyEvent.VK_TAB);
 		    }
 		
-		public void Staff_Dob(CharSequence characters)
+		
+		public void Email(CharSequence characters)
 		{
 			int length = characters.length();
 			for (int i =0; i < length; i++)
@@ -590,6 +540,7 @@ public class All_Programs
 			robot.delay(500);
 			robot.mouseRelease(BUTTON2_DOWN_MASK);
 		}
+		
 		//staff Info Ends
 	 public void type(char character) 
      {

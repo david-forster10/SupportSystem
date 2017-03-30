@@ -33,19 +33,19 @@ public class Products
 			}
 			
 			robot.delay(1000);
-			keyboard.typo("2");
-			keyboard.type1("Michelle19700414");
-			keyboard.type2("1");
-			keyboard.type3("3");
-			keyboard.type4("1");
-			keyboard.type5("Graphics Card");
-			keyboard.type6("2017-03-21");
-			keyboard.type7("MSI");
-			keyboard.type8("Ports on Hard not working");
-			keyboard.type9("11");
-			keyboard.type10("2017-03-22");
-			keyboard.type11("77");
-			keyboard.type12("------");
+			//Login Page
+			keyboard.Username("2");
+			keyboard.Password("Michelle19700414");
+			
+			//Products Page
+			keyboard.ProdName("Graphics Card");
+			keyboard.DateIn("2017-03-21");
+			keyboard.Manufacturer("MSI");
+			keyboard.Problem("Ports on Hard not working");
+			keyboard.ModelNumber("11");
+			keyboard.FixDate("2017-03-22");
+			keyboard.serialNumber("77");
+			keyboard.Finished("------");
 			return successful;
 		}
 		public Products() throws AWTException
@@ -53,7 +53,7 @@ public class Products
 			this.robot = new Robot();
 		}
 		
-		public void typo(CharSequence characters)
+		public void Username(CharSequence characters)
 		{
 			int length = characters.length();
 			for (int i =0; i < length; i++)
@@ -66,7 +66,7 @@ public class Products
 			robot.keyRelease(KeyEvent.VK_TAB);
 		    }
 		
-			public void type1(CharSequence characters)
+			public void Password(CharSequence characters)
 			{
 				int length = characters.length();
 			for (int i =0; i < length; i++)
@@ -90,22 +90,16 @@ public class Products
 			robot.mousePress(BUTTON1_DOWN_MASK);
 			robot.delay(1000);
 			robot.mouseRelease(BUTTON1_DOWN_MASK);
+			
+			//Select
+			robot.delay(1200);
+			robot.mouseMove(725, 410);
+			robot.mousePress(BUTTON1_DOWN_MASK);
+			robot.delay(500);
+			robot.mouseRelease(BUTTON1_DOWN_MASK);
 			}
 			
-			public void type2(CharSequence characters)
-			{
-				int length = characters.length();
-				for (int i =0; i < length; i++)
-				{
-					char character = characters.charAt(i);
-					type(character);
-				}
-				robot.delay(300);
-				robot.keyPress(KeyEvent.VK_TAB);
-				robot.keyRelease(KeyEvent.VK_TAB);
-			    }
-		
-			public void type3(CharSequence characters)
+			public void ProdName(CharSequence characters)
 			{
 				int length = characters.length();
 				for (int i =0; i < length; i++)
@@ -118,7 +112,7 @@ public class Products
 				robot.keyRelease(KeyEvent.VK_TAB);
 			    }
 			
-			public void type4(CharSequence characters)
+			public void DateIn(CharSequence characters)
 			{
 				int length = characters.length();
 				for (int i =0; i < length; i++)
@@ -131,7 +125,7 @@ public class Products
 				robot.keyRelease(KeyEvent.VK_TAB);
 			    }
 			
-			public void type5(CharSequence characters)
+			public void Manufacturer(CharSequence characters)
 			{
 				int length = characters.length();
 				for (int i =0; i < length; i++)
@@ -144,7 +138,7 @@ public class Products
 				robot.keyRelease(KeyEvent.VK_TAB);
 			    }
 			
-			public void type6(CharSequence characters)
+			public void Problem(CharSequence characters)
 			{
 				int length = characters.length();
 				for (int i =0; i < length; i++)
@@ -157,7 +151,7 @@ public class Products
 				robot.keyRelease(KeyEvent.VK_TAB);
 			    }
 			
-			public void type7(CharSequence characters)
+			public void ModelNumber(CharSequence characters)
 			{
 				int length = characters.length();
 				for (int i =0; i < length; i++)
@@ -170,7 +164,7 @@ public class Products
 				robot.keyRelease(KeyEvent.VK_TAB);
 			    }
 			
-			public void type8(CharSequence characters)
+			public void FixDate(CharSequence characters)
 			{
 				int length = characters.length();
 				for (int i =0; i < length; i++)
@@ -183,7 +177,7 @@ public class Products
 				robot.keyRelease(KeyEvent.VK_TAB);
 			    }
 			
-			public void type9(CharSequence characters)
+			public void serialNumber(CharSequence characters)
 			{
 				int length = characters.length();
 				for (int i =0; i < length; i++)
@@ -196,7 +190,7 @@ public class Products
 				robot.keyRelease(KeyEvent.VK_TAB);
 			    }
 			
-			public void type10(CharSequence characters)
+			public void Finished(CharSequence characters)
 			{
 				int length = characters.length();
 				for (int i =0; i < length; i++)
@@ -207,28 +201,6 @@ public class Products
 				robot.delay(300);
 				robot.keyPress(KeyEvent.VK_TAB);
 				robot.keyRelease(KeyEvent.VK_TAB);
-			    }
-			public void type11(CharSequence characters)
-			{
-				int length = characters.length();
-				for (int i =0; i < length; i++)
-				{
-					char character = characters.charAt(i);
-					type(character);
-				}
-				robot.delay(300);
-				robot.keyPress(KeyEvent.VK_TAB);
-				robot.keyRelease(KeyEvent.VK_TAB);
-			    }
-			
-			public void type12(CharSequence characters)
-			{
-				int length = characters.length();
-				for (int i =0; i < length; i++)
-				{
-					char character = characters.charAt(i);
-					type(character);
-				}
 				robot.delay(300);
 				robot.keyPress(KeyEvent.VK_TAB);
 				robot.keyRelease(KeyEvent.VK_TAB);
@@ -251,6 +223,7 @@ public class Products
 				robot.delay(1000);
 				robot.mouseRelease(BUTTON1_DOWN_MASK);
 			    }
+		
 		 public void type(char character) 
 	     {
 			 switch (character) {

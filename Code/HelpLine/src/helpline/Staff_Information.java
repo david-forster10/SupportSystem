@@ -56,6 +56,7 @@ public class Staff_Information extends javax.swing.JFrame {
         lbl_PostCode = new javax.swing.JLabel();
         btnSave = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
+        lblPlace = new javax.swing.JLabel();
         lblPicture = new javax.swing.JLabel();
         tgbtn_Edit = new javax.swing.JToggleButton();
         lbl_StaffID = new javax.swing.JLabel();
@@ -147,7 +148,7 @@ public class Staff_Information extends javax.swing.JFrame {
             }
         });
 
-        lblPicture.setText("Click to add picture");
+        lblPlace.setText("Click to add picture");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -155,15 +156,18 @@ public class Staff_Information extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(48, Short.MAX_VALUE)
-                .addComponent(lblPicture)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblPicture)
+                    .addComponent(lblPlace))
                 .addGap(41, 41, 41))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(82, 82, 82)
                 .addComponent(lblPicture)
-                .addContainerGap(84, Short.MAX_VALUE))
+                .addGap(68, 68, 68)
+                .addComponent(lblPlace)
+                .addContainerGap(98, Short.MAX_VALUE))
         );
 
         tgbtn_Edit.setText("Edit Record");
@@ -318,8 +322,10 @@ public class Staff_Information extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         txt_StaffID.setEnabled(false);
-        int StaffIDGen = Navigation.StaffTbl.get(1).size();
-        txt_StaffID.setText(Integer.toString(Integer.parseInt(Navigation.StaffTbl.get(1).get(StaffIDGen)) + 1));
+        int StaffIDGen = Navigation.StaffTbl.get(0).size();
+        String StaffIDLast = Navigation.StaffTbl.get(0).get(StaffIDGen - 1);
+        int NewID = Integer.parseInt(StaffIDLast) + 1;
+        txt_StaffID.setText(Integer.toString(NewID));
         DefaultTableModel tableModel = (DefaultTableModel) tblDatabase.getModel();
         
         for (int i = 0; i < Navigation.StaffTbl.get(1).size(); i++)
@@ -421,7 +427,6 @@ public class Staff_Information extends javax.swing.JFrame {
     }
     
     private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked
-        // TODO add your handling code here:
     }//GEN-LAST:event_btnDeleteMouseClicked
 
     private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
@@ -437,7 +442,7 @@ public class Staff_Information extends javax.swing.JFrame {
             int type = img.getType() == 0? BufferedImage.TYPE_INT_ARGB : img.getType();
 
             BufferedImage resizeImageJpg = resizeImage(img, type);
-            lblPicture.setText("");
+            lblPlace.setText("");
             lblPicture.setIcon(new ImageIcon(resizeImageJpg));
         } 
         catch (IOException ex) 
@@ -454,7 +459,6 @@ public class Staff_Information extends javax.swing.JFrame {
 
 	return resizedImage;
     }
-
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -497,6 +501,7 @@ public class Staff_Information extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblPicture;
+    private javax.swing.JLabel lblPlace;
     private javax.swing.JLabel lbl_Address;
     private javax.swing.JLabel lbl_DoB;
     private javax.swing.JLabel lbl_Email;

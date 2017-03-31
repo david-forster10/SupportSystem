@@ -85,7 +85,7 @@ public class Products extends javax.swing.JFrame {
 
         lbl_FixDate.setText("Fix Date");
 
-        lbl_Finished.setText("Work done");
+        lbl_Finished.setText("Description of work done");
 
         btn_QuitProd.setText("Back");
         btn_QuitProd.addActionListener(new java.awt.event.ActionListener() {
@@ -370,7 +370,7 @@ public class Products extends javax.swing.JFrame {
             PreparedStatement ps = con.prepareStatement(insert);
             ps.setInt(1, Integer.parseInt(txt_ProductFormID.getText()));
             ps.setInt(2, Integer.parseInt(cmbCustID.getSelectedItem().toString()));
-            ps.setInt(3, Integer.parseInt(cmbCustID.getSelectedItem().toString()));
+            ps.setInt(3, Integer.parseInt(cmbStaffID.getSelectedItem().toString()));
             ps.setString(4, txt_ProName.getText());
             ps.setString(5, txt_Manufacturer.getText());
             ps.setString(6, txt_ModNo.getText());
@@ -411,24 +411,41 @@ public class Products extends javax.swing.JFrame {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/helpline?allowMultiQueries=true","user","user");
             Statement stmt = (Statement)con.createStatement();
             
-            String sql = "UPDATE `staff information form` SET `StaffID` = '"+Integer.parseInt(txt_StaffID.getText())+"' , `FirstName` = '"+txt_FName.getText()+"' , `LastName` = '"+txt_Surname.getText()+"', `Address` = '"+txt_Address.getText()+"', `PostCode` = '"+txt_PostCode.getText()+"', `Email` = '"+txt_Email.getText()+"', `DateOfBirth` = '"+txt_DoB.getText()+"', `PictureURL` = '"+SelectedImg+"' WHERE `StaffID` = '"+Integer.parseInt(txt_StaffID.getText())+"'";
-            stmt.execute(sql);
+            String insert = "UPDATE `product form` SET (?, ? , ? , ? , ? , ? , ? , ? , ? , ? , ?) WHERE `productFormID` = '"+txt_ProductFormID+"'";
+            PreparedStatement ps = con.prepareStatement(insert);
+            ps.setInt(1, Integer.parseInt(txt_ProductFormID.getText()));
+            ps.setInt(2, Integer.parseInt(cmbCustID.getSelectedItem().toString()));
+            ps.setInt(3, Integer.parseInt(cmbStaffID.getSelectedItem().toString()));
+            ps.setString(4, txt_ProName.getText());
+            ps.setString(5, txt_Manufacturer.getText());
+            ps.setString(6, txt_ModNo.getText());
+            ps.setString(7, txt_SerialNo.getText());
+            ps.setString(8, txt_DateIn.getText());
+            ps.setString(9, txt_Problem.getText());
+            ps.setString(10, txt_FixDate.getText());
+            ps.setString(11, txt_Finished.getText());
+            
+            ps.executeUpdate();
+            
+            ps.execute(insert);
             con.close();            
         } 
         catch (Exception ex) 
         {
             Logger.getLogger(HelpLine.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error in updating record, please try again later", "Error", JOptionPane.WARNING_MESSAGE);
         }
+        
         int index = 0;
         for (int i = 0; i < Size; i++)
         {
-            if (Navigation.StaffTbl.get(0).get(i).equals(txt_StaffID.getText()))
+            if (Navigation.StaffTbl.get(0).get(i).equals(txt_ProductFormID.getText()))
             {
                 index = i;
             }
         }
-        Navigation.StaffTbl.get(0).set(index, txt_StaffID.getText());
-        Navigation.StaffTbl.get(1).set(index, txt_FName.getText());
+        Navigation.StaffTbl.get(0).set(index, txt_ProductFormID.getText());
+        Navigation.StaffTbl.get(1).set(index, cmbCustID.getSelectedItem().toString());
         Navigation.StaffTbl.get(2).set(index, txt_Surname.getText());
         Navigation.StaffTbl.get(3).set(index, txt_Address.getText());
         Navigation.StaffTbl.get(4).set(index, txt_PostCode.getText());

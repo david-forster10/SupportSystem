@@ -272,7 +272,7 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="lbl_Finished">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Work done"/>
+                    <Property name="text" type="java.lang.String" value="Description of work done"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txt_ProName">

@@ -40,12 +40,12 @@ public class All_Programs
 		keyboard.Password("Michelle19700414");
 		
 		//Products Page
-		keyboard.DateIn("2017-03-21");
 		keyboard.ProdName("Graphics Card");
-		keyboard.Problem("Ports on Hard not working");
+		keyboard.DateIn("2017-03-21");
 		keyboard.Manufacturer("MSI");
-		keyboard.FixDate("2017-03-22");
+		keyboard.Problem("Ports on Hard not working");
 		keyboard.ModelNumber("11");
+		keyboard.FixDate("2017-03-22");
 		keyboard.serialNumber("77");
 		
 		//Customer Reports Page
@@ -207,7 +207,6 @@ public class All_Programs
 			robot.mouseRelease(BUTTON1_DOWN_MASK);
 		    }
 		
-		
 		public void serialNumber(CharSequence characters)
 		{
 			int length = characters.length();
@@ -234,21 +233,6 @@ public class All_Programs
 			robot.delay(1000);
 			robot.mousePress(BUTTON1_DOWN_MASK);
 			robot.delay(1000);
-			robot.mouseRelease(BUTTON1_DOWN_MASK);
-			
-			robot.delay(500);
-			robot.mouseMove(830, 440);
-	        robot.delay(1000);
-	    	robot.mousePress(BUTTON1_DOWN_MASK);
-	    	robot.delay(1000);
-	    	robot.mouseRelease(BUTTON1_DOWN_MASK);
-	    	
-			//Sauce
-			robot.delay(1000);
-			robot.mouseMove(998, 200);
-			robot.delay(500);
-			robot.mousePress(BUTTON1_DOWN_MASK);
-			robot.delay(500);
 			robot.mouseRelease(BUTTON1_DOWN_MASK);
 			
 		}
@@ -328,6 +312,7 @@ public class All_Programs
 			char character = characters.charAt(i);
 			type(character);
 		}
+		//this here is needing an enter maybe
 		robot.delay(500);
 		robot.mouseMove(705, 350);
 		robot.delay(500);
@@ -335,7 +320,7 @@ public class All_Programs
 		robot.delay(500);
 		robot.mouseRelease(BUTTON1_DOWN_MASK);
 		}
-	    
+	   
 		/*public void StaffRec(CharSequence characters)
 		{
 			int length = characters.length();
@@ -363,7 +348,7 @@ public class All_Programs
 		robot.delay(500);
 		robot.mouseRelease(BUTTON1_DOWN_MASK);
 		}
-		
+
 		/*public void StaffFix(CharSequence characters)
 		{
 			int length = characters.length();
@@ -427,13 +412,9 @@ public class All_Programs
 		robot.mousePress(BUTTON1_DOWN_MASK);
 		robot.delay(500);
 		robot.mouseRelease(BUTTON1_DOWN_MASK);
-        robot.delay(500);
+        robot.delay(2000);
         
-        robot.delay(300);
-		robot.keyPress(VK_ENTER);
-		robot.keyRelease(VK_ENTER);
-        
-        robot.mouseMove(589, 430);
+        robot.mouseMove(589, 620);
         robot.delay(1000);
         robot.mousePress(BUTTON1_DOWN_MASK);
         robot.delay(1000);
@@ -446,6 +427,11 @@ public class All_Programs
     	robot.delay(1000);
     	robot.mouseRelease(BUTTON1_DOWN_MASK);
     	
+    	System.out.println("                                            ");
+    	System.out.println("Completing Test....");
+    	System.out.println("                                            ");
+    	robot.delay(1000);
+    	System.out.print("Test Completed and ");
 		}
 		
 		//Customer Report Ends

@@ -38,12 +38,12 @@ public class Products
 			keyboard.Password("Michelle19700414");
 			
 			//Products Page
-			keyboard.DateIn("2017-03-21");
 			keyboard.ProdName("Graphics Card");
-			keyboard.Problem("Ports on Hard not working");
+			keyboard.DateIn("2017-03-21");
 			keyboard.Manufacturer("MSI");
-			keyboard.FixDate("2017-03-22");
+			keyboard.Problem("Ports on Hard not working");
 			keyboard.ModelNumber("11");
+			keyboard.FixDate("2017-03-22");
 			keyboard.serialNumber("77");
 			return successful;
 		}
@@ -92,24 +92,11 @@ public class Products
 			
 			//Select
 			robot.delay(1200);
-			robot.mouseMove(1064, 200);
+			robot.mouseMove(725, 410);
 			robot.mousePress(BUTTON1_DOWN_MASK);
 			robot.delay(500);
 			robot.mouseRelease(BUTTON1_DOWN_MASK);
 			}
-			
-			public void DateIn(CharSequence characters)
-			{
-				int length = characters.length();
-				for (int i =0; i < length; i++)
-				{
-					char character = characters.charAt(i);
-					type(character);
-				}
-				robot.delay(300);
-				robot.keyPress(KeyEvent.VK_TAB);
-				robot.keyRelease(KeyEvent.VK_TAB);
-			    }
 			
 			public void ProdName(CharSequence characters)
 			{
@@ -124,7 +111,7 @@ public class Products
 				robot.keyRelease(KeyEvent.VK_TAB);
 			    }
 			
-			public void Problem(CharSequence characters)
+			public void DateIn(CharSequence characters)
 			{
 				int length = characters.length();
 				for (int i =0; i < length; i++)
@@ -150,7 +137,7 @@ public class Products
 				robot.keyRelease(KeyEvent.VK_TAB);
 			    }
 			
-			public void FixDate(CharSequence characters)
+			public void Problem(CharSequence characters)
 			{
 				int length = characters.length();
 				for (int i =0; i < length; i++)
@@ -172,11 +159,21 @@ public class Products
 					type(character);
 				}
 				robot.delay(300);
-				robot.mouseMove(673, 345);
-				robot.delay(500);
-				robot.mousePress(BUTTON1_DOWN_MASK);
-				robot.delay(500);
-				robot.mouseRelease(BUTTON1_DOWN_MASK);
+				robot.keyPress(KeyEvent.VK_TAB);
+				robot.keyRelease(KeyEvent.VK_TAB);
+			    }
+			
+			public void FixDate(CharSequence characters)
+			{
+				int length = characters.length();
+				for (int i =0; i < length; i++)
+				{
+					char character = characters.charAt(i);
+					type(character);
+				}
+				robot.delay(300);
+				robot.keyPress(KeyEvent.VK_TAB);
+				robot.keyRelease(KeyEvent.VK_TAB);
 			    }
 			
 			public void serialNumber(CharSequence characters)
@@ -189,15 +186,14 @@ public class Products
 				}
 				//submit
 				robot.delay(500);
-				robot.mouseMove(1200, 383);
+				robot.mouseMove(1041, 550);
 				robot.delay(500);
 				robot.mousePress(BUTTON1_DOWN_MASK);
 				robot.delay(500);
 				robot.mouseRelease(BUTTON1_DOWN_MASK);
-				
 				//back
 				robot.delay(2000);
-				robot.mouseMove(400, 383);
+				robot.mouseMove(596, 550);
 				robot.delay(1000);
 				robot.mousePress(BUTTON1_DOWN_MASK);
 				robot.delay(1000);

@@ -194,7 +194,6 @@ public class Products
 				robot.mousePress(BUTTON1_DOWN_MASK);
 				robot.delay(500);
 				robot.mouseRelease(BUTTON1_DOWN_MASK);
-				
 				//back
 				robot.delay(2000);
 				robot.mouseMove(400, 383);

@@ -51,8 +51,6 @@ INSERT INTO `customer reporting form` (`CustomerReportingFormID`, `FirstName`, `
 	(4, 'Linda', 'Smith', '60 Hindhead Road', 'NN6 7AR', '07071335603', '2017-02-15', 'Switches', 'Switch Hub isn\'t responding', '1', 1, 4, '2017-02-27', 65),
 	(5, 'Rashida', 'Meador', '8 Oxford Rd', 'W15 3AJ', '07063216686', '2017-01-09', 'Monitor', 'Monitor wont pick up signal ', '2', 4, 5, '2017-01-11', 43),
 	(6, 'Luis', 'Thompson', '15 Grenoble Road', 'TA9 9EP', '07745880890', '2017-02-20', 'Computer', 'Unable to boot up ', '1', 5, 6, '2017-02-22', 38),
-	(7, 'Christian', 'Montague', '71 Traill Street', 'BS6 1NW', '07980196988', '2017-03-07', 'Computers', 'USB Hub unresponsive', '1', 6, 7, '2017-03-09', 13),
-	(8, 'Juan', 'Newton', '56 Worthy Lane', 'A62 2LY', '07931021612', '2017-03-24', 'Moniter', 'Dead Pixels', '1', 7, 8, '2017-03-28', 45),
 	(9, 'Joseph', 'Sanders', '42 Peachfield Road', 'O44 1ZR', '07873550770', '2017-01-17', 'Printer', 'Not connecting to Computer', '1', 8, 9, '2017-01-19', 27),
 	(10, 'Gloria', 'Priest', '67 Bishopgate Street', 'LA10 7SN', '07757143071', '2017-03-27', 'Router', 'Faulty Cable', '3', 9, 10, '2017-03-28', 5);
 /*!40000 ALTER TABLE `customer reporting form` ENABLE KEYS */;
@@ -63,10 +61,10 @@ CREATE TABLE IF NOT EXISTS `login` (
   `StaffID` int(20) NOT NULL,
   `Password` varchar(150) NOT NULL,
   KEY `StaffID` (`StaffID`),
-  CONSTRAINT `login_ibfk_1` FOREIGN KEY (`StaffID`) REFERENCES `staff information form` (`StaffID`)
+  CONSTRAINT `login_ibfk_1` FOREIGN KEY (`StaffID`) REFERENCES `staff information form` (`StaffID`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table helpline.login: ~10 rows (approximately)
+-- Dumping data for table helpline.login: ~0 rows (approximately)
 DELETE FROM `login`;
 /*!40000 ALTER TABLE `login` DISABLE KEYS */;
 INSERT INTO `login` (`StaffID`, `Password`) VALUES
@@ -76,7 +74,6 @@ INSERT INTO `login` (`StaffID`, `Password`) VALUES
 	(4, '472b6988d601652b3f2d97f1d9b09232adba67cad4dd5e0c2e81ad81aba2e21e'),
 	(5, '9f15c73b1e77988dc4e0ff62c09202235be8bf5dc7b96e35559e428268bed2e2'),
 	(6, '4bde92ca3a2496a876ac2886f6be98365e7a8ffcd51494fa3a4f8bdbd40890dd'),
-	(7, '14647183c61f89e7dfb9055920102f3afbe312d1baee413705b87a6894dbfa7d'),
 	(8, 'ab9b6da329450e25fe894e0473e2990233576ea46db9bf60825c795f4302c8ae'),
 	(9, '78ccfc0e1a566e042362893b776c0e2bdab6dbed0ecc0460f2935b75ecdbcd09'),
 	(10, '779533101cb74bc0dd55886a7c3513951bd99ea19f3fa7d069ef3366ac7b4d6e');
@@ -99,8 +96,8 @@ CREATE TABLE IF NOT EXISTS `product form` (
   PRIMARY KEY (`productFormID`),
   KEY `CustomerReportingFormID` (`CustomerReportingFormID`),
   KEY `StaffID` (`StaffID`),
-  CONSTRAINT `product form_ibfk_1` FOREIGN KEY (`CustomerReportingFormID`) REFERENCES `customer reporting form` (`CustomerReportingFormID`),
-  CONSTRAINT `product form_ibfk_2` FOREIGN KEY (`StaffID`) REFERENCES `staff information form` (`StaffID`)
+  CONSTRAINT `product form_ibfk_1` FOREIGN KEY (`CustomerReportingFormID`) REFERENCES `customer reporting form` (`CustomerReportingFormID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `product form_ibfk_2` FOREIGN KEY (`StaffID`) REFERENCES `staff information form` (`StaffID`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Dumping data for table helpline.product form: ~10 rows (approximately)
@@ -113,8 +110,6 @@ INSERT INTO `product form` (`productFormID`, `CustomerReportingFormID`, `StaffID
 	(4, 4, 4, 'Switch Hub', 'Netgear', 36, 1, '2017-02-17', 'Switch not Responding', '2017-03-27', '-'),
 	(5, 5, 5, 'Monitor Cable', 'Dell', 60, 17, '2017-01-10', 'Not picking up signal', '2017-01-11', '-'),
 	(6, 6, 6, 'Hard-Drive', 'Western Digital', 69, 53, '2017-02-20', 'Not Booting up', '2017-03-22', '-'),
-	(7, 7, 7, 'USB Hub', 'ADVENT', 9, 33, '2017-03-07', 'Hub Unresponsive', '2017-03-09', '-'),
-	(8, 8, 8, 'Monitor', 'Dell', 51, 63, '2017-03-24', 'Dead Pixels', '2017-03-28', '-'),
 	(9, 9, 9, 'USB Cable', 'Dell', 67, 61, '2017-01-18', 'No connection to computer', '2017-01-19', '-'),
 	(10, 10, 10, 'Router Cable', 'Netgear', 70, 13, '2017-03-28', 'Faulty Cable', '2017-03-28', '-');
 /*!40000 ALTER TABLE `product form` ENABLE KEYS */;
@@ -143,7 +138,6 @@ INSERT INTO `staff information form` (`StaffID`, `FirstName`, `LastName`, `Addre
 	(4, 'Paul', 'Kellum', '39 Exning Road', 'SN4 3SY', 'PaulKellum@hotmail.com', '1976-10-14', 'C:\\Users\\Vanilla\\Documents\\GitHub\\SupportSystem\\Images\\StaffImages\\4.png'),
 	(5, 'Barbara', 'Baldwin', '39 Golf Road', 'N16 2HP', 'BarbaraBaldwin@hotmail.com', '1957-08-04', 'C:\\Users\\Vanilla\\Documents\\GitHub\\SupportSystem\\Images\\StaffImages\\5.png'),
 	(6, 'Kenneth', 'Terry', '89 Greyfriars Road', 'I12 5PT', 'KenTerry@gmail.com', '1965-04-02', 'C:\\Users\\Vanilla\\Documents\\GitHub\\SupportSystem\\Images\\StaffImages\\6.png'),
-	(7, 'William', 'Westover', '10 Haslemere Road', 'N17 6AN', 'WilliamWest@gmail.com', '1976-06-14', 'C:\\Users\\Vanilla\\Documents\\GitHub\\SupportSystem\\Images\\StaffImages\\7.png'),
 	(8, 'John', 'Wilson', '84 Sandyhill Rd', 'WR6 2SL', 'JohnWilson@hotmail.com', '1970-07-07', 'C:\\Users\\Vanilla\\Documents\\GitHub\\SupportSystem\\Images\\StaffImages\\8.png'),
 	(9, 'Wills', 'Jordan', '14 New Dover Rd', 'H43 4JA', 'WIllsJordan@gmail.com', '1976-08-14', 'C:\\Users\\Vanilla\\Documents\\GitHub\\SupportSystem\\Images\\StaffImages\\9.png'),
 	(10, 'Joanna', 'Hall', '5 Boroughbridge Road', 'NP6 9PS', 'JoannaHall@hotmail.com', '1970-02-13', 'C:\\Users\\Vanilla\\Documents\\GitHub\\SupportSystem\\Images\\StaffImages\\10.png');

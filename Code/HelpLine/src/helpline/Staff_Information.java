@@ -405,7 +405,7 @@ public class Staff_Information extends javax.swing.JFrame {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/helpline?allowMultiQueries=true","user","user");
             Statement stmt = (Statement)con.createStatement();
             
-            String sql = "DELETE FROM * WHERE `StaffID` = '"+Integer.parseInt(txt_StaffID.getText())+"'";
+            String sql = "DELETE FROM `staff information form` WHERE `StaffID` = '"+Integer.parseInt(txt_StaffID.getText())+"'";
             stmt.execute(sql);
             con.close();            
         } 
@@ -413,8 +413,9 @@ public class Staff_Information extends javax.swing.JFrame {
         {
             Logger.getLogger(HelpLine.class.getName()).log(Level.SEVERE, null, ex);
             bFailed = true;
+            JOptionPane.showMessageDialog(null, "Error in deleting Record!", "Error", JOptionPane.WARNING_MESSAGE);
         }
-        if (bFailed = false)
+        if (bFailed == false)
         {
             int index = 0;
             for (int i = 0; i < Size; i++)

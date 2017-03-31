@@ -1,21 +1,27 @@
 package helpline;
 
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.CLOSED_OPTION;
+import static javax.swing.JOptionPane.NO_OPTION;
+import static javax.swing.JOptionPane.YES_OPTION;
 import javax.swing.table.DefaultTableModel;
 
 public class Products extends javax.swing.JFrame {
 
+    private boolean bEdit = false;
+    private static int Size = 0;
+    private static int NewID = 0;
+    
     public Products() {
         initComponents();
     }
@@ -51,12 +57,12 @@ public class Products extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txt_ProductFormID = new javax.swing.JTextField();
-        txt_CustomerReportingFormID = new javax.swing.JTextField();
-        txt_StaffID = new javax.swing.JTextField();
-        btn_edit = new javax.swing.JToggleButton();
+        btn_Edit = new javax.swing.JToggleButton();
         btn_delete = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblDatabase = new javax.swing.JTable();
+        cmbStaffID = new javax.swing.JComboBox<>();
+        cmbCustID = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -83,7 +89,7 @@ public class Products extends javax.swing.JFrame {
 
         lbl_FixDate.setText("Fix Date");
 
-        lbl_Finished.setText("Finished");
+        lbl_Finished.setText("Description of work done");
 
         btn_QuitProd.setText("Back");
         btn_QuitProd.addActionListener(new java.awt.event.ActionListener() {
@@ -105,10 +111,10 @@ public class Products extends javax.swing.JFrame {
 
         jLabel3.setText("Staff ID");
 
-        btn_edit.setText("Edit Record");
-        btn_edit.addActionListener(new java.awt.event.ActionListener() {
+        btn_Edit.setText("Edit Record");
+        btn_Edit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_editActionPerformed(evt);
+                btn_EditActionPerformed(evt);
             }
         });
 
@@ -119,7 +125,7 @@ public class Products extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblDatabase.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -142,10 +148,20 @@ public class Products extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jTable1.getTableHeader().setReorderingAllowed(false);
-        jScrollPane2.setViewportView(jTable1);
+        tblDatabase.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tblDatabase.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tblDatabase.getTableHeader().setReorderingAllowed(false);
+        tblDatabase.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblDatabaseMouseClicked(evt);
+            }
+        });
+        tblDatabase.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tblDatabaseKeyPressed(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tblDatabase);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -165,16 +181,14 @@ public class Products extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(txt_ProductFormID, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_CustomerReportingFormID, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txt_ProName, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txt_Manufacturer, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txt_ModNo, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_SerialNo, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(txt_SerialNo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                            .addComponent(cmbCustID, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addComponent(btn_QuitProd, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(btn_QuitProd, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(367, 367, 367)
@@ -189,14 +203,14 @@ public class Products extends javax.swing.JFrame {
                             .addComponent(lbl_DateIn, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lbl_FixDate, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lbl_Problem, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lbl_Finished, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lbl_Finished, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(txt_DateIn)
-                            .addComponent(txt_StaffID)
                             .addComponent(txt_Problem)
                             .addComponent(txt_FixDate, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_Finished, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txt_Finished, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                            .addComponent(cmbStaffID, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(116, 116, 116))))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -207,7 +221,7 @@ public class Products extends javax.swing.JFrame {
                         .addGap(415, 415, 415)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lbl_Products)
-                            .addComponent(btn_edit))))
+                            .addComponent(btn_Edit))))
                 .addContainerGap(13, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -219,23 +233,23 @@ public class Products extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_ProductFormID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addComponent(txt_StaffID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabel1)
+                    .addComponent(cmbStaffID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_CustomerReportingFormID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(txt_DateIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_DateIn))
+                    .addComponent(lbl_DateIn)
+                    .addComponent(cmbCustID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_ProName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_ProName)
                     .addComponent(lbl_Problem)
                     .addComponent(txt_Problem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txt_Manufacturer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lbl_Manufacturer))
@@ -248,7 +262,6 @@ public class Products extends javax.swing.JFrame {
                             .addComponent(txt_SerialNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lbl_SerialNo)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbl_FixDate)
                             .addComponent(txt_FixDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -259,7 +272,7 @@ public class Products extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_QuitProd)
-                    .addComponent(btn_edit)
+                    .addComponent(btn_Edit)
                     .addComponent(btn_delete)
                     .addComponent(btn_submit))
                 .addGap(18, 18, 18)
@@ -322,8 +335,6 @@ public class Products extends javax.swing.JFrame {
         Pattern pat5 = Pattern.compile("[^0-9]");
      
         Matcher productformID = pat5.matcher(txt_ProductFormID.getText());
-        Matcher customerID = pat5.matcher(txt_CustomerReportingFormID.getText());
-        Matcher staffID = pat5.matcher(txt_StaffID.getText());
         Matcher Productname = pat.matcher(txt_ProName.getText());
         Matcher manufacturer = pat.matcher(txt_Manufacturer.getText());
         Matcher modNo = pat2.matcher(txt_ModNo.getText());
@@ -333,79 +344,249 @@ public class Products extends javax.swing.JFrame {
         Matcher fixDate = pat4.matcher(txt_FixDate.getText());
         Matcher finished = pat.matcher(txt_Finished.getText());
     
-        if (txt_ProductFormID.getText().equals("") || txt_CustomerReportingFormID.getText().equals("") || txt_StaffID.getText().equals("") || txt_ProName.getText().equals("") || txt_Manufacturer.getText().equals("") || txt_ModNo.getText().equals("") || txt_SerialNo.getText().equals("") || txt_DateIn.getText().equals("") || txt_Problem.getText().equals("") || txt_FixDate.getText().equals("") || txt_Finished.getText().equals(""))
+        if (txt_ProductFormID.getText().equals("") || cmbCustID.getSelectedItem().toString().equals("Please select one...") || cmbStaffID.getSelectedItem().toString().equals("Please select one...") || txt_ProName.getText().equals("") || txt_Manufacturer.getText().equals("") || txt_ModNo.getText().equals("") || txt_SerialNo.getText().equals("") || txt_DateIn.getText().equals("") || txt_Problem.getText().equals("") || txt_FixDate.getText().equals("") || txt_Finished.getText().equals(""))
         {
             JOptionPane.showMessageDialog(null, "Please fill in all sections of the form!", "Error", JOptionPane.WARNING_MESSAGE);
         }
         else
         {
-            if (productformID.find() || customerID.find() || staffID.find() || Productname.find() || manufacturer.find() || modNo.find() || SerialNo.find() || dateIn.find() || problem.find() || fixDate.find() || finished.find()) //uses matchers from above, add/remove as needed
+            if (productformID.find() || Productname.find() || manufacturer.find() || modNo.find() || SerialNo.find() || dateIn.find() || problem.find() || fixDate.find() || finished.find()) //uses matchers from above, add/remove as needed
             {
+                if (bEdit == false)
+                            {
+                                AddData();
+                            }
+                            else
+                            {
+                                UpdateData();
+                            }
+                            Clear();
+                            TableLoad();
             }
-        else
-        {
-            JOptionPane.showMessageDialog(null, "Please only input valid characters!", "Error", JOptionPane.WARNING_MESSAGE);
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Please only input valid characters!", "Error", JOptionPane.WARNING_MESSAGE);
+            }
         }
-    }
     }                                          
 
+    private void Clear() {
+        txt_ProductFormID.setText(Integer.toString(NewID));
+        txt_ProName.setText("");
+        txt_Manufacturer.setText("");
+        txt_ModNo.setText("");
+        txt_SerialNo.setText("");
+        txt_DateIn.setText("");
+        txt_Problem.setText("");
+        txt_FixDate.setText("");
+        txt_Finished.setText("");
+        ComboLoad();
+    }
+    
     public void AddData(){
-        try {
-        Class.forName("com.mysql.jdbc.Driver"); 
-        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/helpline?allowMultiQueries=true","user","user");
-        
-        String DateIn = txt_DateIn.getText();
-        String FixDate = txt_FixDate.getText();
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        Date In;
-        Date Fix;
-        try {
-            In = (Date) df.parse(DateIn);
-            Fix = (Date) df.parse(FixDate);  
-            String dteIn = df.format(In);
-            String dteFix = df.format(Fix);
-            
+        try 
+        {
+            Class.forName("com.mysql.jdbc.Driver"); 
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/helpline?allowMultiQueries=true","user","user");
+           
             String insert = "INSERT INTO `product form` VALUES (?, ? , ? , ? , ? , ? , ? , ? , ? , ? , ?) ";
             PreparedStatement ps = con.prepareStatement(insert);
             ps.setInt(1, Integer.parseInt(txt_ProductFormID.getText()));
-            ps.setInt(2, Integer.parseInt(txt_CustomerReportingFormID.getText()));
-            ps.setInt(3, Integer.parseInt(txt_StaffID.getText()));
+            ps.setInt(2, Integer.parseInt(cmbCustID.getSelectedItem().toString()));
+            ps.setInt(3, Integer.parseInt(cmbStaffID.getSelectedItem().toString()));
             ps.setString(4, txt_ProName.getText());
             ps.setString(5, txt_Manufacturer.getText());
             ps.setString(6, txt_ModNo.getText());
             ps.setString(7, txt_SerialNo.getText());
-            ps.setString(8, dteIn);
+            ps.setString(8, txt_DateIn.getText());
             ps.setString(9, txt_Problem.getText());
-            ps.setString(10, dteFix);
+            ps.setString(10, txt_FixDate.getText());
             ps.setString(11, txt_Finished.getText());
             
             ps.executeUpdate();
             
             ps.execute(insert);
-            con.close();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }           
-    } 
-    catch (Exception ex) {
-	Logger.getLogger(HelpLine.class.getName()).log(Level.SEVERE, null, ex);
-    }
+            con.close();      
+        } 
+        catch (Exception ex) 
+        {
+            Logger.getLogger(HelpLine.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error in adding record, please try again later", "Error", JOptionPane.WARNING_MESSAGE);
+        }
+        
+        Navigation.ProductTbl.get(0).add(txt_ProductFormID.getText());
+        ComboLoad();
+        Navigation.ProductTbl.get(3).add(txt_ProName.getText());
+        Navigation.ProductTbl.get(4).add(txt_Manufacturer.getText());
+        Navigation.ProductTbl.get(5).add(txt_ModNo.getText());
+        Navigation.ProductTbl.get(6).add(txt_SerialNo.getText());
+        Navigation.ProductTbl.get(7).add(txt_DateIn.getText());
+        Navigation.ProductTbl.get(8).add(txt_Problem.getText());
+        Navigation.ProductTbl.get(9).add(txt_FixDate.getText());
+        Navigation.ProductTbl.get(10).add(txt_Finished.getText());
+        NewID += 1;
     }//GEN-LAST:event_btn_submitActionPerformed
-
+   
+    private void UpdateData() {
+        try 
+        {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/helpline?allowMultiQueries=true","user","user");
+            Statement stmt = (Statement)con.createStatement();
+            
+            String insert = "UPDATE `product form` SET (?, ? , ? , ? , ? , ? , ? , ? , ? , ? , ?) WHERE `productFormID` = '"+txt_ProductFormID+"'";
+            PreparedStatement ps = con.prepareStatement(insert);
+            ps.setInt(1, Integer.parseInt(txt_ProductFormID.getText()));
+            ps.setInt(2, Integer.parseInt(cmbCustID.getSelectedItem().toString()));
+            ps.setInt(3, Integer.parseInt(cmbStaffID.getSelectedItem().toString()));
+            ps.setString(4, txt_ProName.getText());
+            ps.setString(5, txt_Manufacturer.getText());
+            ps.setString(6, txt_ModNo.getText());
+            ps.setString(7, txt_SerialNo.getText());
+            ps.setString(8, txt_DateIn.getText());
+            ps.setString(9, txt_Problem.getText());
+            ps.setString(10, txt_FixDate.getText());
+            ps.setString(11, txt_Finished.getText());
+            
+            ps.executeUpdate();
+            
+            ps.execute(insert);
+            con.close();            
+        } 
+        catch (Exception ex) 
+        {
+            Logger.getLogger(HelpLine.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error in updating record, please try again later", "Error", JOptionPane.WARNING_MESSAGE);
+        }
+        
+        int index = 0;
+        for (int i = 0; i < Size; i++)
+        {
+            if (Navigation.StaffTbl.get(0).get(i).equals(txt_ProductFormID.getText()))
+            {
+                index = i;
+            }
+        }
+        Navigation.StaffTbl.get(0).set(index, txt_ProductFormID.getText());
+        Navigation.StaffTbl.get(1).set(index, cmbCustID.getSelectedItem().toString());
+        Navigation.StaffTbl.get(2).set(index, cmbStaffID.getSelectedItem().toString());
+        Navigation.StaffTbl.get(3).set(index, txt_ProName.getText());
+        Navigation.StaffTbl.get(4).set(index, txt_Manufacturer.getText());
+        Navigation.StaffTbl.get(5).set(index, txt_ModNo.getText());
+        Navigation.StaffTbl.get(6).set(index, txt_SerialNo.getText());
+        Navigation.StaffTbl.get(7).set(index, txt_DateIn.getText());
+        Navigation.StaffTbl.get(8).set(index, txt_Problem.getText());
+        Navigation.StaffTbl.get(9).set(index, txt_FixDate.getText());
+        Navigation.StaffTbl.get(6).set(index, txt_Finished.getText());
+    }
+    
+    private void RemoveData(){
+        boolean bFailed = false;
+        try 
+        {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/helpline?allowMultiQueries=true","user","user");
+            Statement stmt = (Statement)con.createStatement();
+            
+            String sql = "DELETE FROM `product form` WHERE `productFormID` = '"+Integer.parseInt(txt_ProductFormID.getText())+"'";
+            stmt.execute(sql);
+            con.close();            
+        } 
+        catch (Exception ex) 
+        {
+            Logger.getLogger(HelpLine.class.getName()).log(Level.SEVERE, null, ex);
+            bFailed = true;
+            JOptionPane.showMessageDialog(null, "Error in deleting Record!", "Error", JOptionPane.WARNING_MESSAGE);
+        }
+        if (bFailed == false)
+        {
+            int index = 0;
+            for (int i = 0; i < Size; i++)
+            {
+                if (Navigation.ProductTbl.get(0).get(i).equals(txt_ProductFormID.getText()))
+                {
+                    index = i;
+                }
+            }
+            Navigation.ProductTbl.get(0).remove(index);
+            Navigation.ProductTbl.get(1).remove(index);
+            Navigation.ProductTbl.get(2).remove(index);
+            Navigation.ProductTbl.get(3).remove(index);
+            Navigation.ProductTbl.get(4).remove(index);
+            Navigation.ProductTbl.get(5).remove(index);
+            Navigation.ProductTbl.get(6).remove(index);
+            Navigation.ProductTbl.get(7).remove(index);
+        }
+    }
+    
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
-        // TODO add your handling code here:
+        switch(JOptionPane.showConfirmDialog(null,"Delete record?", "Delete", JOptionPane.YES_NO_OPTION))
+        {
+            case YES_OPTION:
+                if (bEdit == false)
+                {
+                    Clear();
+                }
+                else if (bEdit == true)
+                {
+                    RemoveData();
+                    Clear();
+                    TableLoad();
+                }
+                break;
+            case NO_OPTION:
+            case CLOSED_OPTION:
+                break;
+        }
     }//GEN-LAST:event_btn_deleteActionPerformed
 
-    private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_editActionPerformed
+    private void btn_EditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EditActionPerformed
+        if (btn_Edit.getText().equals("Edit Record"))
+        {
+            btn_Edit.setText("New Record");
+            tblDatabase.setEnabled(true);
+            bEdit = true;
+        }
+        else if (btn_Edit.getText().equals("New Record"))
+        {
+            btn_Edit.setText("Edit Record");
+            tblDatabase.setEnabled(false);
+            bEdit = false;
+            Clear();
+        }
+    }//GEN-LAST:event_btn_EditActionPerformed
 
     private void LoadProducts(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_LoadProducts
-        txt_ProductFormID.setEnabled(false); //disabling the autogenerated StaffID text file
-        //int IDGen = Navigation.ProductTbl.get(1).size(); //getting size of array for last ID generated
-        //txt_ProductFormID.setText(Integer.toString(Integer.parseInt(Navigation.ProductTbl.get(1).get(IDGen)) + 1)); //Generating a new ID
-        DefaultTableModel tableModel = (DefaultTableModel) jTable1.getModel(); //declaring a tablemodel for adding records to the JTable
-       
+        txt_ProductFormID.setEnabled(false);
+        Size = Navigation.ProductTbl.get(0).size();
+        String StaffIDLast = Navigation.ProductTbl.get(0).get(Size - 1);
+        NewID = Integer.parseInt(StaffIDLast) + 1;
+        txt_ProductFormID.setText(Integer.toString(NewID));
+                
+        TableLoad();
+        ComboLoad();
+        tblDatabase.setEnabled(false); //disabling the table on load
+    }//GEN-LAST:event_LoadProducts
+
+    private void tblDatabaseKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblDatabaseKeyPressed
+        switch(evt.getExtendedKeyCode())
+        {
+            case KeyEvent.VK_UP:
+            case KeyEvent.VK_DOWN:
+                SelectedRecord();
+                break;
+        }
+    }//GEN-LAST:event_tblDatabaseKeyPressed
+
+    private void tblDatabaseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDatabaseMouseClicked
+        SelectedRecord();
+    }//GEN-LAST:event_tblDatabaseMouseClicked
+
+    private void TableLoad() {
+        DefaultTableModel tableModel = (DefaultTableModel) tblDatabase.getModel();
+        
+        tableModel.setRowCount(0);
+        
         for (int i = 0; i < Navigation.ProductTbl.get(1).size(); i++) //loop to add all records to table
         {
             Object[] rowData = { 
@@ -423,13 +604,28 @@ public class Products extends javax.swing.JFrame {
         };
             tableModel.addRow(rowData); //adding the data into the table
         }
-        
-        jTable1.setEnabled(false); //disabling the table on load
-    }//GEN-LAST:event_LoadProducts
+    }    
 
-    /**
-     * @param args the command line arguments
-     */
+    private void ComboLoad() {
+        DefaultComboBoxModel cmbCustModel = (DefaultComboBoxModel) cmbCustID.getModel();
+        
+        cmbCustModel.removeAllElements();
+        cmbCustModel.addElement("Please select one...");
+        for (int i = 0; i < Navigation.CustomerReportTbl.get(0).size(); i++)
+        {
+            cmbCustModel.addElement(Navigation.CustomerReportTbl.get(0).get(i)); 
+        }
+        
+        DefaultComboBoxModel cmbStaffModel = (DefaultComboBoxModel) cmbStaffID.getModel();
+        
+        cmbStaffModel.removeAllElements();
+        cmbStaffModel.addElement("Please select one...");
+        for (int i = 0; i < Navigation.StaffTbl.get(0).size(); i++)
+        {
+            cmbStaffModel.addElement(Navigation.StaffTbl.get(0).get(i)); 
+        }
+    }
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -462,11 +658,29 @@ public class Products extends javax.swing.JFrame {
         });
     }
 
+    private void SelectedRecord() {
+        int SelectedData = tblDatabase.getSelectedRow();
+        
+        txt_ProductFormID.setText(Navigation.ProductTbl.get(0).get(SelectedData));
+        txt_ProName.setText(Navigation.ProductTbl.get(3).get(SelectedData));
+        txt_Manufacturer.setText(Navigation.ProductTbl.get(4).get(SelectedData));
+        txt_ModNo.setText(Navigation.ProductTbl.get(5).get(SelectedData));
+        txt_SerialNo.setText(Navigation.ProductTbl.get(6).get(SelectedData));
+        txt_DateIn.setText(Navigation.ProductTbl.get(7).get(SelectedData));
+        txt_Problem.setText(Navigation.ProductTbl.get(8).get(SelectedData));
+        txt_FixDate.setText(Navigation.ProductTbl.get(9).get(SelectedData));
+        txt_Finished.setText(Navigation.ProductTbl.get(10).get(SelectedData));
+        cmbCustID.setSelectedItem(Navigation.ProductTbl.get(1).get(SelectedData));
+        cmbStaffID.setSelectedItem(Navigation.ProductTbl.get(2).get(SelectedData));
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JToggleButton btn_Edit;
     private javax.swing.JButton btn_QuitProd;
     private javax.swing.JButton btn_delete;
-    private javax.swing.JToggleButton btn_edit;
     private javax.swing.JButton btn_submit;
+    private javax.swing.JComboBox<String> cmbCustID;
+    private javax.swing.JComboBox<String> cmbStaffID;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -475,7 +689,6 @@ public class Products extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbl_DateIn;
     private javax.swing.JLabel lbl_Finished;
     private javax.swing.JLabel lbl_FixDate;
@@ -485,7 +698,7 @@ public class Products extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_Problem;
     private javax.swing.JLabel lbl_Products;
     private javax.swing.JLabel lbl_SerialNo;
-    private javax.swing.JTextField txt_CustomerReportingFormID;
+    private javax.swing.JTable tblDatabase;
     private javax.swing.JTextField txt_DateIn;
     private javax.swing.JTextField txt_Finished;
     private javax.swing.JTextField txt_FixDate;
@@ -495,6 +708,5 @@ public class Products extends javax.swing.JFrame {
     private javax.swing.JTextField txt_Problem;
     private javax.swing.JTextField txt_ProductFormID;
     private javax.swing.JTextField txt_SerialNo;
-    private javax.swing.JTextField txt_StaffID;
     // End of variables declaration//GEN-END:variables
 }

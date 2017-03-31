@@ -107,7 +107,7 @@ public class Staff_Information
 				type(character);
 			}
 			robot.delay(300);
-			robot.mouseMove(740, 310);
+			robot.mouseMove(730, 300);
 			robot.delay(300);
 			robot.mousePress(BUTTON1_DOWN_MASK);
 			robot.delay(300);
@@ -123,7 +123,7 @@ public class Staff_Information
 				type(character);
 			}
 			robot.delay(300);
-			robot.mouseMove(740, 290);
+			robot.mouseMove(1040, 300);
 			robot.delay(300);
 			robot.mousePress(BUTTON1_DOWN_MASK);
 			robot.delay(300);
@@ -139,7 +139,7 @@ public class Staff_Information
 				type(character);
 			}
 			robot.delay(300);
-			robot.mouseMove(730, 330);
+			robot.mouseMove(730, 340);
 			robot.delay(300);
 			robot.mousePress(BUTTON1_DOWN_MASK);
 			robot.delay(300);
@@ -155,7 +155,7 @@ public class Staff_Information
 				type(character);
 			}
 			robot.delay(300);
-			robot.mouseMove(1040, 330);
+			robot.mouseMove(1040, 340);
 			robot.delay(300);
 			robot.mousePress(BUTTON1_DOWN_MASK);
 			robot.delay(300);
@@ -171,7 +171,7 @@ public class Staff_Information
 				type(character);
 			}
 			robot.delay(300);
-			robot.mouseMove(730, 360);
+			robot.mouseMove(730, 370);
 			robot.delay(300);
 			robot.mousePress(BUTTON1_DOWN_MASK);
 			robot.delay(300);

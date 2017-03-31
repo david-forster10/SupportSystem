@@ -46,7 +46,6 @@ public class Products
 			keyboard.ModelNumber("20");
 			keyboard.WorkDone("Gavin Called");
 			keyboard.serialNumber("100");
-			keyboard.EditProd("2017-03-22");
 			return successful;
 		}
 		public Products() throws AWTException
@@ -207,67 +206,17 @@ public class Products
 				robot.mousePress(BUTTON1_DOWN_MASK);
 				robot.delay(500);
 				robot.mouseRelease(BUTTON1_DOWN_MASK);
-				robot.delay(200);
-				robot.keyPress(VK_ENTER);
-				robot.keyRelease(VK_ENTER);
 				
 				//Select/Edit
 				robot.delay(500);
-				robot.mouseMove(1200, 440);
+				robot.mouseMove(1200, 420);
 				robot.delay(300);
 				robot.mousePress(BUTTON1_DOWN_MASK);
 				robot.delay(300);
-				robot.mouseRelease(BUTTON1_DOWN_MASK);
-				robot.mouseMove(820, 383);
-				robot.delay(300);
-				robot.mousePress(BUTTON1_DOWN_MASK);
-				robot.delay(200);
 				robot.mouseRelease(BUTTON1_DOWN_MASK);
 				
-				robot.delay(500);
-				robot.mouseMove(1066, 200);
-				robot.mousePress(BUTTON1_DOWN_MASK);
-				robot.delay(100);
-				robot.mouseRelease(BUTTON1_DOWN_MASK);
-				robot.delay(200);
-				robot.keyPress(VK_BACK_SPACE);
-				robot.keyRelease(VK_BACK_SPACE);
-				robot.keyPress(VK_BACK_SPACE);
-				robot.keyRelease(VK_BACK_SPACE);
-				robot.keyPress(VK_BACK_SPACE);
-				robot.keyRelease(VK_BACK_SPACE);
-				robot.keyPress(VK_BACK_SPACE);
-				robot.keyRelease(VK_BACK_SPACE);
-				robot.keyPress(VK_BACK_SPACE);
-				robot.keyRelease(VK_BACK_SPACE);
-				robot.keyPress(VK_BACK_SPACE);
-				robot.keyRelease(VK_BACK_SPACE);
-				robot.keyPress(VK_BACK_SPACE);
-				robot.keyRelease(VK_BACK_SPACE);
-				robot.keyPress(VK_BACK_SPACE);
-				robot.keyRelease(VK_BACK_SPACE);
-				robot.keyPress(VK_BACK_SPACE);
-				robot.keyRelease(VK_BACK_SPACE);
-				robot.keyPress(VK_BACK_SPACE);
-				robot.keyRelease(VK_BACK_SPACE);
-				robot.keyPress(VK_BACK_SPACE);
-				robot.keyRelease(VK_BACK_SPACE);
-				robot.keyPress(VK_BACK_SPACE);
-				robot.keyRelease(VK_BACK_SPACE);
-				robot.delay(1000);
-				
-			}
-			
-			public void EditProd(CharSequence characters)
-			{
-				int length = characters.length();
-				for (int i =0; i < length; i++)
-				{
-					char character = characters.charAt(i);
-					type(character);
-				}
 				//back
-				robot.delay(1000);
+				robot.delay(2000);
 				robot.mouseMove(400, 383);
 				robot.delay(1000);
 				robot.mousePress(BUTTON1_DOWN_MASK);
@@ -288,7 +237,6 @@ public class Products
 				robot.delay(1000);
 				System.out.print("Test Completed and ");
 			    }
-
 		
 		 public void type(char character) 
 	     {

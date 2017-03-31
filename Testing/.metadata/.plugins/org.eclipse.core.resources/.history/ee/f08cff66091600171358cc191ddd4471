@@ -254,7 +254,7 @@ public class Products
 				robot.keyRelease(VK_BACK_SPACE);
 				robot.keyPress(VK_BACK_SPACE);
 				robot.keyRelease(VK_BACK_SPACE);
-				robot.delay(1000);
+				robot.delay(3000);
 				
 			}
 			

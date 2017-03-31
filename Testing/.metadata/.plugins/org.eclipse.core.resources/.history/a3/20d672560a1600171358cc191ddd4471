@@ -284,6 +284,14 @@ public class All_Programs
 			robot.keyRelease(VK_BACK_SPACE);
 			robot.delay(1000);
 			
+			robot.mouseMove(1200, 383);
+			robot.delay(500);
+			robot.mousePress(BUTTON1_DOWN_MASK);
+			robot.delay(500);
+			robot.mouseRelease(BUTTON1_DOWN_MASK);
+			robot.delay(200);
+			robot.keyPress(VK_ENTER);
+			robot.keyRelease(VK_ENTER);
 		}
 		
 		public void EditProd(CharSequence characters)
@@ -294,16 +302,6 @@ public class All_Programs
 				char character = characters.charAt(i);
 				type(character);
 			}
-			//sub
-			robot.mouseMove(1200, 383);
-			robot.delay(500);
-			robot.mousePress(BUTTON1_DOWN_MASK);
-			robot.delay(500);
-			robot.mouseRelease(BUTTON1_DOWN_MASK);
-			robot.delay(200);
-			robot.keyPress(VK_ENTER);
-			robot.keyRelease(VK_ENTER);
-			
 			//back
 			robot.delay(1000);
 			robot.mouseMove(400, 383);
@@ -318,13 +316,6 @@ public class All_Programs
 			robot.delay(500);
 			robot.mousePress(BUTTON1_DOWN_MASK);
 			robot.delay(1000);
-			robot.mouseRelease(BUTTON1_DOWN_MASK);
-			
-			robot.delay(1000);
-			robot.mouseMove(998, 200);
-			robot.delay(500);
-			robot.mousePress(BUTTON1_DOWN_MASK);
-			robot.delay(500);
 			robot.mouseRelease(BUTTON1_DOWN_MASK);
 			
 			
@@ -546,11 +537,8 @@ public class All_Programs
 				type(character);
 			}
 			robot.delay(300);
-			robot.mouseMove(730, 300);
-			robot.delay(300);
-			robot.mousePress(BUTTON1_DOWN_MASK);
-			robot.delay(300);
-			robot.mousePress(BUTTON1_DOWN_MASK);
+			robot.keyPress(KeyEvent.VK_TAB);
+			robot.keyRelease(KeyEvent.VK_TAB);
 		    }
 		
 		

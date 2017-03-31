@@ -107,7 +107,7 @@ public class Staff_Information
 				type(character);
 			}
 			robot.delay(300);
-			robot.mouseMove(740, 310);
+			robot.mouseMove(1040, 290);
 			robot.delay(300);
 			robot.mousePress(BUTTON1_DOWN_MASK);
 			robot.delay(300);

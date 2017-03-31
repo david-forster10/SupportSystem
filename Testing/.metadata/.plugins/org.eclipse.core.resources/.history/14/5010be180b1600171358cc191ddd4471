@@ -107,7 +107,7 @@ public class Staff_Information
 				type(character);
 			}
 			robot.delay(300);
-			robot.mouseMove(740, 310);
+			robot.mouseMove(730, 300);
 			robot.delay(300);
 			robot.mousePress(BUTTON1_DOWN_MASK);
 			robot.delay(300);
@@ -123,11 +123,8 @@ public class Staff_Information
 				type(character);
 			}
 			robot.delay(300);
-			robot.mouseMove(740, 290);
-			robot.delay(300);
-			robot.mousePress(BUTTON1_DOWN_MASK);
-			robot.delay(300);
-			robot.mousePress(BUTTON1_DOWN_MASK);
+			robot.keyPress(KeyEvent.VK_TAB);
+			robot.keyRelease(KeyEvent.VK_TAB);
 		    }
 		
 		public void Staff_Postcode(CharSequence characters)
@@ -139,11 +136,8 @@ public class Staff_Information
 				type(character);
 			}
 			robot.delay(300);
-			robot.mouseMove(730, 330);
-			robot.delay(300);
-			robot.mousePress(BUTTON1_DOWN_MASK);
-			robot.delay(300);
-			robot.mousePress(BUTTON1_DOWN_MASK);
+			robot.keyPress(KeyEvent.VK_TAB);
+			robot.keyRelease(KeyEvent.VK_TAB);
 		    }
 		
 		public void Staff_Surname(CharSequence characters)
@@ -155,11 +149,8 @@ public class Staff_Information
 				type(character);
 			}
 			robot.delay(300);
-			robot.mouseMove(1040, 330);
-			robot.delay(300);
-			robot.mousePress(BUTTON1_DOWN_MASK);
-			robot.delay(300);
-			robot.mousePress(BUTTON1_DOWN_MASK);
+			robot.keyPress(KeyEvent.VK_TAB);
+			robot.keyRelease(KeyEvent.VK_TAB);
 		    }
 		
 		public void Staff_Dob(CharSequence characters)
@@ -171,11 +162,8 @@ public class Staff_Information
 				type(character);
 			}
 			robot.delay(300);
-			robot.mouseMove(730, 360);
-			robot.delay(300);
-			robot.mousePress(BUTTON1_DOWN_MASK);
-			robot.delay(300);
-			robot.mousePress(BUTTON1_DOWN_MASK);
+			robot.keyPress(KeyEvent.VK_TAB);
+			robot.keyRelease(KeyEvent.VK_TAB);
 		    }
 		
 		public void Email(CharSequence characters)

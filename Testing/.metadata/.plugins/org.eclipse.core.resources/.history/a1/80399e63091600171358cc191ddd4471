@@ -231,31 +231,8 @@ public class Products
 				robot.mouseRelease(BUTTON1_DOWN_MASK);
 				robot.delay(200);
 				robot.keyPress(VK_BACK_SPACE);
+				robot.delay(3000);
 				robot.keyRelease(VK_BACK_SPACE);
-				robot.keyPress(VK_BACK_SPACE);
-				robot.keyRelease(VK_BACK_SPACE);
-				robot.keyPress(VK_BACK_SPACE);
-				robot.keyRelease(VK_BACK_SPACE);
-				robot.keyPress(VK_BACK_SPACE);
-				robot.keyRelease(VK_BACK_SPACE);
-				robot.keyPress(VK_BACK_SPACE);
-				robot.keyRelease(VK_BACK_SPACE);
-				robot.keyPress(VK_BACK_SPACE);
-				robot.keyRelease(VK_BACK_SPACE);
-				robot.keyPress(VK_BACK_SPACE);
-				robot.keyRelease(VK_BACK_SPACE);
-				robot.keyPress(VK_BACK_SPACE);
-				robot.keyRelease(VK_BACK_SPACE);
-				robot.keyPress(VK_BACK_SPACE);
-				robot.keyRelease(VK_BACK_SPACE);
-				robot.keyPress(VK_BACK_SPACE);
-				robot.keyRelease(VK_BACK_SPACE);
-				robot.keyPress(VK_BACK_SPACE);
-				robot.keyRelease(VK_BACK_SPACE);
-				robot.keyPress(VK_BACK_SPACE);
-				robot.keyRelease(VK_BACK_SPACE);
-				robot.delay(1000);
-				
 			}
 			
 			public void EditProd(CharSequence characters)

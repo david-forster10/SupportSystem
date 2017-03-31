@@ -547,10 +547,6 @@ public class All_Programs
 			}
 			robot.delay(300);
 			robot.mouseMove(730, 300);
-			robot.delay(300);
-			robot.mousePress(BUTTON1_DOWN_MASK);
-			robot.delay(300);
-			robot.mousePress(BUTTON1_DOWN_MASK);
 		    }
 		
 		

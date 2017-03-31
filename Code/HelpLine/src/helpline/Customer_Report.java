@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.util.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -17,6 +18,9 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.CLOSED_OPTION;
+import static javax.swing.JOptionPane.NO_OPTION;
+import static javax.swing.JOptionPane.YES_OPTION;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -24,6 +28,10 @@ import javax.swing.table.DefaultTableModel;
  * @author Vanilla
  */
 public class Customer_Report extends javax.swing.JFrame {
+    private boolean bEdit = false;
+    private static int NewID = 0;
+    private static int Size = 0;
+
 
     /**
      * Creates new form Customer_Report
@@ -237,20 +245,29 @@ public class Customer_Report extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTable1);
 
         btn_Delete.setText("Delete");
+        btn_Delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_DeleteActionPerformed(evt);
+            }
+        });
 
         btn_Edit.setText("Edit");
+        btn_Edit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_EditActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lbl_ReportForm)
-                .addGap(144, 144, 144))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane1)
@@ -286,7 +303,7 @@ public class Customer_Report extends javax.swing.JFrame {
                                     .addComponent(txt_Postcode, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txt_Telephone, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txt_ReportDate, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 198, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbl_Problem, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lbl_Severity, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -305,13 +322,17 @@ public class Customer_Report extends javax.swing.JFrame {
                             .addComponent(txt_RepairCost)
                             .addComponent(jComboBox1, 0, 130, Short.MAX_VALUE))))
                 .addGap(21, 21, 21))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(233, 233, 233)
+                .addComponent(lbl_ReportForm)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                .addGap(31, 31, 31)
                 .addComponent(lbl_ReportForm)
-                .addGap(27, 27, 27)
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -423,6 +444,16 @@ public class Customer_Report extends javax.swing.JFrame {
             } else {
                    JOptionPane.showMessageDialog(null, "Please enter a valid Post Code!", "Error", JOptionPane.WARNING_MESSAGE);
                 }
+            if (bEdit == false)
+                            {
+                                AddData();
+                            }
+                            else
+                            {
+                                UpdateData();
+                            }
+                            Clear();
+                            TableLoad();
         }
         else
         {
@@ -478,6 +509,118 @@ public class Customer_Report extends javax.swing.JFrame {
     catch (Exception ex) {
 	Logger.getLogger(HelpLine.class.getName()).log(Level.SEVERE, null, ex);
     }
+    }
+    
+    private void RemoveData(){
+        boolean bFailed = false;
+        try 
+        {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/helpline?allowMultiQueries=true","user","user");
+            Statement stmt = (Statement)con.createStatement();
+            
+            String sql = "DELETE FROM `customer reporting form` WHERE `Customer` = '"+Integer.parseInt(txt_Customer.getText())+"'";
+            stmt.execute(sql);
+            con.close();            
+        } 
+        catch (Exception ex) 
+        {
+            Logger.getLogger(HelpLine.class.getName()).log(Level.SEVERE, null, ex);
+            bFailed = true;
+            JOptionPane.showMessageDialog(null, "Error in deleting Record!", "Error", JOptionPane.WARNING_MESSAGE);
+        }
+        if (bFailed == false)
+        {
+            int index = 0;
+            for (int i = 0; i < Size; i++)
+            {
+                if (Navigation.CustomerReportTbl.get(0).get(i).equals(txt_Customer.getText()))
+                {
+                    index = i;
+                }
+            }
+            Navigation.CustomerReportTbl.get(0).remove(index);
+            Navigation.CustomerReportTbl.get(1).remove(index);
+            Navigation.CustomerReportTbl.get(2).remove(index);
+            Navigation.CustomerReportTbl.get(3).remove(index);
+            Navigation.CustomerReportTbl.get(4).remove(index);
+            Navigation.CustomerReportTbl.get(5).remove(index);
+            Navigation.CustomerReportTbl.get(6).remove(index);
+            Navigation.CustomerReportTbl.get(7).remove(index);
+            Navigation.CustomerReportTbl.get(8).remove(index);
+            Navigation.CustomerReportTbl.get(9).remove(index);
+            Navigation.CustomerReportTbl.get(10).remove(index);
+            Navigation.CustomerReportTbl.get(11).remove(index);
+            Navigation.CustomerReportTbl.get(12).remove(index);
+            Navigation.CustomerReportTbl.get(13).remove(index);
+        }
+    }
+    
+    private void UpdateData() {
+        try 
+        {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/helpline?allowMultiQueries=true","user","user");
+            Statement stmt = (Statement)con.createStatement();
+            
+            String sql = "UPDATE `customer reporting form` SET `Customer` = '"+Integer.parseInt(txt_Customer.getText())+"' , `FirstName` = '"+txt_FirstName.getText()+"' , `Surname` = '"+txt_Surname.getText()+"', `Address` = '"+txt_Address.getText()+"', `PostCode` = '"+txt_Postcode.getText()+"', `Telephone` = '"+txt_Telephone.getText()+"', `Date Reported` = '"+txt_ReportDate.getText()+"', `Equipment Type` = '"+txt_EquipType.getText()+"', `Problem` = '"+txt_Problem.getText()+"', `Severity` = '"+jComboBox1.getSelectedItem().toString()+"',`Staff Recieving` = '"+txt_StaffRecieving.getText()+"',`Staff Fixing` = '"+txt_StaffFixing.getText()+"',`Date Resolved` = '"+txt_DateResolved.getText()+"', `Repair Cost` = '"+txt_RepairCost.getText()+"', = '"+Integer.parseInt(txt_Customer.getText())+"'";
+            stmt.execute(sql);
+            con.close();            
+        } 
+        catch (Exception ex) 
+        {
+            Logger.getLogger(HelpLine.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        int index = 0;
+        for (int i = 0; i < Size; i++)
+        {
+            if (Navigation.CustomerReportTbl.get(0).get(i).equals(txt_Customer.getText()))
+            {
+                index = i;
+            }
+        }
+        Navigation.CustomerReportTbl.get(0).set(index, txt_Customer.getText());
+        Navigation.CustomerReportTbl.get(1).set(index, txt_FirstName.getText());
+        Navigation.CustomerReportTbl.get(2).set(index, txt_Surname.getText());
+        Navigation.CustomerReportTbl.get(3).set(index, txt_Address.getText());
+        Navigation.CustomerReportTbl.get(4).set(index, txt_Postcode.getText());
+        Navigation.CustomerReportTbl.get(5).set(index, txt_Telephone.getText());
+        Navigation.CustomerReportTbl.get(6).set(index, txt_ReportDate.getText());
+        Navigation.CustomerReportTbl.get(7).set(index, txt_EquipType.getText());
+        Navigation.CustomerReportTbl.get(8).set(index, txt_Problem.getText());
+        Navigation.CustomerReportTbl.get(9).set(index, jComboBox1.getSelectedItem().toString());
+        Navigation.CustomerReportTbl.get(10).set(index, txt_StaffRecieving.getText());
+        Navigation.CustomerReportTbl.get(11).set(index, txt_StaffFixing.getText());
+        Navigation.CustomerReportTbl.get(12).set(index, txt_DateResolved.getText());
+        Navigation.CustomerReportTbl.get(13).set(index, txt_RepairCost.getText());  
+    }
+    
+    private void TableLoad() {
+        DefaultTableModel tableModel = (DefaultTableModel) jTable1.getModel();
+        
+        tableModel.setRowCount(0);
+        
+        for (int i = 0; i < Navigation.CustomerReportTbl.get(1).size(); i++)
+        {
+            Object[] rowData = { 
+                Navigation.CustomerReportTbl.get(0).get(i), 
+                Navigation.CustomerReportTbl.get(1).get(i), 
+                Navigation.CustomerReportTbl.get(2).get(i), 
+                Navigation.CustomerReportTbl.get(3).get(i),
+                Navigation.CustomerReportTbl.get(4).get(i),
+                Navigation.CustomerReportTbl.get(5).get(i),
+                Navigation.CustomerReportTbl.get(6).get(i),
+                Navigation.CustomerReportTbl.get(7).get(i),
+                Navigation.CustomerReportTbl.get(8).get(i),
+                Navigation.CustomerReportTbl.get(9).get(i),
+                Navigation.CustomerReportTbl.get(10).get(i),
+                Navigation.CustomerReportTbl.get(11).get(i),
+                Navigation.CustomerReportTbl.get(12).get(i),
+                Navigation.CustomerReportTbl.get(13).get(i)
+
+            };
+            tableModel.addRow(rowData);
+        }
     }
     
     private void btn_BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BackActionPerformed
@@ -567,9 +710,62 @@ public class Customer_Report extends javax.swing.JFrame {
     jTable1.setEnabled(false); //disabling the table on load
     }//GEN-LAST:event_formWindowOpened
 
-    /**
-     * @param args the command line arguments
-     */
+    private void Clear() {
+        txt_Customer.setText(Integer.toString(NewID));
+        txt_FirstName.setText("");
+        txt_Surname.setText("");
+        txt_Address.setText("");
+        txt_Postcode.setText("");
+        txt_Telephone.setText("");
+        txt_ReportDate.setText("");
+        txt_EquipType.setText("");
+        txt_Problem.setText("");
+        jComboBox1.setSelectedItem("Please Select");
+        txt_StaffRecieving.setText("");
+        txt_StaffFixing.setText("");
+        txt_DateResolved.setText("");
+        txt_RepairCost.setText("");
+    }
+    
+    private void btn_EditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EditActionPerformed
+        if (btn_Edit.getText().equals("Edit Record"))
+        {
+            btn_Edit.setText("New Record");
+            jTable1.setEnabled(true);
+            bEdit = true;
+        }
+        else if (btn_Edit.getText().equals("New Record"))
+        {
+            btn_Edit.setText("Edit Record");
+            jTable1.setEnabled(false);
+            bEdit = false;
+            Clear();
+        }
+    }//GEN-LAST:event_btn_EditActionPerformed
+
+    private void btn_DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DeleteActionPerformed
+        switch(JOptionPane.showConfirmDialog(null,"Delete record?", "Delete", JOptionPane.YES_NO_OPTION))
+        {
+            case YES_OPTION:
+                
+                if (bEdit == false)
+                {
+                    Clear();
+                }
+                else if (bEdit == true)
+                {
+                    RemoveData();
+                    Clear();
+                    TableLoad();
+                }
+                break;
+            case NO_OPTION:
+            case CLOSED_OPTION:
+                break;
+        }
+    }//GEN-LAST:event_btn_DeleteActionPerformed
+
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

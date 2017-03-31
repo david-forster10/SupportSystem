@@ -28,7 +28,7 @@ public class Staff_Information
 		}
 		try {
 			Runtime.getRuntime().exec("cmd /c start C:\\Users\\Vanilla\\Documents\\SupportSystem\\Code\\HelpLine\\dist\\HelpLine.jar");
-			robot.delay(3000);
+			robot.delay(1200);
 			successful = true;
 		} catch (IOException e) {
 			e.printStackTrace();

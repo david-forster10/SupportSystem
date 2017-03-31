@@ -24,7 +24,7 @@ public class Customer_Report
 		}
 		try {
 			Runtime.getRuntime().exec("cmd /c start C:\\Users\\Vanilla\\Documents\\SupportSystem\\Code\\HelpLine\\dist\\HelpLine.jar");
-			robot.delay(3000);
+			robot.delay(1200);
 			successful = true;
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -38,7 +38,7 @@ public class Customer_Report
 		//Sauce
 		keyboard.EquipType("Router");
 		keyboard.FirstName("Gloria");
-		keyboard.CustProblem("faulty Cable");
+		keyboard.CustProblem("Faulty Cable");
 		keyboard.Surname("Priest");
 		keyboard.Address("67 Bishopgate Street");
 		//keyboard.StaffRec("Mary Porter");
@@ -96,7 +96,7 @@ public class Customer_Report
 		
 		//Sauce
 		robot.delay(1000);
-		robot.mouseMove(955, 322);
+		robot.mouseMove(998, 200);
 		robot.delay(500);
 		robot.mousePress(BUTTON1_DOWN_MASK);
 		robot.delay(500);
@@ -153,15 +153,20 @@ public class Customer_Report
 			type(character);
 		}
 		robot.delay(1000);
-		robot.mouseMove(985, 410);
+		robot.mouseMove(986, 266);
 		robot.delay(1000);
 		robot.mousePress(BUTTON1_DOWN_MASK);
 		robot.delay(800);
-		robot.mouseMove(985, 440);
+		robot.mouseMove(986, 320);
 		robot.delay(1000);
 		robot.mouseRelease(BUTTON1_DOWN_MASK);
-		robot.keyPress(KeyEvent.VK_TAB);
-		robot.keyRelease(KeyEvent.VK_TAB);
+	    
+		robot.delay(500);
+		robot.mouseMove(705, 320);
+		robot.delay(500);
+		robot.mousePress(BUTTON1_DOWN_MASK);
+		robot.delay(500);
+		robot.mouseRelease(BUTTON1_DOWN_MASK);
 		}
 		
 		public void Address(CharSequence characters)
@@ -172,10 +177,14 @@ public class Customer_Report
 			char character = characters.charAt(i);
 			type(character);
 		}
-		robot.keyPress(KeyEvent.VK_TAB);
-		robot.keyRelease(KeyEvent.VK_TAB);
+		robot.delay(500);
+		robot.mouseMove(705, 350);
+		robot.delay(500);
+		robot.mousePress(BUTTON1_DOWN_MASK);
+		robot.delay(500);
+		robot.mouseRelease(BUTTON1_DOWN_MASK);
 		}
-	    //I need to adjust the mouseMove/mousePress here
+	    
 		/*public void StaffRec(CharSequence characters)
 		{
 			int length = characters.length();
@@ -196,10 +205,14 @@ public class Customer_Report
 			char character = characters.charAt(i);
 			type(character);
 		}
-		robot.keyPress(KeyEvent.VK_TAB);
-		robot.keyRelease(KeyEvent.VK_TAB);
+		robot.delay(500);
+		robot.mouseMove(705, 390);
+		robot.delay(500);
+		robot.mousePress(BUTTON1_DOWN_MASK);
+		robot.delay(500);
+		robot.mouseRelease(BUTTON1_DOWN_MASK);
 		}
-		//I need to adjust the mouseMove/mousePress here
+		
 		/*public void StaffFix(CharSequence characters)
 		{
 			int length = characters.length();
@@ -257,30 +270,32 @@ public class Customer_Report
 			char character = characters.charAt(i);
 			type(character);
 		}
-            robot.delay(1000);
-            robot.mouseMove(990, 620);
-            robot.delay(1000);
-            robot.mousePress(BUTTON1_DOWN_MASK);
-            robot.delay(1000);
-            robot.mouseRelease(BUTTON1_DOWN_MASK);
-            robot.delay(2000);
-            robot.mouseMove(589, 620);
-            robot.delay(1000);
-            robot.mousePress(BUTTON1_DOWN_MASK);
-            robot.delay(1000);
-            robot.mouseRelease(BUTTON1_DOWN_MASK);
-            robot.delay(1000);
+		robot.delay(500);
+		robot.mouseMove(1016, 450);
+		robot.delay(500);
+		robot.mousePress(BUTTON1_DOWN_MASK);
+		robot.delay(500);
+		robot.mouseRelease(BUTTON1_DOWN_MASK);
+        robot.delay(2000);
+        
+        robot.mouseMove(589, 620);
+        robot.delay(1000);
+        robot.mousePress(BUTTON1_DOWN_MASK);
+        robot.delay(1000);
+        robot.mouseRelease(BUTTON1_DOWN_MASK);
+        robot.delay(1000);
             
-            robot.mouseMove(830, 540);
-    		robot.delay(1000);
-    		robot.mousePress(BUTTON1_DOWN_MASK);
-    		robot.delay(1000);
-    		robot.mouseRelease(BUTTON1_DOWN_MASK);
-    		System.out.println("                                            ");
-    		System.out.println("Completing Test....");
-    		System.out.println("                                            ");
-    		robot.delay(1000);
-    		System.out.print("Test Completed and ");
+        robot.mouseMove(830, 540);
+        robot.delay(1000);
+    	robot.mousePress(BUTTON1_DOWN_MASK);
+    	robot.delay(1000);
+    	robot.mouseRelease(BUTTON1_DOWN_MASK);
+    	
+    	System.out.println("                                            ");
+    	System.out.println("Completing Test....");
+    	System.out.println("                                            ");
+    	robot.delay(1000);
+    	System.out.print("Test Completed and ");
 		}
 		
 	 public void type(char character) 

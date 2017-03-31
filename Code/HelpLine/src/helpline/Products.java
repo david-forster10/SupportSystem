@@ -4,10 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -89,7 +85,7 @@ public class Products extends javax.swing.JFrame {
 
         lbl_FixDate.setText("Fix Date");
 
-        lbl_Finished.setText("Finished");
+        lbl_Finished.setText("Work done");
 
         btn_QuitProd.setText("Back");
         btn_QuitProd.addActionListener(new java.awt.event.ActionListener() {
@@ -193,7 +189,7 @@ public class Products extends javax.swing.JFrame {
                             .addComponent(lbl_DateIn, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lbl_FixDate, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lbl_Problem, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lbl_Finished, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lbl_Finished, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(txt_DateIn)
@@ -342,7 +338,16 @@ public class Products extends javax.swing.JFrame {
         {
             if (productformID.find() || Productname.find() || manufacturer.find() || modNo.find() || SerialNo.find() || dateIn.find() || problem.find() || fixDate.find() || finished.find()) //uses matchers from above, add/remove as needed
             {
-                
+                if (bEdit == false)
+                            {
+                                AddData();
+                            }
+                            else
+                            {
+                                UpdateData();
+                            }
+                            Clear();
+                            TableLoad();
             }
             else
             {
@@ -387,8 +392,7 @@ public class Products extends javax.swing.JFrame {
         }
         
         Navigation.ProductTbl.get(0).add(txt_ProductFormID.getText());
-        Navigation.ProductTbl.get(1).add(txt_CustomerReportingFormID.getText());
-        Navigation.ProductTbl.get(2).add(txt_StaffID.getText());
+        ComboLoad();
         Navigation.ProductTbl.get(3).add(txt_ProName.getText());
         Navigation.ProductTbl.get(4).add(txt_Manufacturer.getText());
         Navigation.ProductTbl.get(5).add(txt_ModNo.getText());
@@ -400,7 +404,7 @@ public class Products extends javax.swing.JFrame {
         NewID += 1;
     }//GEN-LAST:event_btn_submitActionPerformed
    
-    /*private void UpdateData() {
+    private void UpdateData() {
         try 
         {
             Class.forName("com.mysql.jdbc.Driver");
@@ -470,7 +474,7 @@ public class Products extends javax.swing.JFrame {
             Navigation.StaffTbl.get(6).remove(index);
             Navigation.StaffTbl.get(7).remove(index);
         }
-    }*/
+    }
     
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
         // TODO add your handling code here:
@@ -520,7 +524,7 @@ public class Products extends javax.swing.JFrame {
         DefaultComboBoxModel cmbCustModel = (DefaultComboBoxModel) cmbCustID.getModel();
         
         cmbCustModel.removeAllElements();
-        
+        cmbCustModel.addElement("Please select one...");
         for (int i = 0; i < Navigation.CustomerReportTbl.get(0).size(); i++)
         {
             cmbCustModel.addElement(Navigation.CustomerReportTbl.get(0).get(i)); 
@@ -529,10 +533,10 @@ public class Products extends javax.swing.JFrame {
         DefaultComboBoxModel cmbStaffModel = (DefaultComboBoxModel) cmbStaffID.getModel();
         
         cmbStaffModel.removeAllElements();
-        
+        cmbStaffModel.addElement("Please select one...");
         for (int i = 0; i < Navigation.StaffTbl.get(0).size(); i++)
         {
-            cmbCustModel.addElement(Navigation.StaffTbl.get(0).get(i)); 
+            cmbStaffModel.addElement(Navigation.StaffTbl.get(0).get(i)); 
         }
     }
     

@@ -351,6 +351,7 @@ public class Staff_Information extends javax.swing.JFrame {
         catch (Exception ex) 
         {
             Logger.getLogger(HelpLine.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error in adding record, please try again later", "Error", JOptionPane.WARNING_MESSAGE);
         }
         
         Navigation.StaffTbl.get(0).add(txt_StaffID.getText());
@@ -362,6 +363,28 @@ public class Staff_Information extends javax.swing.JFrame {
         Navigation.StaffTbl.get(6).add(txt_DoB.getText());
         Navigation.StaffTbl.get(7).add(SelectedImg);
         NewID += 1;
+        
+        String dteformat = txt_DoB.getText().replaceAll("-", "");
+        String newPass = txt_FName.getText()+dteformat;
+        String hashedPass = HelpLine.SHA_Hash(newPass);
+        
+        try 
+        {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/helpline?allowMultiQueries=true","user","user");
+            Statement stmt = (Statement)con.createStatement();
+            
+            String sql = "INSERT INTO `login` (`StaffID`, `Password`) VALUES ('"+Integer.parseInt(txt_StaffID.getText())+"', '"+hashedPass+"')";
+            stmt.execute(sql);
+            con.close();
+            
+            JOptionPane.showMessageDialog(null, "New User Created!\nUsername: "+txt_StaffID.getText()+"\nPassword: "+newPass, "New User", JOptionPane.INFORMATION_MESSAGE);
+        } 
+        catch (Exception ex) 
+        {
+            Logger.getLogger(HelpLine.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error in adding password record, please try again later", "Error", JOptionPane.WARNING_MESSAGE);
+        }
     }
     
     private void UpdateData() {

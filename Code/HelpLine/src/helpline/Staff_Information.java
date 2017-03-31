@@ -519,7 +519,6 @@ public class Staff_Information extends javax.swing.JFrame {
             case CLOSED_OPTION:
                 break;
         }
-        
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed

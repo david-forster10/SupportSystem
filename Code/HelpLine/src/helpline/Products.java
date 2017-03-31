@@ -1,5 +1,6 @@
 package helpline;
 
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -10,6 +11,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.CLOSED_OPTION;
+import static javax.swing.JOptionPane.NO_OPTION;
+import static javax.swing.JOptionPane.YES_OPTION;
 import javax.swing.table.DefaultTableModel;
 
 public class Products extends javax.swing.JFrame {
@@ -53,7 +57,7 @@ public class Products extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txt_ProductFormID = new javax.swing.JTextField();
-        btn_edit = new javax.swing.JToggleButton();
+        btn_Edit = new javax.swing.JToggleButton();
         btn_delete = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblDatabase = new javax.swing.JTable();
@@ -107,10 +111,10 @@ public class Products extends javax.swing.JFrame {
 
         jLabel3.setText("Staff ID");
 
-        btn_edit.setText("Edit Record");
-        btn_edit.addActionListener(new java.awt.event.ActionListener() {
+        btn_Edit.setText("Edit Record");
+        btn_Edit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_editActionPerformed(evt);
+                btn_EditActionPerformed(evt);
             }
         });
 
@@ -147,6 +151,16 @@ public class Products extends javax.swing.JFrame {
         tblDatabase.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         tblDatabase.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tblDatabase.getTableHeader().setReorderingAllowed(false);
+        tblDatabase.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblDatabaseMouseClicked(evt);
+            }
+        });
+        tblDatabase.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tblDatabaseKeyPressed(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblDatabase);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -207,7 +221,7 @@ public class Products extends javax.swing.JFrame {
                         .addGap(415, 415, 415)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lbl_Products)
-                            .addComponent(btn_edit))))
+                            .addComponent(btn_Edit))))
                 .addContainerGap(13, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -258,7 +272,7 @@ public class Products extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_QuitProd)
-                    .addComponent(btn_edit)
+                    .addComponent(btn_Edit)
                     .addComponent(btn_delete)
                     .addComponent(btn_submit))
                 .addGap(18, 18, 18)
@@ -358,6 +372,15 @@ public class Products extends javax.swing.JFrame {
 
     private void Clear() {
         txt_ProductFormID.setText(Integer.toString(NewID));
+        txt_ProName.setText("");
+        txt_Manufacturer.setText("");
+        txt_ModNo.setText("");
+        txt_SerialNo.setText("");
+        txt_DateIn.setText("");
+        txt_Problem.setText("");
+        txt_FixDate.setText("");
+        txt_Finished.setText("");
+        ComboLoad();
     }
     
     public void AddData(){
@@ -446,12 +469,15 @@ public class Products extends javax.swing.JFrame {
         }
         Navigation.StaffTbl.get(0).set(index, txt_ProductFormID.getText());
         Navigation.StaffTbl.get(1).set(index, cmbCustID.getSelectedItem().toString());
-        Navigation.StaffTbl.get(2).set(index, txt_Surname.getText());
-        Navigation.StaffTbl.get(3).set(index, txt_Address.getText());
-        Navigation.StaffTbl.get(4).set(index, txt_PostCode.getText());
-        Navigation.StaffTbl.get(5).set(index, txt_Email.getText());
-        Navigation.StaffTbl.get(6).set(index, txt_DoB.getText());
-        Navigation.StaffTbl.get(7).set(index, SelectedImg);
+        Navigation.StaffTbl.get(2).set(index, cmbStaffID.getSelectedItem().toString());
+        Navigation.StaffTbl.get(3).set(index, txt_ProName.getText());
+        Navigation.StaffTbl.get(4).set(index, txt_Manufacturer.getText());
+        Navigation.StaffTbl.get(5).set(index, txt_ModNo.getText());
+        Navigation.StaffTbl.get(6).set(index, txt_SerialNo.getText());
+        Navigation.StaffTbl.get(7).set(index, txt_DateIn.getText());
+        Navigation.StaffTbl.get(8).set(index, txt_Problem.getText());
+        Navigation.StaffTbl.get(9).set(index, txt_FixDate.getText());
+        Navigation.StaffTbl.get(6).set(index, txt_Finished.getText());
     }
     
     private void RemoveData(){
@@ -462,7 +488,7 @@ public class Products extends javax.swing.JFrame {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/helpline?allowMultiQueries=true","user","user");
             Statement stmt = (Statement)con.createStatement();
             
-            String sql = "DELETE FROM `staff information form` WHERE `StaffID` = '"+Integer.parseInt(txt_StaffID.getText())+"'";
+            String sql = "DELETE FROM `product form` WHERE `productFormID` = '"+Integer.parseInt(txt_ProductFormID.getText())+"'";
             stmt.execute(sql);
             con.close();            
         } 
@@ -477,29 +503,58 @@ public class Products extends javax.swing.JFrame {
             int index = 0;
             for (int i = 0; i < Size; i++)
             {
-                if (Navigation.StaffTbl.get(0).get(i).equals(txt_StaffID.getText()))
+                if (Navigation.ProductTbl.get(0).get(i).equals(txt_ProductFormID.getText()))
                 {
                     index = i;
                 }
             }
-            Navigation.StaffTbl.get(0).remove(index);
-            Navigation.StaffTbl.get(1).remove(index);
-            Navigation.StaffTbl.get(2).remove(index);
-            Navigation.StaffTbl.get(3).remove(index);
-            Navigation.StaffTbl.get(4).remove(index);
-            Navigation.StaffTbl.get(5).remove(index);
-            Navigation.StaffTbl.get(6).remove(index);
-            Navigation.StaffTbl.get(7).remove(index);
+            Navigation.ProductTbl.get(0).remove(index);
+            Navigation.ProductTbl.get(1).remove(index);
+            Navigation.ProductTbl.get(2).remove(index);
+            Navigation.ProductTbl.get(3).remove(index);
+            Navigation.ProductTbl.get(4).remove(index);
+            Navigation.ProductTbl.get(5).remove(index);
+            Navigation.ProductTbl.get(6).remove(index);
+            Navigation.ProductTbl.get(7).remove(index);
         }
     }
     
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
-        // TODO add your handling code here:
+        switch(JOptionPane.showConfirmDialog(null,"Delete record?", "Delete", JOptionPane.YES_NO_OPTION))
+        {
+            case YES_OPTION:
+                if (bEdit == false)
+                {
+                    Clear();
+                }
+                else if (bEdit == true)
+                {
+                    RemoveData();
+                    Clear();
+                    TableLoad();
+                }
+                break;
+            case NO_OPTION:
+            case CLOSED_OPTION:
+                break;
+        }
     }//GEN-LAST:event_btn_deleteActionPerformed
 
-    private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_editActionPerformed
+    private void btn_EditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EditActionPerformed
+        if (btn_Edit.getText().equals("Edit Record"))
+        {
+            btn_Edit.setText("New Record");
+            tblDatabase.setEnabled(true);
+            bEdit = true;
+        }
+        else if (btn_Edit.getText().equals("New Record"))
+        {
+            btn_Edit.setText("Edit Record");
+            tblDatabase.setEnabled(false);
+            bEdit = false;
+            Clear();
+        }
+    }//GEN-LAST:event_btn_EditActionPerformed
 
     private void LoadProducts(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_LoadProducts
         txt_ProductFormID.setEnabled(false);
@@ -512,6 +567,20 @@ public class Products extends javax.swing.JFrame {
         ComboLoad();
         tblDatabase.setEnabled(false); //disabling the table on load
     }//GEN-LAST:event_LoadProducts
+
+    private void tblDatabaseKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblDatabaseKeyPressed
+        switch(evt.getExtendedKeyCode())
+        {
+            case KeyEvent.VK_UP:
+            case KeyEvent.VK_DOWN:
+                SelectedRecord();
+                break;
+        }
+    }//GEN-LAST:event_tblDatabaseKeyPressed
+
+    private void tblDatabaseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDatabaseMouseClicked
+        SelectedRecord();
+    }//GEN-LAST:event_tblDatabaseMouseClicked
 
     private void TableLoad() {
         DefaultTableModel tableModel = (DefaultTableModel) tblDatabase.getModel();
@@ -589,10 +658,26 @@ public class Products extends javax.swing.JFrame {
         });
     }
 
+    private void SelectedRecord() {
+        int SelectedData = tblDatabase.getSelectedRow();
+        
+        txt_ProductFormID.setText(Navigation.ProductTbl.get(0).get(SelectedData));
+        txt_ProName.setText(Navigation.ProductTbl.get(3).get(SelectedData));
+        txt_Manufacturer.setText(Navigation.ProductTbl.get(4).get(SelectedData));
+        txt_ModNo.setText(Navigation.ProductTbl.get(5).get(SelectedData));
+        txt_SerialNo.setText(Navigation.ProductTbl.get(6).get(SelectedData));
+        txt_DateIn.setText(Navigation.ProductTbl.get(7).get(SelectedData));
+        txt_Problem.setText(Navigation.ProductTbl.get(8).get(SelectedData));
+        txt_FixDate.setText(Navigation.ProductTbl.get(9).get(SelectedData));
+        txt_Finished.setText(Navigation.ProductTbl.get(10).get(SelectedData));
+        cmbCustID.setSelectedItem(Navigation.ProductTbl.get(1).get(SelectedData));
+        cmbStaffID.setSelectedItem(Navigation.ProductTbl.get(2).get(SelectedData));
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JToggleButton btn_Edit;
     private javax.swing.JButton btn_QuitProd;
     private javax.swing.JButton btn_delete;
-    private javax.swing.JToggleButton btn_edit;
     private javax.swing.JButton btn_submit;
     private javax.swing.JComboBox<String> cmbCustID;
     private javax.swing.JComboBox<String> cmbStaffID;

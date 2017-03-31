@@ -148,7 +148,7 @@
                                   <EmptySpace min="-2" pref="415" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="1" attributes="0">
                                       <Component id="lbl_Products" min="-2" max="-2" attributes="0"/>
-                                      <Component id="btn_edit" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btn_Edit" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -215,7 +215,7 @@
                           <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="btn_QuitProd" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btn_edit" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btn_Edit" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btn_delete" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btn_submit" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -324,12 +324,12 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="txt_ProductFormID">
                 </Component>
-                <Component class="javax.swing.JToggleButton" name="btn_edit">
+                <Component class="javax.swing.JToggleButton" name="btn_Edit">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Edit Record"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_editActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_EditActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btn_delete">
@@ -374,6 +374,10 @@
                           <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblDatabaseMouseClicked"/>
+                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tblDatabaseKeyPressed"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>

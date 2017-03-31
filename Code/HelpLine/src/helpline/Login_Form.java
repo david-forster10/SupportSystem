@@ -8,6 +8,7 @@ public class Login_Form extends javax.swing.JFrame {
     
     public Login_Form() {
         initComponents();
+        this.getRootPane().setDefaultButton(btn_Go);
     }
 
     @SuppressWarnings("unchecked")
@@ -24,20 +25,11 @@ public class Login_Form extends javax.swing.JFrame {
         txt_Password = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
-            }
-        });
 
         lbl_Username.setText("Username");
 
         btn_Go.setText("Go");
-        btn_Go.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_GoMouseClicked(evt);
-            }
-        });
+        btn_Go.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_Go.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_GoActionPerformed(evt);
@@ -45,15 +37,10 @@ public class Login_Form extends javax.swing.JFrame {
         });
 
         btn_Quit.setText("Quit");
+        btn_Quit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_Quit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_QuitActionPerformed(evt);
-            }
-        });
-
-        txt_Username.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_UsernameActionPerformed(evt);
             }
         });
 
@@ -125,21 +112,7 @@ public class Login_Form extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txt_UsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_UsernameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_UsernameActionPerformed
-
     private void btn_GoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_GoActionPerformed
-    }//GEN-LAST:event_btn_GoActionPerformed
-
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {
-    }
-    
-    private void btn_QuitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_QuitActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_btn_QuitActionPerformed
-
-    private void btn_GoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_GoMouseClicked
         String sUNInput = txt_Username.getText();
         String sPWInput = txt_Password.getText();
         String sHashedPW;
@@ -186,7 +159,11 @@ public class Login_Form extends javax.swing.JFrame {
                     break;
             }
         }
-    }//GEN-LAST:event_btn_GoMouseClicked
+    }//GEN-LAST:event_btn_GoActionPerformed
+    
+    private void btn_QuitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_QuitActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_btn_QuitActionPerformed
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

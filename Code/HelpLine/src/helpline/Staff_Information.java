@@ -1,14 +1,12 @@
 package helpline;
 
-import static helpline.HelpLine.User;
 import java.awt.Graphics2D;
-import java.awt.Image;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,15 +16,21 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
+import static javax.swing.JOptionPane.CLOSED_OPTION;
+import static javax.swing.JOptionPane.NO_OPTION;
+import static javax.swing.JOptionPane.YES_OPTION;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
 public class Staff_Information extends javax.swing.JFrame {
 
+    private boolean bEdit = false;
     private static final int IMG_WIDTH = 180;
-    private static final int IMG_HEIGHT = 180;    
+    private static final int IMG_HEIGHT = 180;
+    private static String SelectedImg = "";
+    private static int Size = 0;
+    private static int NewID = 0;
     
     public Staff_Information() {
         initComponents();
@@ -56,6 +60,7 @@ public class Staff_Information extends javax.swing.JFrame {
         lbl_PostCode = new javax.swing.JLabel();
         btnSave = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
+        lblPlace = new javax.swing.JLabel();
         lblPicture = new javax.swing.JLabel();
         tgbtn_Edit = new javax.swing.JToggleButton();
         lbl_StaffID = new javax.swing.JLabel();
@@ -93,15 +98,32 @@ public class Staff_Information extends javax.swing.JFrame {
         });
         tblDatabase.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         tblDatabase.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tblDatabase.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tblDatabase.getTableHeader().setResizingAllowed(false);
         tblDatabase.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(tblDatabase);
-
-        txt_FName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_FNameActionPerformed(evt);
+        tblDatabase.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblDatabaseMouseClicked(evt);
             }
         });
+        tblDatabase.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tblDatabaseKeyPressed(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblDatabase);
+
+        txt_FName.setNextFocusableComponent(txt_Surname);
+
+        txt_Surname.setNextFocusableComponent(txt_Email);
+
+        txt_Email.setNextFocusableComponent(txt_Address);
+
+        txt_Address.setNextFocusableComponent(txt_PostCode);
+
+        txt_PostCode.setNextFocusableComponent(txt_DoB);
+
+        txt_DoB.setNextFocusableComponent(btnSave);
 
         lbl_Surname.setText("Surname");
 
@@ -111,9 +133,9 @@ public class Staff_Information extends javax.swing.JFrame {
         lbl_Info.setText("Staff Info");
 
         btnDelete.setText("Delete");
-        btnDelete.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnDeleteMouseClicked(evt);
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
             }
         });
 
@@ -128,14 +150,14 @@ public class Staff_Information extends javax.swing.JFrame {
             }
         });
 
-        lbl_DoB.setText("DOB (YYYY/MM/DD)");
+        lbl_DoB.setText("DOB (YYYY-MM-DD)");
 
         lbl_PostCode.setText("Post Code");
 
         btnSave.setText("Save");
-        btnSave.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnSaveMouseClicked(evt);
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
             }
         });
 
@@ -147,7 +169,7 @@ public class Staff_Information extends javax.swing.JFrame {
             }
         });
 
-        lblPicture.setText("Click to add picture");
+        lblPlace.setText("Click to add picture");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -155,23 +177,21 @@ public class Staff_Information extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(48, Short.MAX_VALUE)
-                .addComponent(lblPicture)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblPicture)
+                    .addComponent(lblPlace))
                 .addGap(41, 41, 41))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(82, 82, 82)
                 .addComponent(lblPicture)
-                .addContainerGap(84, Short.MAX_VALUE))
+                .addGap(68, 68, 68)
+                .addComponent(lblPlace)
+                .addContainerGap(98, Short.MAX_VALUE))
         );
 
         tgbtn_Edit.setText("Edit Record");
-        tgbtn_Edit.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tgbtn_EditMouseClicked(evt);
-            }
-        });
         tgbtn_Edit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tgbtn_EditActionPerformed(evt);
@@ -179,12 +199,6 @@ public class Staff_Information extends javax.swing.JFrame {
         });
 
         lbl_StaffID.setText("Staff ID");
-
-        txt_StaffID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_StaffIDActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -306,10 +320,6 @@ public class Staff_Information extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txt_FNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_FNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_FNameActionPerformed
-
     private void btn_QuitInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_QuitInfoActionPerformed
         Navigation BackStaff = new Navigation();
         BackStaff.setVisible(true);
@@ -318,52 +328,182 @@ public class Staff_Information extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         txt_StaffID.setEnabled(false);
-        int StaffIDGen = Navigation.StaffTbl.get(1).size();
-        txt_StaffID.setText(Integer.toString(Integer.parseInt(Navigation.StaffTbl.get(1).get(StaffIDGen)) + 1));
-        DefaultTableModel tableModel = (DefaultTableModel) tblDatabase.getModel();
+        Size = Navigation.StaffTbl.get(0).size();
+        String StaffIDLast = Navigation.StaffTbl.get(0).get(Size - 1);
+        NewID = Integer.parseInt(StaffIDLast) + 1;
+        txt_StaffID.setText(Integer.toString(NewID));
         
-        for (int i = 0; i < Navigation.StaffTbl.get(1).size(); i++)
-        {
-            Object[] rowData = { 
-                Navigation.StaffTbl.get(0).get(i), 
-                Navigation.StaffTbl.get(1).get(i), 
-                Navigation.StaffTbl.get(2).get(i), 
-                Navigation.StaffTbl.get(3).get(i),
-                Navigation.StaffTbl.get(4).get(i),
-                Navigation.StaffTbl.get(5).get(i),
-                Navigation.StaffTbl.get(6).get(i),
-                Navigation.StaffTbl.get(7).get(i)
-            };
-            tableModel.addRow(rowData);
-        }
+        TableLoad();
         tblDatabase.setEnabled(false);
     }//GEN-LAST:event_formWindowOpened
 
-    private void tgbtn_EditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tgbtn_EditActionPerformed
-    }//GEN-LAST:event_tgbtn_EditActionPerformed
-
-    private void tgbtn_EditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tgbtn_EditMouseClicked
-        if (tgbtn_Edit.getText().equals("Edit Record"))
+    private void AddData() {
+        try 
         {
-            tgbtn_Edit.setText("New Record");
-            tblDatabase.setEnabled(true);
-        }
-        else if (tgbtn_Edit.getText().equals("New Record"))
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/helpline?allowMultiQueries=true","user","user");
+            Statement stmt = (Statement)con.createStatement();
+            
+            String sql = "INSERT INTO `staff information form` (`StaffID`, `FirstName`, `LastName`, `Address`, `PostCode`, `Email`, `DateOfBirth`, `PictureURL`) VALUES ('"+Integer.parseInt(txt_StaffID.getText())+"', '"+txt_FName.getText()+"', '"+txt_Surname.getText()+"', '"+txt_Address.getText()+"', '"+txt_PostCode.getText()+"', '"+txt_Email.getText()+"', '"+txt_DoB.getText()+"', '"+SelectedImg+"')";
+            stmt.execute(sql);
+            con.close();            
+        } 
+        catch (Exception ex) 
         {
-            tgbtn_Edit.setText("Edit Record");
-            tblDatabase.setEnabled(false);
+            Logger.getLogger(HelpLine.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_tgbtn_EditMouseClicked
+        
+        Navigation.StaffTbl.get(0).add(txt_StaffID.getText());
+        Navigation.StaffTbl.get(1).add(txt_FName.getText());
+        Navigation.StaffTbl.get(2).add(txt_Surname.getText());
+        Navigation.StaffTbl.get(3).add(txt_Address.getText());
+        Navigation.StaffTbl.get(4).add(txt_PostCode.getText());
+        Navigation.StaffTbl.get(5).add(txt_Email.getText());
+        Navigation.StaffTbl.get(6).add(txt_DoB.getText());
+        Navigation.StaffTbl.get(7).add(SelectedImg);
+        NewID += 1;
+    }
+    
+    private void UpdateData() {
+        try 
+        {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/helpline?allowMultiQueries=true","user","user");
+            Statement stmt = (Statement)con.createStatement();
+            
+            String sql = "UPDATE `staff information form` SET `StaffID` = '"+Integer.parseInt(txt_StaffID.getText())+"' , `FirstName` = '"+txt_FName.getText()+"' , `LastName` = '"+txt_Surname.getText()+"', `Address` = '"+txt_Address.getText()+"', `PostCode` = '"+txt_PostCode.getText()+"', `Email` = '"+txt_Email.getText()+"', `DateOfBirth` = '"+txt_DoB.getText()+"', `PictureURL` = '"+SelectedImg+"' WHERE `StaffID` = '"+Integer.parseInt(txt_StaffID.getText())+"'";
+            stmt.execute(sql);
+            con.close();            
+        } 
+        catch (Exception ex) 
+        {
+            Logger.getLogger(HelpLine.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        int index = 0;
+        for (int i = 0; i < Size; i++)
+        {
+            if (Navigation.StaffTbl.get(0).get(i).equals(txt_StaffID.getText()))
+            {
+                index = i;
+            }
+        }
+        Navigation.StaffTbl.get(0).set(index, txt_StaffID.getText());
+        Navigation.StaffTbl.get(1).set(index, txt_FName.getText());
+        Navigation.StaffTbl.get(2).set(index, txt_Surname.getText());
+        Navigation.StaffTbl.get(3).set(index, txt_Address.getText());
+        Navigation.StaffTbl.get(4).set(index, txt_PostCode.getText());
+        Navigation.StaffTbl.get(5).set(index, txt_Email.getText());
+        Navigation.StaffTbl.get(6).set(index, txt_DoB.getText());
+        Navigation.StaffTbl.get(7).set(index, SelectedImg);
+    }
+    
+    private void RemoveData(){
+        boolean bFailed = false;
+        try 
+        {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/helpline?allowMultiQueries=true","user","user");
+            Statement stmt = (Statement)con.createStatement();
+            
+            String sql = "DELETE FROM `staff information form` WHERE `StaffID` = '"+Integer.parseInt(txt_StaffID.getText())+"'";
+            stmt.execute(sql);
+            con.close();            
+        } 
+        catch (Exception ex) 
+        {
+            Logger.getLogger(HelpLine.class.getName()).log(Level.SEVERE, null, ex);
+            bFailed = true;
+            JOptionPane.showMessageDialog(null, "Error in deleting Record!", "Error", JOptionPane.WARNING_MESSAGE);
+        }
+        if (bFailed == false)
+        {
+            int index = 0;
+            for (int i = 0; i < Size; i++)
+            {
+                if (Navigation.StaffTbl.get(0).get(i).equals(txt_StaffID.getText()))
+                {
+                    index = i;
+                }
+            }
+            Navigation.StaffTbl.get(0).remove(index);
+            Navigation.StaffTbl.get(1).remove(index);
+            Navigation.StaffTbl.get(2).remove(index);
+            Navigation.StaffTbl.get(3).remove(index);
+            Navigation.StaffTbl.get(4).remove(index);
+            Navigation.StaffTbl.get(5).remove(index);
+            Navigation.StaffTbl.get(6).remove(index);
+            Navigation.StaffTbl.get(7).remove(index);
+        }
+    }
+    
+    private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
+        final JFileChooser fc = new JFileChooser();
+        FileFilter imageFilter = new FileNameExtensionFilter("Image files", ImageIO.getReaderFileSuffixes());
+        fc.addChoosableFileFilter(imageFilter);
+        fc.setAcceptAllFileFilterUsed(false);
+        int returnVal = fc.showDialog(Staff_Information.this, "Open");      
+        
+        try 
+        {
+            SelectedImg = fc.getSelectedFile().getPath();
+            ExtensionFormat();
+            BufferedImage img = ImageIO.read(fc.getSelectedFile());
+            int type = img.getType() == 0? BufferedImage.TYPE_INT_ARGB : img.getType();
 
-    private void txt_StaffIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_StaffIDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_StaffIDActionPerformed
+            BufferedImage resizeImageJpg = resizeImage(img, type);
+            lblPlace.setText("");
+            lblPicture.setIcon(new ImageIcon(resizeImageJpg));
+        } 
+        catch (IOException ex) 
+        {
+            SelectedImg = "";
+            lblPicture.setIcon(null);
+            lblPlace.setText("Click to add picture");
+            Logger.getLogger(Staff_Information.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jPanel2MouseClicked
 
-    private void btnSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveMouseClicked
+    private void tblDatabaseKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblDatabaseKeyPressed
+        switch(evt.getExtendedKeyCode())
+        {
+            case KeyEvent.VK_UP:
+            case KeyEvent.VK_DOWN:
+                SelectedRecord();
+                break;
+        }
+    }//GEN-LAST:event_tblDatabaseKeyPressed
+
+    private void tblDatabaseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDatabaseMouseClicked
+        SelectedRecord();
+    }//GEN-LAST:event_tblDatabaseMouseClicked
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        switch(JOptionPane.showConfirmDialog(null,"Delete record?", "Delete", JOptionPane.YES_NO_OPTION))
+        {
+            case YES_OPTION:
+                if (bEdit == false)
+                {
+                    Clear();
+                }
+                else if (bEdit == true)
+                {
+                    RemoveData();
+                    Clear();
+                    TableLoad();
+                }
+                break;
+            case NO_OPTION:
+            case CLOSED_OPTION:
+                break;
+        }
+        
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         Pattern pat = Pattern.compile("[^a-z ]", Pattern.CASE_INSENSITIVE);
         Pattern pat2 = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
         Pattern pat3 = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
-        Pattern pat4 = Pattern.compile("\\d{4}/\\d{2}/\\d{2}", Pattern.CASE_INSENSITIVE);
+        Pattern pat4 = Pattern.compile("\\d{4}-\\d{2}-\\d{2}", Pattern.CASE_INSENSITIVE);
         Matcher match1 = pat.matcher(txt_FName.getText());
         Matcher match2 = pat.matcher(txt_Surname.getText());
         Matcher match3 = pat2.matcher(txt_Email.getText());
@@ -377,75 +517,67 @@ public class Staff_Information extends javax.swing.JFrame {
         }
         else
         {
-            if (match1.find() || match2.find() || match3.find() || match4.find() || match5.find() || match6.find())
+            if (!SelectedImg.equals(""))
             {
-                if (txt_Email.getText().contains("@"))
+                if (match1.find() || match2.find() || match3.find() || match4.find() || match5.find() || match6.find())
                 {
-                    if (txt_PostCode.getText().length() < 9)
+                    if (txt_Email.getText().contains("@"))
                     {
-                        AddData();
+                        if (txt_PostCode.getText().length() < 9)
+                        {
+                            if (bEdit == false)
+                            {
+                                AddData();
+                            }
+                            else
+                            {
+                                UpdateData();
+                            }
+                            Clear();
+                            TableLoad();
+                        }
+                        else
+                        {
+                            JOptionPane.showMessageDialog(null, "Please enter a valid Post Code!", "Error", JOptionPane.WARNING_MESSAGE);
+                        }
                     }
                     else
                     {
-                        JOptionPane.showMessageDialog(null, "Please enter a valid Post Code!", "Error", JOptionPane.WARNING_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Please enter a valid Email!", "Error", JOptionPane.WARNING_MESSAGE);
                     }
                 }
                 else
                 {
-                    JOptionPane.showMessageDialog(null, "Please enter a valid Email!", "Error", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Please only input valid characters!", "Error", JOptionPane.WARNING_MESSAGE);
                 }
             }
             else
             {
-                JOptionPane.showMessageDialog(null, "Please only input valid characters!", "Error", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Please select a picture for the member of staff!", "Error", JOptionPane.WARNING_MESSAGE);
             }
         }
-    }//GEN-LAST:event_btnSaveMouseClicked
+    }//GEN-LAST:event_btnSaveActionPerformed
 
-    public void AddData()
-    {
-        try 
+    private void tgbtn_EditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tgbtn_EditActionPerformed
+        if (tgbtn_Edit.getText().equals("Edit Record"))
         {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/helpline?allowMultiQueries=true","user","user");
-            Statement stmt = (Statement)con.createStatement();
-            
-            String sql = "INSERT INTO `staff information form` (`StaffID`, `FirstName`, `LastName`, `Address`, `PostCode`, `Email`, `DateOfBirth`) VALUES ('"+Integer.parseInt(txt_StaffID.getText())+"', '"+txt_FName.getText()+"', '"+txt_Surname.getText()+"', '"+txt_Address.getText()+"', '"+txt_PostCode.getText()+"', '"+txt_Email.getText()+"', '"+txt_DoB.getText()+"')";
-            stmt.execute(sql);
-            con.close();            
-        } 
-        catch (Exception ex) 
-        {
-            Logger.getLogger(HelpLine.class.getName()).log(Level.SEVERE, null, ex);
+            tgbtn_Edit.setText("New Record");
+            tblDatabase.setEnabled(true);
+            bEdit = true;
         }
+        else if (tgbtn_Edit.getText().equals("New Record"))
+        {
+            tgbtn_Edit.setText("Edit Record");
+            tblDatabase.setEnabled(false);
+            bEdit = false;
+            Clear();
+        }
+    }//GEN-LAST:event_tgbtn_EditActionPerformed
+    
+    private static void ExtensionFormat() {
+        SelectedImg = SelectedImg.replaceAll("\\\\", "\\\\\\\\");
     }
     
-    private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnDeleteMouseClicked
-
-    private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
-        final JFileChooser fc = new JFileChooser();
-        FileFilter imageFilter = new FileNameExtensionFilter("Image files", ImageIO.getReaderFileSuffixes());
-        fc.addChoosableFileFilter(imageFilter);
-        fc.setAcceptAllFileFilterUsed(false);
-        int returnVal = fc.showDialog(Staff_Information.this, "Open");      
-        
-        try 
-        {
-            BufferedImage img = ImageIO.read(fc.getSelectedFile());
-            int type = img.getType() == 0? BufferedImage.TYPE_INT_ARGB : img.getType();
-
-            BufferedImage resizeImageJpg = resizeImage(img, type);
-            lblPicture.setText("");
-            lblPicture.setIcon(new ImageIcon(resizeImageJpg));
-        } 
-        catch (IOException ex) 
-        {
-            Logger.getLogger(Staff_Information.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jPanel2MouseClicked
-
     private static BufferedImage resizeImage(BufferedImage originalImage, int type){
 	BufferedImage resizedImage = new BufferedImage(IMG_WIDTH, IMG_HEIGHT, type);
 	Graphics2D g = resizedImage.createGraphics();
@@ -454,7 +586,6 @@ public class Staff_Information extends javax.swing.JFrame {
 
 	return resizedImage;
     }
-
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -489,6 +620,64 @@ public class Staff_Information extends javax.swing.JFrame {
         });
     }
 
+    private void Clear() {
+        txt_StaffID.setText(Integer.toString(NewID));
+        txt_FName.setText("");
+        txt_Surname.setText("");
+        txt_Email.setText("");
+        txt_Address.setText("");
+        txt_PostCode.setText("");
+        txt_DoB.setText("");
+        lblPicture.setIcon(null);
+        lblPlace.setText("Click to add picture");
+    }
+    
+    private void TableLoad() {
+        DefaultTableModel tableModel = (DefaultTableModel) tblDatabase.getModel();
+        
+        tableModel.setRowCount(0);
+        
+        for (int i = 0; i < Navigation.StaffTbl.get(1).size(); i++)
+        {
+            Object[] rowData = { 
+                Navigation.StaffTbl.get(0).get(i), 
+                Navigation.StaffTbl.get(1).get(i), 
+                Navigation.StaffTbl.get(2).get(i), 
+                Navigation.StaffTbl.get(3).get(i),
+                Navigation.StaffTbl.get(4).get(i),
+                Navigation.StaffTbl.get(5).get(i),
+                Navigation.StaffTbl.get(6).get(i),
+                Navigation.StaffTbl.get(7).get(i)
+            };
+            tableModel.addRow(rowData);
+        }
+    }    
+    
+    private void SelectedRecord() {
+        int SelectedData = tblDatabase.getSelectedRow();
+        
+        txt_StaffID.setText(Navigation.StaffTbl.get(0).get(SelectedData));
+        txt_FName.setText(Navigation.StaffTbl.get(1).get(SelectedData));
+        txt_Surname.setText(Navigation.StaffTbl.get(2).get(SelectedData));
+        txt_Email.setText(Navigation.StaffTbl.get(5).get(SelectedData));
+        txt_Address.setText(Navigation.StaffTbl.get(3).get(SelectedData));
+        txt_PostCode.setText(Navigation.StaffTbl.get(4).get(SelectedData));
+        txt_DoB.setText(Navigation.StaffTbl.get(6).get(SelectedData));
+        SelectedImg = Navigation.StaffTbl.get(7).get(SelectedData);
+        File imgLoc = new File(Navigation.StaffTbl.get(7).get(SelectedData));
+                
+        try {
+            BufferedImage img = ImageIO.read(imgLoc);
+            int type = img.getType() == 0? BufferedImage.TYPE_INT_ARGB : img.getType();
+            
+            BufferedImage resizeImageJpg = resizeImage(img, type);
+            lblPlace.setText("");
+            lblPicture.setIcon(new ImageIcon(resizeImageJpg));
+        } catch (IOException ex) {
+            lblPlace.setText("Error Loading Picture - File not found");
+            Logger.getLogger(Staff_Information.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnSave;
@@ -497,6 +686,7 @@ public class Staff_Information extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblPicture;
+    private javax.swing.JLabel lblPlace;
     private javax.swing.JLabel lbl_Address;
     private javax.swing.JLabel lbl_DoB;
     private javax.swing.JLabel lbl_Email;

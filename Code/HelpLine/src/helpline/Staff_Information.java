@@ -337,7 +337,7 @@ public class Staff_Information extends javax.swing.JFrame {
         tblDatabase.setEnabled(false);
     }//GEN-LAST:event_formWindowOpened
 
-    public void AddData() {
+    private void AddData() {
         try 
         {
             Class.forName("com.mysql.jdbc.Driver");
@@ -364,7 +364,7 @@ public class Staff_Information extends javax.swing.JFrame {
         NewID += 1;
     }
     
-    public void UpdateData() {
+    private void UpdateData() {
         try 
         {
             Class.forName("com.mysql.jdbc.Driver");
@@ -395,6 +395,44 @@ public class Staff_Information extends javax.swing.JFrame {
         Navigation.StaffTbl.get(5).set(index, txt_Email.getText());
         Navigation.StaffTbl.get(6).set(index, txt_DoB.getText());
         Navigation.StaffTbl.get(7).set(index, SelectedImg);
+    }
+    
+    private void RemoveData(){
+        boolean bFailed = false;
+        try 
+        {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/helpline?allowMultiQueries=true","user","user");
+            Statement stmt = (Statement)con.createStatement();
+            
+            String sql = "DELETE FROM * WHERE `StaffID` = '"+Integer.parseInt(txt_StaffID.getText())+"'";
+            stmt.execute(sql);
+            con.close();            
+        } 
+        catch (Exception ex) 
+        {
+            Logger.getLogger(HelpLine.class.getName()).log(Level.SEVERE, null, ex);
+            bFailed = true;
+        }
+        if (bFailed = false)
+        {
+            int index = 0;
+            for (int i = 0; i < Size; i++)
+            {
+                if (Navigation.StaffTbl.get(0).get(i).equals(txt_StaffID.getText()))
+                {
+                    index = i;
+                }
+            }
+            Navigation.StaffTbl.get(0).remove(index);
+            Navigation.StaffTbl.get(1).remove(index);
+            Navigation.StaffTbl.get(2).remove(index);
+            Navigation.StaffTbl.get(3).remove(index);
+            Navigation.StaffTbl.get(4).remove(index);
+            Navigation.StaffTbl.get(5).remove(index);
+            Navigation.StaffTbl.get(6).remove(index);
+            Navigation.StaffTbl.get(7).remove(index);
+        }
     }
     
     private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
@@ -448,16 +486,9 @@ public class Staff_Information extends javax.swing.JFrame {
                 }
                 else if (bEdit == true)
                 {
-                    Pattern pat = Pattern.compile("[^a-z ]", Pattern.CASE_INSENSITIVE);
-                    Pattern pat2 = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
-                    Pattern pat3 = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
-                    Pattern pat4 = Pattern.compile("\\d{4}-\\d{2}-\\d{2}", Pattern.CASE_INSENSITIVE);
-                    Matcher match1 = pat.matcher(txt_FName.getText());
-                    Matcher match2 = pat.matcher(txt_Surname.getText());
-                    Matcher match3 = pat2.matcher(txt_Email.getText());
-                    Matcher match4 = pat3.matcher(txt_Address.getText());
-                    Matcher match5 = pat3.matcher(txt_PostCode.getText());
-                    Matcher match6 = pat4.matcher(txt_DoB.getText());
+                    RemoveData();
+                    Clear();
+                    TableLoad();
                 }
                 break;
             case NO_OPTION:

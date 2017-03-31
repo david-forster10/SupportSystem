@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.JProgressBar" name="jProgressBar1">
+    </Component>
+  </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
@@ -56,7 +60,10 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jPanel3" alignment="1" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -75,52 +82,44 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                                  <Component id="btn_QuitProd" min="-2" pref="70" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="151" max="-2" attributes="0"/>
+                                  <Component id="btn_edit" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lbl_ProName" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lbl_Manufacturer" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lbl_ModNo" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lbl_SerialNo" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="txt_ProductFormID" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txt_CustomerReportingFormID" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txt_ProName" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txt_Manufacturer" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txt_ModNo" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txt_SerialNo" alignment="1" min="-2" pref="160" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="btn_delete" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jScrollPane2" max="32767" attributes="0"/>
+                                  <Component id="btn_submit" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="lbl_Manufacturer" min="-2" max="-2" attributes="0"/>
-                                              <Component id="lbl_ProName" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                                              <Component id="lbl_ModNo" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="txt_SerialNo" alignment="0" max="32767" attributes="0"/>
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                                  <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Component id="txt_ProName" alignment="0" max="32767" attributes="0"/>
-                                                      <Group type="102" alignment="1" attributes="0">
-                                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                              <Component id="txt_Manufacturer" max="32767" attributes="0"/>
-                                                              <Component id="txt_ModNo" min="-2" pref="130" max="-2" attributes="0"/>
-                                                          </Group>
-                                                      </Group>
-                                                  </Group>
-                                              </Group>
-                                              <Component id="txt_CustomerReportingFormID" alignment="1" max="32767" attributes="0"/>
-                                              <Component id="txt_ProductFormID" alignment="1" max="32767" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <Group type="102" attributes="0">
-                                          <Group type="103" groupAlignment="1" attributes="0">
-                                              <Component id="btn_QuitProd" min="-2" pref="70" max="-2" attributes="0"/>
-                                              <Component id="lbl_SerialNo" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace max="32767" attributes="0"/>
-                                          <Component id="btn_edit" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
                                   <Group type="103" groupAlignment="0" attributes="0">
+<<<<<<< HEAD
                                       <Group type="102" alignment="1" attributes="0">
                                           <EmptySpace max="32767" attributes="0"/>
                                           <Component id="btn_delete" min="-2" max="-2" attributes="0"/>
@@ -171,62 +170,104 @@
 >>>>>>> refs/remotes/origin/master
                                           </Group>
                                       </Group>
+=======
+                                      <Component id="jLabel3" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lbl_DateIn" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lbl_FixDate" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lbl_Problem" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lbl_Finished" alignment="1" min="-2" pref="40" max="-2" attributes="0"/>
+>>>>>>> refs/remotes/origin/master
                                   </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="txt_DateIn" pref="160" max="32767" attributes="0"/>
+                                      <Component id="txt_StaffID" max="32767" attributes="0"/>
+                                      <Component id="txt_Problem" max="32767" attributes="0"/>
+                                      <Component id="txt_FixDate" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txt_Finished" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          <Component id="lbl_Products" min="-2" pref="99" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="251" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                                  <Component id="jScrollPane2" min="-2" pref="885" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="393" max="-2" attributes="0"/>
+                                  <Component id="lbl_Products" min="-2" pref="99" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                          <Component id="lbl_Products" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txt_ProductFormID" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txt_StaffID" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txt_CustomerReportingFormID" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="lbl_ProName" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txt_ProName" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="lbl_DateIn" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txt_DateIn" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="lbl_Manufacturer" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txt_Manufacturer" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="lbl_Problem" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txt_Problem" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="lbl_ModNo" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txt_ModNo" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="lbl_FixDate" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txt_FixDate" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="lbl_SerialNo" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txt_SerialNo" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="lbl_Finished" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txt_Finished" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                                  <Component id="lbl_Products" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="txt_ProductFormID" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txt_StaffID" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="txt_CustomerReportingFormID" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txt_DateIn" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lbl_DateIn" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="txt_ProName" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lbl_ProName" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lbl_Problem" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txt_Problem" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="txt_Manufacturer" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lbl_Manufacturer" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="txt_ModNo" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lbl_ModNo" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="txt_SerialNo" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lbl_SerialNo" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="lbl_FixDate" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="txt_FixDate" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="lbl_Finished" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="txt_Finished" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                              </Group>
                           </Group>
                           <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -373,9 +414,6 @@
                   </Events>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txt_StaffID">
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_StaffIDActionPerformed"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JToggleButton" name="btn_edit">
                   <Properties>
@@ -404,17 +442,17 @@
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                           <Table columnCount="11" rowCount="0">
-                            <Column editable="false" title="productFormID" type="java.lang.String"/>
-                            <Column editable="false" title="CustomerReportingFormID" type="java.lang.String"/>
-                            <Column editable="false" title="StaffID" type="java.lang.String"/>
+                            <Column editable="false" title="Product Form ID" type="java.lang.String"/>
+                            <Column editable="false" title="Customer Reporting Form ID" type="java.lang.String"/>
+                            <Column editable="false" title="Staff ID" type="java.lang.String"/>
                             <Column editable="false" title="Product Name" type="java.lang.String"/>
-                            <Column editable="false" title="Manufacturer" type="java.lang.Object"/>
-                            <Column editable="false" title="Model Number" type="java.lang.Object"/>
-                            <Column editable="false" title="Serial Number" type="java.lang.Object"/>
-                            <Column editable="false" title="Date bought in for fixing" type="java.lang.Object"/>
-                            <Column editable="false" title="Nature of problem" type="java.lang.Object"/>
-                            <Column editable="false" title="Date fixed" type="java.lang.Object"/>
-                            <Column editable="false" title="Work Done" type="java.lang.Object"/>
+                            <Column editable="false" title="Manufacturer" type="java.lang.String"/>
+                            <Column editable="false" title="Model Number" type="java.lang.String"/>
+                            <Column editable="false" title="Serial Number" type="java.lang.String"/>
+                            <Column editable="false" title="Date bought in for fixing" type="java.lang.String"/>
+                            <Column editable="false" title="Nature of problem" type="java.lang.String"/>
+                            <Column editable="false" title="Date fixed" type="java.lang.String"/>
+                            <Column editable="false" title="Work Done" type="java.lang.String"/>
                           </Table>
                         </Property>
                       </Properties>

@@ -23,7 +23,7 @@ public class CbaToLoginManually
 			e.printStackTrace();
 		}
 		try {
-			Runtime.getRuntime().exec("cmd /c start C:\\Users\\Vanilla\\Documents\\SupportSystem\\Code\\HelpLine\\dist\\HelpLine.jar");
+			Runtime.getRuntime().exec("cmd /c start C:\\Users\\Vanilla\\Documents\\GitHub\\SupportSystem\\Code\\HelpLine\\dist\\HelpLine.jar");
 			robot.delay(1000);
 			successful = true;
 		} catch (IOException e) {

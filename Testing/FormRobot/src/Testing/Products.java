@@ -24,7 +24,7 @@ public class Products
 				e.printStackTrace();
 			}
 			try {
-				Runtime.getRuntime().exec("cmd /c start C:\\Users\\Vanilla\\Documents\\SupportSystem\\Code\\HelpLine\\dist\\HelpLine.jar");
+				Runtime.getRuntime().exec("cmd /c start C:\\Users\\Vanilla\\Documents\\GitHub\\SupportSystem\\Code\\HelpLine\\dist\\HelpLine.jar");
 				robot.delay(1200);
 				successful = true;
 			} catch (IOException e) {
@@ -38,13 +38,14 @@ public class Products
 			keyboard.Password("Michelle19700414");
 			
 			//Products Page
-			keyboard.DateIn("2017-03-21");
-			keyboard.ProdName("Graphics Card");
-			keyboard.Problem("Ports on Hard not working");
-			keyboard.Manufacturer("MSI");
-			keyboard.FixDate("2017-03-22");
-			keyboard.ModelNumber("11");
-			keyboard.serialNumber("77");
+			keyboard.DateIn("2017-03-23");
+			keyboard.ProdName("Monitor");
+			keyboard.Problem("Cracks");
+			keyboard.Manufacturer("Sony");
+			keyboard.FixDate("2017-03-25");
+			keyboard.ModelNumber("20");
+			keyboard.WorkDone("Gavin Called");
+			keyboard.serialNumber("100");
 			return successful;
 		}
 		public Products() throws AWTException
@@ -92,7 +93,7 @@ public class Products
 			
 			//Select
 			robot.delay(1200);
-			robot.mouseMove(1064, 200);
+			robot.mouseMove(1066, 200);
 			robot.mousePress(BUTTON1_DOWN_MASK);
 			robot.delay(500);
 			robot.mouseRelease(BUTTON1_DOWN_MASK);
@@ -194,6 +195,7 @@ public class Products
 				robot.mousePress(BUTTON1_DOWN_MASK);
 				robot.delay(500);
 				robot.mouseRelease(BUTTON1_DOWN_MASK);
+				
 				
 				//back
 				robot.delay(2000);

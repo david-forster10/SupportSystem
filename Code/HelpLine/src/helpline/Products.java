@@ -5,6 +5,20 @@
  */
 package helpline;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Vanilla
@@ -48,15 +62,24 @@ public class Products extends javax.swing.JFrame {
         txt_Finished = new javax.swing.JTextField();
         btn_QuitProd = new javax.swing.JButton();
         txt_FixDate = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btn_submit = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        ProductFormID = new javax.swing.JTextField();
-        CustomerReportingFormID = new javax.swing.JTextField();
-        StaffID = new javax.swing.JTextField();
+        txt_ProductFormID = new javax.swing.JTextField();
+        txt_CustomerReportingFormID = new javax.swing.JTextField();
+        txt_StaffID = new javax.swing.JTextField();
+        btn_edit = new javax.swing.JToggleButton();
+        btn_delete = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                LoadProducts(evt);
+            }
+        });
 
         lbl_Products.setFont(new java.awt.Font("Tahoma", 0, 21)); // NOI18N
         lbl_Products.setText("Products");
@@ -77,9 +100,45 @@ public class Products extends javax.swing.JFrame {
 
         lbl_Finished.setText("Finished");
 
+        txt_ProName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_ProNameActionPerformed(evt);
+            }
+        });
+
+        txt_Manufacturer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_ManufacturerActionPerformed(evt);
+            }
+        });
+
+        txt_ModNo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_ModNoActionPerformed(evt);
+            }
+        });
+
         txt_SerialNo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_SerialNoActionPerformed(evt);
+            }
+        });
+
+        txt_DateIn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_DateInActionPerformed(evt);
+            }
+        });
+
+        txt_Problem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_ProblemActionPerformed(evt);
+            }
+        });
+
+        txt_Finished.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_FinishedActionPerformed(evt);
             }
         });
 
@@ -90,10 +149,16 @@ public class Products extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Submit");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        txt_FixDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                txt_FixDateActionPerformed(evt);
+            }
+        });
+
+        btn_submit.setText("Submit");
+        btn_submit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_submitActionPerformed(evt);
             }
         });
 
@@ -103,11 +168,62 @@ public class Products extends javax.swing.JFrame {
 
         jLabel3.setText("Staff ID");
 
-        ProductFormID.addActionListener(new java.awt.event.ActionListener() {
+        txt_ProductFormID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ProductFormIDActionPerformed(evt);
+                txt_ProductFormIDActionPerformed(evt);
             }
         });
+
+        txt_CustomerReportingFormID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_CustomerReportingFormIDActionPerformed(evt);
+            }
+        });
+
+        txt_StaffID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_StaffIDActionPerformed(evt);
+            }
+        });
+
+        btn_edit.setText("Edit");
+        btn_edit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_editActionPerformed(evt);
+            }
+        });
+
+        btn_delete.setText("Delete");
+        btn_delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_deleteActionPerformed(evt);
+            }
+        });
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "productFormID", "CustomerReportingFormID", "StaffID", "Product Name", "Manufacturer", "Model Number", "Serial Number", "Date bought in for fixing", "Nature of problem", "Date fixed", "Work Done"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -116,47 +232,48 @@ public class Products extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addComponent(btn_QuitProd, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_Manufacturer)
-                            .addComponent(lbl_SerialNo)
-                            .addComponent(lbl_ProName)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(lbl_ModNo))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txt_SerialNo)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txt_ProName)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txt_Manufacturer)
-                                            .addComponent(txt_ModNo, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                            .addComponent(CustomerReportingFormID, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(ProductFormID, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(27, 27, 27)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(lbl_FixDate)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(lbl_Finished, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(18, 18, 18)
+                                    .addComponent(lbl_Manufacturer)
+                                    .addComponent(lbl_ProName)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2)
+                                    .addComponent(lbl_ModNo))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txt_Finished)
-                                    .addComponent(txt_FixDate, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)))
+                                    .addComponent(txt_SerialNo)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addGap(1, 1, 1)
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txt_ProName)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                                .addGap(0, 0, Short.MAX_VALUE)
+                                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addComponent(txt_Manufacturer)
+                                                    .addComponent(txt_ModNo, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(txt_CustomerReportingFormID, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txt_ProductFormID, javax.swing.GroupLayout.Alignment.TRAILING)))
                             .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(btn_QuitProd, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbl_SerialNo))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btn_edit)))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btn_delete)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btn_submit))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(27, 27, 27)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<<<<<<< HEAD
                                     .addComponent(lbl_DateIn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel3)
                                     .addComponent(lbl_Problem, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE))
@@ -165,27 +282,49 @@ public class Products extends javax.swing.JFrame {
                                     .addComponent(txt_DateIn, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
                                     .addComponent(txt_Problem)
                                     .addComponent(StaffID, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+=======
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                                .addComponent(lbl_FixDate)
+                                                .addGap(0, 0, Short.MAX_VALUE))
+                                            .addComponent(lbl_Finished, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(txt_Finished)
+                                            .addComponent(txt_FixDate, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel3)
+                                            .addComponent(lbl_DateIn, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(lbl_Problem, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(txt_DateIn, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                                            .addComponent(txt_Problem)
+                                            .addComponent(txt_StaffID, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
+>>>>>>> refs/remotes/origin/master
                 .addGap(19, 19, 19))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(166, 166, 166)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(lbl_Products, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(251, 251, 251))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
+                .addGap(10, 10, 10)
                 .addComponent(lbl_Products)
-                .addGap(8, 8, 8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(ProductFormID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(StaffID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_ProductFormID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_StaffID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(CustomerReportingFormID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_CustomerReportingFormID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_ProName)
@@ -210,11 +349,15 @@ public class Products extends javax.swing.JFrame {
                     .addComponent(txt_SerialNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_Finished)
                     .addComponent(txt_Finished, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(14, 14, 14)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_QuitProd)
-                    .addComponent(jButton1))
-                .addGap(36, 36, 36))
+                    .addComponent(btn_edit)
+                    .addComponent(btn_delete)
+                    .addComponent(btn_submit))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -225,7 +368,9 @@ public class Products extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -264,13 +409,164 @@ public class Products extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_SerialNoActionPerformed
 
-    private void ProductFormIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProductFormIDActionPerformed
+    private void txt_ProductFormIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_ProductFormIDActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ProductFormIDActionPerformed
+    }//GEN-LAST:event_txt_ProductFormIDActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btn_submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_submitActionPerformed
+        Pattern pat = Pattern.compile("[^a-z ]", Pattern.CASE_INSENSITIVE); //allows only text inputs e.g. name fields
+        Pattern pat2 = Pattern.compile("[^0-9.]");
+        Pattern pat3 = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE); //validation for only allowing numbers & letters, e.g. an address
+        Pattern pat4 = Pattern.compile("\\d{4}-\\d{2}-\\d{2}", Pattern.CASE_INSENSITIVE); //validation for a date, format "YYYY/MM/DD"
+        Pattern pat5 = Pattern.compile("[^0-9]");
+     
+        Matcher productformID = pat5.matcher(txt_ProductFormID.getText());
+        Matcher customerID = pat5.matcher(txt_CustomerReportingFormID.getText());
+        Matcher staffID = pat5.matcher(txt_StaffID.getText());
+        Matcher Productname = pat.matcher(txt_ProName.getText());
+        Matcher manufacturer = pat.matcher(txt_Manufacturer.getText());
+        Matcher modNo = pat2.matcher(txt_ModNo.getText());
+        Matcher SerialNo = pat2.matcher(txt_SerialNo.getText());
+        Matcher dateIn = pat4.matcher(txt_DateIn.getText());
+        Matcher problem = pat.matcher(txt_Problem.getText());  
+        Matcher fixDate = pat4.matcher(txt_FixDate.getText());
+        Matcher finished = pat.matcher(txt_Finished.getText());
+    
+        if (txt_ProductFormID.getText().equals("") || txt_CustomerReportingFormID.getText().equals("") || txt_StaffID.getText().equals("") || txt_ProName.getText().equals("") || txt_Manufacturer.getText().equals("") || txt_ModNo.getText().equals("") || txt_SerialNo.getText().equals("") || txt_DateIn.getText().equals("") || txt_Problem.getText().equals("") || txt_FixDate.getText().equals("") || txt_Finished.getText().equals(""))
+        {
+            JOptionPane.showMessageDialog(null, "Please fill in all sections of the form!", "Error", JOptionPane.WARNING_MESSAGE);
+        }
+        else
+        {
+            if (productformID.find() || customerID.find() || staffID.find() || Productname.find() || manufacturer.find() || modNo.find() || SerialNo.find() || dateIn.find() || problem.find() || fixDate.find() || finished.find()) //uses matchers from above, add/remove as needed
+            {
+            }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Please only input valid characters!", "Error", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+    }                                          
+
+    public void AddData(){
+        try {
+        Class.forName("com.mysql.jdbc.Driver"); //don't need to change anything here
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/helpline?allowMultiQueries=true","user","user");
+ 
+    	//in first marks input table name, then in the marks in the brackets, the column headings, add/remove as needed.
+	//in second brackets, change names of text fields, add more as needed
+        
+        String DateIn = txt_DateIn.getText();
+        String FixDate = txt_FixDate.getText();
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        Date In;
+        Date Fix;
+        try {
+            In = (Date) df.parse(DateIn);
+            Fix = (Date) df.parse(FixDate);  
+            String dteIn = df.format(In);
+            String dteFix = df.format(Fix);
+            
+            String insert = "INSERT INTO `product form` VALUES (?, ? , ? , ? , ? , ? , ? , ? , ? , ? , ?) ";
+            PreparedStatement ps = con.prepareStatement(insert);
+            ps.setInt(1, Integer.parseInt(txt_ProductFormID.getText()));
+            ps.setInt(2, Integer.parseInt(txt_CustomerReportingFormID.getText()));
+            ps.setInt(3, Integer.parseInt(txt_StaffID.getText()));
+            ps.setString(4, txt_ProName.getText());
+            ps.setString(5, txt_Manufacturer.getText());
+            ps.setString(6, txt_ModNo.getText());
+            ps.setString(7, txt_SerialNo.getText());
+            ps.setString(8, dteIn);
+            ps.setString(9, txt_Problem.getText());
+            ps.setString(10, dteFix);
+            ps.setString(11, txt_Finished.getText());
+            
+            ps.executeUpdate();
+            
+            ps.execute(insert);
+            con.close(); // FIX 
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }           
+    } 
+    catch (Exception ex) {
+	Logger.getLogger(HelpLine.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    }//GEN-LAST:event_btn_submitActionPerformed
+
+    private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btn_deleteActionPerformed
+
+    private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_editActionPerformed
+
+    private void txt_FixDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_FixDateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_FixDateActionPerformed
+
+    private void LoadProducts(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_LoadProducts
+        txt_ProductFormID.setEnabled(false); //disabling the autogenerated StaffID text file
+        int IDGen = Navigation.ProductTbl.get(1).size(); //getting size of array for last ID generated
+        txt_ProductFormID.setText(Integer.toString(Integer.parseInt(Navigation.ProductTbl.get(1).get(IDGen)) + 1)); //Generating a new ID
+        DefaultTableModel tableModel = (DefaultTableModel) jTable1.getModel(); //declaring a tablemodel for adding records to the JTable
+       
+        for (int i = 0; i < Navigation.ProductTbl.get(1).size(); i++) //loop to add all records to table
+        {
+            Object[] rowData = { 
+                Navigation.ProductTbl.get(0).get(i), //each comma is info for a new row
+                Navigation.ProductTbl.get(1).get(i), 
+                Navigation.ProductTbl.get(2).get(i), 
+                Navigation.ProductTbl.get(3).get(i),
+                Navigation.ProductTbl.get(4).get(i),
+                Navigation.ProductTbl.get(5).get(i),
+                Navigation.ProductTbl.get(6).get(i),
+                Navigation.ProductTbl.get(7).get(i),
+                Navigation.ProductTbl.get(8).get(i),
+                Navigation.ProductTbl.get(9).get(i),
+                Navigation.ProductTbl.get(10).get(i),
+                Navigation.ProductTbl.get(11).get(i),
+                Navigation.ProductTbl.get(12).get(i),
+                Navigation.ProductTbl.get(13).get(i)
+        };
+            tableModel.addRow(rowData); //adding the data into the table
+        }
+            jTable1.setEnabled(false); //disabling the table on load
+    
+    }//GEN-LAST:event_LoadProducts
+
+    private void txt_StaffIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_StaffIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_StaffIDActionPerformed
+
+    private void txt_CustomerReportingFormIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_CustomerReportingFormIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_CustomerReportingFormIDActionPerformed
+
+    private void txt_ProNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_ProNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_ProNameActionPerformed
+
+    private void txt_DateInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_DateInActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_DateInActionPerformed
+
+    private void txt_ManufacturerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_ManufacturerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_ManufacturerActionPerformed
+
+    private void txt_ProblemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_ProblemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_ProblemActionPerformed
+
+    private void txt_ModNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_ModNoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_ModNoActionPerformed
+
+    private void txt_FinishedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_FinishedActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_FinishedActionPerformed
 
     /**
      * @param args the command line arguments
@@ -308,17 +604,18 @@ public class Products extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField CustomerReportingFormID;
-    private javax.swing.JTextField ProductFormID;
-    private javax.swing.JTextField StaffID;
     private javax.swing.JButton btn_QuitProd;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btn_delete;
+    private javax.swing.JToggleButton btn_edit;
+    private javax.swing.JButton btn_submit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbl_DateIn;
     private javax.swing.JLabel lbl_Finished;
     private javax.swing.JLabel lbl_FixDate;
@@ -328,6 +625,7 @@ public class Products extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_Problem;
     private javax.swing.JLabel lbl_Products;
     private javax.swing.JLabel lbl_SerialNo;
+    private javax.swing.JTextField txt_CustomerReportingFormID;
     private javax.swing.JTextField txt_DateIn;
     private javax.swing.JTextField txt_Finished;
     private javax.swing.JTextField txt_FixDate;
@@ -335,6 +633,8 @@ public class Products extends javax.swing.JFrame {
     private javax.swing.JTextField txt_ModNo;
     private javax.swing.JTextField txt_ProName;
     private javax.swing.JTextField txt_Problem;
+    private javax.swing.JTextField txt_ProductFormID;
     private javax.swing.JTextField txt_SerialNo;
+    private javax.swing.JTextField txt_StaffID;
     // End of variables declaration//GEN-END:variables
 }

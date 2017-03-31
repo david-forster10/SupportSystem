@@ -204,59 +204,44 @@ public class All_Programs
 			robot.keyRelease(KeyEvent.VK_TAB);
 		    }
 		
-		public void serialNumber(CharSequence characters)
-		{
-			int length = characters.length();
-			for (int i =0; i < length; i++)
+        public void serialNumber(CharSequence characters)
 			{
-				char character = characters.charAt(i);
-				type(character);
-			}
-			robot.delay(300);
-			robot.keyPress(KeyEvent.VK_TAB);
-			robot.keyRelease(KeyEvent.VK_TAB);
-		    }
-		
-		public void Finished(CharSequence characters)
-		{
-			int length = characters.length();
-			for (int i =0; i < length; i++)
-			{
-				char character = characters.charAt(i);
-				type(character);
-			}
-			robot.delay(300);
-			robot.keyPress(KeyEvent.VK_TAB);
-			robot.keyRelease(KeyEvent.VK_TAB);
-			robot.delay(300);
-			robot.keyPress(KeyEvent.VK_TAB);
-			robot.keyRelease(KeyEvent.VK_TAB);
-			robot.delay(1000);
-			robot.mouseMove(1041, 550);
-			robot.delay(1000);
-			robot.mousePress(BUTTON1_DOWN_MASK);
-			robot.delay(1000);
-			robot.mouseRelease(BUTTON1_DOWN_MASK);
-			robot.delay(2000);
-			robot.mouseMove(596, 550);
-			robot.delay(1000);
-			robot.mousePress(BUTTON1_DOWN_MASK);
-			robot.delay(1000);
-			robot.mouseRelease(BUTTON1_DOWN_MASK);
-			robot.delay(1000);
-			robot.mouseMove(770, 445);
-			robot.delay(500);
-			robot.mousePress(BUTTON1_DOWN_MASK);
-			robot.delay(1000);
-			robot.mouseRelease(BUTTON1_DOWN_MASK);
-			
-			robot.delay(1000);
-			robot.mouseMove(955, 322);
-			robot.delay(500);
-			robot.mousePress(BUTTON1_DOWN_MASK);
-			robot.delay(500);
-			robot.mouseRelease(BUTTON1_DOWN_MASK);
-		    }
+				int length = characters.length();
+				for (int i =0; i < length; i++)
+				{
+					char character = characters.charAt(i);
+					type(character);
+				}
+				//submit
+				robot.delay(500);
+				robot.mouseMove(1041, 550);
+				robot.delay(500);
+				robot.mousePress(BUTTON1_DOWN_MASK);
+				robot.delay(500);
+				robot.mouseRelease(BUTTON1_DOWN_MASK);
+				//back
+				robot.delay(1200);
+				robot.mouseMove(596, 550);
+				robot.delay(1000);
+				robot.mousePress(BUTTON1_DOWN_MASK);
+				robot.delay(1000);
+				robot.mouseRelease(BUTTON1_DOWN_MASK);
+				
+				robot.delay(500);
+				robot.mouseMove(755, 460);
+				robot.delay(500);
+				robot.mousePress(BUTTON1_DOWN_MASK);
+				robot.delay(500);
+				robot.mouseRelease(BUTTON1_DOWN_MASK);
+				
+				robot.delay(500);
+				robot.mouseMove(998, 200);
+				robot.delay(500);
+				robot.mousePress(BUTTON1_DOWN_MASK);
+				robot.delay(500);
+				robot.mouseRelease(BUTTON1_DOWN_MASK);
+
+			    }
 		//Products Page Ends
 	    
 	   //Customer Report Starts
@@ -333,6 +318,7 @@ public class All_Programs
 			char character = characters.charAt(i);
 			type(character);
 		}
+		//this here is needing an enter maybe
 		robot.delay(500);
 		robot.mouseMove(705, 350);
 		robot.delay(500);
